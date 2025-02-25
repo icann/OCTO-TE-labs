@@ -1,20 +1,6 @@
-
-<img src="https://github.com/yakanho/training/assets/54844453/321060e5-fc84-40f7-8caa-846d0a68494b" alt="ICANN" style="zoom:25%;" />
-
-------
-
 # Lab Introduction to Domain Information Groper (dig)
 
-```
-Created by: Yazid AKANHO
-Modified by: -
-Current version: 2024020400
-Previous version:-
-```
-
-------
-
-### Intro
+## Intro
 
 Working with "dig" and understanding its outputs are crucial for DNS troubleshooting and debugging, so don't be shy and ask questions to learn the maximum. 
 
@@ -24,7 +10,7 @@ Working with "dig" and understanding its outputs are crucial for DNS troubleshoo
 
 
 
-### Goals
+## Goals
 
 1. Become familiar with the use of dig
 2. Use dig to retrieve and examine DNS ressource records
@@ -34,15 +20,14 @@ Working with "dig" and understanding its outputs are crucial for DNS troubleshoo
 >
 > Commands preceded with "$" imply that you should execute the command as a general user - not as root.
 > Commands preceded with "#" imply that you should be working as root.
-> Commands with more specific command lines (e.g. “rtrX>" or “mysql>") imply that you are executing commands on remote equipment, or within another program.
 
-
-
-### The dig Tool
+## The dig Tool
 
 The tool “*dig*” was originally shipped with BIND and is commonly found on many Unix-like platforms. It stands for *Domain Information Groper*. It collects data about Domain Name Servers and is helpful for troubleshooting DNS problems and/or displaying DNS information.
 
 Other DNS implementations also include similar tools, often with similar names (e.g. kdig). Older tools used for DNS troubleshooting include *nslookup* and *host*.
+> [!WARNING]
+> Do not use these older tools, they work very poorly with modern DNS features.
 
 A manual page for dig can be found here or from the command-line. There are a lot of available parameters. You can ignore most of them while you are getting started.
 
@@ -60,8 +45,6 @@ dig @SERVER NAME TYPE
 - **NAME**: name of the resource record that is to be looked up.
 - **TYPE**: type of query requested (A, MX, NS, SIG, ...). If no type supplied, dig will lookup for an A record.
 
-
-
 For each dig query sent, a response is expected with different sections. Here are few of them:
 
 * The first line displays the version of the dig command.
@@ -76,6 +59,7 @@ For each dig query sent, a response is expected with different sections. Here ar
 * The **OPT PSEUDOSECTION** displays advanced data such as EDNS (Extension mechanisms for DNS), if used.
 * The **QUESTION** section displays the query data that was sent.
 * The **ANSWER** section: probably the most important section for the user.
+* The **ADDITIONAL** section: contains data that might be usefull in the further processing of the answer
 * The **STATISTICS** section shows metadata about the query: 
    * query time (amount of time to get the response); 
    * SERVER (IP address and port of the responding DNS server); 
