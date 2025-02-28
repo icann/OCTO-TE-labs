@@ -63,7 +63,7 @@ Then in your zone, change allow-transfer line
 ```
 zone "grpX.<lab_domain>.te-labs.training" {                                                                               
         type master;                                                                                                  
-        file "/etc/bind/zones/db.grpX";                                                                                     
+        file "/var/lib/bind/zones/db.grpX";                                                                                     
         allow-transfer { key grpX-key; };
         also-notify { 100.100.X.130; 100.100.X.131; };                                                                                      
 };

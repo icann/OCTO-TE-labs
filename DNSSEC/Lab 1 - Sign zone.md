@@ -25,8 +25,8 @@ Position yourself in BIND configuration folder and then backup your zone file:
 Create a directory to hold your DNSSEC keys
 
 ```
-# mkdir -p /etc/bind/keys
-# cd /etc/bind/keys
+# sudo mkdir -p /var/lib/bind/keys
+# cd /var/lib/bind/keys
 ```
 
 Generate **ZSK**
@@ -44,8 +44,8 @@ Generate **KSK**
 Change ownership to the zones and keys folders
 
 ```
-# chown -R bind:bind /etc/bind/keys
-# chown -R bind:bind /etc/bind/zones
+# chown -R bind:bind /var/lib/bind/keys
+# chown -R bind:bind /var/lib/bind/zones
 ```
 
 
@@ -58,7 +58,7 @@ There is even a third option and more... Which one to use is up to you. As we ar
 ## Manual zone signing.
 
 ```
-# cd /etc/bind/
+# cd /var/lib/bind/
 # dnssec-signzone -S -K keys/ -o grpX.<lab_domain>.te-labs.training zones/db.grpX
 ```
 
@@ -87,7 +87,7 @@ We can now use *dig* utility to confirm that the zone is signed and play with th
 **QUESTION**: Will you get the "ad" flag ? Why ?
 
 ```
-root@soa:/etc/bind# dig @localhost soa grpX.<lab_domain>.te-labs.training. +dnssec 
+# dig @localhost soa grpX.<lab_domain>.te-labs.training. +dnssec 
 ; <<>> DiG 9.16.1-Ubuntu <<>> @localhost soa grpX.<lab_domain>.te-labs.training. +dnssec                                                      
 ; (2 servers found)                                                               
 ;; global options: +cmd                                                           
@@ -119,7 +119,7 @@ More tests:
 >
 > When you are done with the manual signing and confirm that your public nameservers are serving the signed zone, you should:
 
-1. revert back `named.conf.local` to its previous configuration, i.e. configure BIND to serve the unsigned zone file as before the manual signing configuration which was: `file "/etc/bind/zones/db.grpX";` 
+1. revert back `named.conf.local` to its previous configuration, i.e. configure BIND to serve the unsigned zone file as before the manual signing configuration which was: `file "/var/lib/bind/zones/db.grpX";` 
 2. backup the signed zone file (.signed) and delete the .signed zone file (BIND will create its own signed zone file in the next step)
 3. increase the serial in the unsigned zone file and reload BIND.
 
@@ -133,17 +133,17 @@ Update your zone configuration statement in `/etc/bind/named.conf.local`, to loo
 ```
 zone "grpX.<lab_domain>.te-labs.training" {
 	type primary;
-	file "/etc/bind/zones/db.grpX";
+	file "/var/lib/bind/zones/db.grpX";
 	allow-transfer { any; };
 	also-notify {100.100.X.130; 100.100.X.131; };
-	key-directory "/etc/bind/keys";
+	key-directory "/var/lib/bind/keys";
 	auto-dnssec maintain;
 	inline-signing yes;
 };
 ```
 
 
-Then, reconfigure or restart BIND: using `rndc reconfig` or `systemctl restart bind9`. Always check status after such operation.
+Then, reconfigure or restart BIND: using `rndc reconfig` or `systemctl restart named`. Always check status after such operation.
 
 Some new files should appear in the *zones* directory.
 

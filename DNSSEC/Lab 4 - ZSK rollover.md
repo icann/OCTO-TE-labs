@@ -64,14 +64,14 @@ BIND9 will handle most of these steps, but you will still have to generate a new
    > Remember that your filename will be different! Do not simply cut and paste Kmytld.+008+26734 later in the lab!
 
    ```
-   root@soa:/etc/bind/keys# cat KgrpX.<lab_domain>.te-labs.training.+008+26734.key 
+   root@soa:# cat /var/lib/bind/keys/KgrpX.<lab_domain>.te-labs.training.+008+26734.key 
    ; This is a zone-signing key, keyid 26734, for grpX.<lab_domain>.te-labs.training.
    ; Created: 20221103220010 (Thu Nov  3 22:00:10 2022)
    ; Publish: 20221103220010 (Thu Nov  3 22:00:10 2022)
    ; Activate: 20221103220010 (Thu Nov  3 22:00:10 2022)
    grpX.<lab_domain>.te-labs.training. IN DNSKEY 256 3 8 AwEAAadehqG2E23DsA4MnHcaeTH/bKTHlLftvUKR9i8lVbvWNTydacdQ MsZJPTTFZXHeXFdSmxAxImc/FEGNnk9VRr3FfzfJKbc+s6r17PLWn1bO sUxawKZogOvISPytMcWnhbj8Trs8KOoAekB1PRaiPGsCP/nj68ufvrzl x2AcfDJAWPynNDjgHxeFygifVlM6iYuzmPlpcMAY5LCIS/B1MrfashJh wtj0dldgqJSp6yZHaP8vcrMa6+s5McQcqRpyoR2rpNpl6PiOUBtjE0Ho nwg1XYzSaBAbhLdmQhC4MWL/aNiXp1ybwXSVb8uZqL5k26QlKRNH2eB8 
    YRRtq+B9rIs=
-   root@soa:/etc/bind/keys# 
+   root@soa:/var/lib/bind/keys# 
    ```
 
    
@@ -79,16 +79,16 @@ BIND9 will handle most of these steps, but you will still have to generate a new
 2. Use the `dnssec-settime` command, to set an “*inactive*” time and a “*delete*” time for this key. These parameters are required by BIND9 to manage the ZSK rollover. In the below example, we use "**+10mi**” to mean “ten minutes from now” and "**+30mi**” to mean “thirty minutes from now”. The change on the timers will be recorded in the key file itself. In the real world you would probably use much longer timers.
 
 ```
-root@soa:/etc/bind/keys# sudo dnssec-settime -I +10mi -D +30mi KgrpX.<lab_domain>.te-labs.training.+008+26734
+root@soa:/var/lib/bind/keys# sudo dnssec-settime -I +10mi -D +30mi KgrpX.<lab_domain>.te-labs.training.+008+26734
 ./KgrpX.<lab_domain>.te-labs.training.+008+26734.key
 ./KgrpX.<lab_domain>.te-labs.training.+008+26734.private
-root@soa:/etc/bind/keys#
+root@soa:/var/lib/bind/keys#
 ```
 
 You will see two new lines ("Inactive" and "Delete") that appear in the key file.
 
 ```
-root@soa:/etc/bind/keys# cat KgrpX.<lab_domain>.te-labs.training.+008+26734.key 
+root@soa:/var/lib/bind/keys# cat KgrpX.<lab_domain>.te-labs.training.+008+26734.key 
 ; This is a zone-signing key, keyid 26734, for grpX.<lab_domain>.te-labs.training.
 ; Created: 20221103220010 (Thu Nov  3 22:00:10 2022)
 ; Publish: 20221103220010 (Thu Nov  3 22:00:10 2022)
@@ -96,7 +96,7 @@ root@soa:/etc/bind/keys# cat KgrpX.<lab_domain>.te-labs.training.+008+26734.key
 ; Inactive: 20221104163455 (Fri Nov  4 16:34:55 2022)
 ; Delete: 20221104165455 (Fri Nov  4 16:54:55 2022)
 grpX.<lab_domain>.te-labs.training. IN DNSKEY 256 3 8 AwEAAadehqG2E23DsA4MnHcaeTH/bKTHlLftvUKR9i8lVbvWNTydacdQ MsZJPTTFZXHeXFdSmxAxImc/FEGNnk9VRr3FfzfJKbc+s6r17PLWn1bO sUxawKZogOvISPytMcWnhbj8Trs8KOoAekB1PRaiPGsCP/nj68ufvrzl x2AcfDJAWPynNDjgHxeFygifVlM6iYuzmPlpcMAY5LCIS/B1MrfashJh wtj0dldgqJSp6yZHaP8vcrMa6+s5McQcqRpyoR2rpNpl6PiOUBtjE0Ho nwg1XYzSaBAbhLdmQhC4MWL/aNiXp1ybwXSVb8uZqL5k26QlKRNH2eB8 YRRtq+B9rIs=
-root@soa:/etc/bind/keys# 
+root@soa:/var/lib/bind/keys# 
 ```
 
 
@@ -108,13 +108,13 @@ We do not need to specify the full set of parameters (algorithm name, key size, 
 Use the **-i** option to specify a much shorter pre-publication interval than normal, to be compatible with the very short timers used in previous one.
 
 ```
-root@soa:/etc/bind/keys# dnssec-keygen -S KgrpX.<lab_domain>.te-labs.training.+008+26734 -i5mi
+root@soa:/var/lib/bind/keys# dnssec-keygen -S KgrpX.<lab_domain>.te-labs.training.+008+26734 -i5mi
 Generating key pair............+++++ ..............................+++++ 
 KgrpX.<lab_domain>.te-labs.training.+008+12969
-root@soa:/etc/bind/keys# 
-root@soa:/etc/bind/keys# chown -R bind:bind /etc/bind/keys
-root@soa:/etc/bind/keys# rndc loadkeys grpX.<lab_domain>.te-labs.training
-root@soa:/etc/bind/keys#
+root@soa:/var/lib/bind/keys# 
+root@soa:/var/lib/bind/keys# chown -R bind:bind /var/lib/bind/keys
+root@soa:/var/lib/bind/keys# rndc loadkeys grpX.<lab_domain>.te-labs.training
+root@soa:/var/lib/bind/keys#
 ```
 
 Then check the logs and watch the DNS! 
@@ -122,7 +122,7 @@ Then check the logs and watch the DNS!
 Here we summarize the serie of events.
 
 ```
-root@soa:/etc/bind/keys# grep named /var/log/syslog
+root@soa:/var/lib/bind/keys# grep named /var/log/syslog
 Nov  4 15:15:51 soa named[1186]: zone grpX.<lab_domain>.te-labs.training/IN (signed): next key event: 04-Nov-2022 16:15:51.577
 Nov  4 16:15:51 soa named[1186]: zone grpX.<lab_domain>.te-labs.training/IN (signed): reconfiguring zone keys
 Nov  4 16:15:51 soa named[1186]: zone grpX.<lab_domain>.te-labs.training/IN (signed): next key event: 04-Nov-2022 17:15:51.580

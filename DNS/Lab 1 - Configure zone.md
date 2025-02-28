@@ -84,11 +84,12 @@ Our zone configuration must be compatible with that.
 
 We use the container "SOA" (hidden primary authoritative) [**grpX-soa**]
 
-We go to the `/etc/bind` directory, create a new folder for our zone files. Inside that new folder, we then create a new file for our domain zone data.
+We create a new folder for our zone files. Inside that new folder, we then create a new file for our domain zone data.
 
 ```
-$ sudo mkdir -p /etc/bind/zones
-$ sudo touch db.grpX
+$ sudo mkdir -p /var/lib/bind/zones
+$ sudo touch /var/lib/bind/zones/db.grpX
+$ sudo chown -R bind:bind /var/lib/bind
 ```
 
 Then, update the db.grpX zone to look like the below:
@@ -129,7 +130,7 @@ In the configuration file ***/etc/bind/named.conf.local*** , create a new "zone"
 ```
 zone "grpX.<lab_domain>.te-labs.training" {
 		type primary;
-		file "/etc/bind/zones/db.grpX";
+		file "/var/lib/bind/zones/db.grpX";
 		allow-transfer { any; };
 		also-notify {100.100.X.130; 100.100.X.131; };
 }; 
@@ -144,8 +145,8 @@ zone "grpX.<lab_domain>.te-labs.training" {
 Restart the DNS service and verify its status. You should see an output as the below
 
 ```
-root@soa:/etc/bind# systemctl restart bind9
-root@soa:/etc/bind# systemctl status bind9
+root@soa:/etc/bind# systemctl restart named
+root@soa:/etc/bind# systemctl status named
 ● named.service - BIND Domain Name Server
      Loaded: loaded (/lib/systemd/system/named.service; enabled; vendor preset: enabled)
     Drop-In: /run/systemd/system/service.d
@@ -209,11 +210,12 @@ These servers are the ones that expose our zone publicly (so they will be open-t
 
 **Server ns1 runs BIND** (from ISC)
 
-Go to the `/etc/bind` directory and create a file that will contain our zone file in the nameserver:
+Create directory and file that will contain our zone file in the nameserver:
 
 ```
-$ sudo mkdir -p /etc/bind/zones
-$ touch /etc/bind/zones/db.grpX.secondary
+$ sudo mkdir -p /var/lib/bind/zones
+$ touch /var/lib/bind/zones/db.grpX.secondary
+$ sudo chown -R bind:bind /var/lib/bind
 ```
 
 To do this, in the ***/etc/bind/named.conf.local*** file, configure the following parameters:
@@ -228,7 +230,7 @@ To do this, in the ***/etc/bind/named.conf.local*** file, configure the followin
 
 zone "grpX.<lab_domain>.te-labs.training" {
         type secondary;
-        file "/etc/bind/zones/db.grpX.secondary";
+        file "/var/lib/bind/zones/db.grpX.secondary";
         masters { 100.100.X.66; };
 };
 ```
@@ -237,14 +239,14 @@ Verify the configuration and if there are no errors, restart the server:
 
 ```
 # named-checkconf
-# systemctl restart bind9
+# systemctl restart named
 ```
 
 
 Verify that it restarted correctly:
 
 ```
-# systemctl status bind9
+# systemctl status named
 ```
 
 ```
@@ -278,6 +280,13 @@ May 13 04:25:43 ns1.grpX.<lab_domain>.te-labs.training named[739]: resolver prim
 
 **Server ns2 runs NSD** (from NLnet Labs)
 
+Create directory that will contain our zone file in the nameserver:
+
+```
+$ sudo mkdir -p /var/lib/nsd
+$ sudo chown -R bind:bind /var/lib/nsd
+```
+
 To do this, in the ***/etc/nsd/nsd.conf*** file, configure the following parameters:
 
 ```
@@ -294,7 +303,7 @@ To do this, in the ***/etc/nsd/nsd.conf*** file, configure the following paramet
 include: "/etc/nsd/nsd.conf.d/*.conf"
 
 server:
-	zonesdir: "/etc/nsd"
+	zonesdir: "/var/lib/nsd"
 
 pattern:
 	name: "fromprimary"

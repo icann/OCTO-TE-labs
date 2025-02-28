@@ -82,13 +82,13 @@ Once finish editing the configuration file, verify the configuration syntax:
 Then restart the server so that it takes the configuration changes:
 
 ```
-# systemctl restart bind9
+# systemctl restart named
 ```
 
 Check the status of the bind9 process:
 
 ```
-# systemctl status bind9
+# systemctl status named
 ```
 
 You should get something similar to the below:
@@ -306,7 +306,7 @@ Did you get the "ad" flag in all the cases ?
 
 
 
-## Temporary desable DNSSEC validation for broken domains
+## Temporary disable DNSSEC validation for broken domains
 
 A zone can become broken due to issues with its DNSSEC configuration. In that case, validating resolvers may return DNS answers with status bogus, servfail, etc. Users behind such recursive resolver will get impacted for those domains. While it is generally the responsibility of the domain administrator to fix the issue, the recursive resolver administrator can take action to temporarily disable DNSSEC validation for such domain that is broken at validation level.
 
