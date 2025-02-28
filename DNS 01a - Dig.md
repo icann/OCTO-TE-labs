@@ -1,14 +1,9 @@
-# Lab Introduction to Domain Information Groper (dig)
-
-## Intro
+# Introduction to Domain Information Groper (dig)
 
 Working with "dig" and understanding its outputs are crucial for DNS troubleshooting and debugging, so don't be shy and ask questions to learn the maximum. 
 
 > [!TIP]
->
 > We can't explore all dig possibilities during this workshop. We do recommend you to continue playing to learn this fantastic tool.
-
-
 
 ## Goals
 
@@ -16,16 +11,12 @@ Working with "dig" and understanding its outputs are crucial for DNS troubleshoo
 2. Use dig to retrieve and examine DNS ressource records
 3. Interpret dig's output and identify some common DNS problems.
 
-> [!WARNING]
->
-> Commands preceded with "$" imply that you should execute the command as a general user - not as root.
-> Commands preceded with "#" imply that you should be working as root.
-
 ## The dig Tool
 
 The tool “*dig*” was originally shipped with BIND and is commonly found on many Unix-like platforms. It stands for *Domain Information Groper*. It collects data about Domain Name Servers and is helpful for troubleshooting DNS problems and/or displaying DNS information.
 
 Other DNS implementations also include similar tools, often with similar names (e.g. kdig). Older tools used for DNS troubleshooting include *nslookup* and *host*.
+
 > [!WARNING]
 > Do not use these older tools, they work very poorly with modern DNS features.
 
@@ -66,16 +57,14 @@ For each dig query sent, a response is expected with different sections. Here ar
    * WHEN (timestamp when the command was run); 
    * MSG SIZE rcvd (size of the response packet from the DNS server).
 
-
-### Sending DNS Queries Using dig
+## Sending DNS Queries Using dig
 
 Try using dig to query the IPv4 address corresponding to www.icann.org. Here are various ways of doing that; what differences do you see in the output from each of them?
 
 ```
 $ dig www.icann.org A
-$ dig www.icann.org A
 $ dig @8.8.8.8 www.icann.org A
-$ dig @1.1.1.1 www.icann.org A
+$ dig @one.one.one.one www.icann.org A
 ```
 
 For each answer that you got, discuss the different section of the answer with the facilitators. You will be surprised to see that dig tool provides a sea of information.
@@ -83,40 +72,27 @@ For each answer that you got, discuss the different section of the answer with t
 Now try other records
 
 ```
-$ dig NS icann.org
-```
-
-```
-$ dig SOA ricta.org.rw
-```
-
-```
+$ dig icann.org NS
+$ dig ricta.org.rw SOA
 $ dig www.ricta.org.rw A
-```
-
-```
 $ dig @8.8.8.8 www.ricta.org.rw A
+$ dig @ns1.ricta.org.rw ricta.org.rw SOA
 ```
-
-```
-$ dig SOA ricta.org.rw @ns1.ricta.org.rw.
-```
-
 
 Again, try to discuss the various outputs with your instructors.
 
-### Let's continue exploring dig tool with its following options
+## Let's continue exploring dig tool with its following options
 
 * **+short**: to display only the queried resource record value
 
 ```
-$ dig @8.8.8.8 www.icann.org A +short
+$ dig www.icann.org A +short
 ```
 
 * **+noall +answer**: to get detailed information of the answers section only
 
 ```
-$ dig @8.8.8.8 www.icann.org A +noall +answer
+$ dig www.icann.org A +noall +answer
 ```
 
 * **+trace**: lists each different server the query goes through to its final destination. Good for troubleshooting
@@ -134,31 +110,56 @@ $ dig -x 192.0.47.7
 * **-f**: to look up multiple entries stored in a file
 
 ```
-$ echo "icann.org google.com gmail.com" > test_batch_lookup.txt ; dig -f test_batch_lookup.txt +short
+$ echo "icann.org google.com gmail.com" > test_batch_lookup.txt ; dig -f test_batch_lookup.txt +noall +answer
 ```
+
+# Server Identity
+
+Back in the days engineers thought it was a good idea that you could query
+a server for the software and version it is running. Turns out, bad guys can 
+exploit that information. So today most servers don't answer anything or
+some preconfigured string, but not the actuall software or version that is running.
+
+BIND servers respond to queries for name version.bind with record type TXT and class CHAOS. By default, this is set to the version of BIND that has been installed
+
+
+The first instances of this have been made by bind, which is reflected in the 
+query name.
 
 * **hostname.bind**: to retrieve the hostname of the server (if allowed to)
-
 ```
-$ dig CHAOS txt hostname.bind @ns.icann.org.
-$ dig txt hostname.bind @d.root-servers.net CHAOS
+$ dig @ns.icann.org. hostname.bind TXT CHAOS
+$ dig @d.root-servers.net hostname.bind TXT CHAOS
+$ dig hostname.bind TXT CHAOS
 ```
 
+* **version.bind**: to retrieve the version of the server (if allowed to)
+```
+$ dig @ns.icann.org. version.bind TXT CHAOS
+$ dig @d.root-servers.net version.bind TXT CHAOS
+$ dig version.bind TXT CHAOS
+```
+
+A newer approch has been the query for **id.server** as it is independent of the 
+software manufacturer.
 * **id.server**: 
-
 ```
-$ dig txt ID.SERVER @d.root-servers.net CHAOS
-$ dig txt ID.SERVER @9.9.9.9 CHAOS
-```
-
-* **version.bind**: BIND servers respond to queries for name version.bind with record type TXT and class CHAOS. By default, this is set to the version of BIND that has been installed
-
-```
-$ dig CHAOS txt version.bind @ns.icann.org.
-$ dig txt version.bind @d.root-servers.net CHAOS
+$ dig @ns.icann.org. id.server TXT CHAOS
+$ dig @d.root-servers.net id.server TXT CHAOS
+$ dig id.server TXT CHAOS
 ```
 
+All these old query types have one problem. They are a query in itself.
+In modern anycast networks we can't be sure that two queries to the same IP address
+will be received by the same server. So the latest approch allows for the
+server identity to be included in the response.
 
+* **nsid**: retrieve DNS Name Server Identifier (NSID) 
+```
+$ dig @ns.icann.org. icann.org SOA +nsid
+$ dig @d.root-servers.net icann.org SOA +nsid
+$ dig icann.org SOA +nsid
+```
 
 ### Using dig to get DNSSEC information
 
@@ -166,9 +167,6 @@ $ dig txt version.bind @d.root-servers.net CHAOS
 
 ```
 $ dig www.icann.org A +dnssec
-```
-
-```
 $ dig icann.org NS +dnssec
 ```
 
@@ -179,7 +177,7 @@ You can add the `+multi` option to make the results more "readable".
 * Retrieve the public keys for the zone: they are stored in a specific resource record type named "DNSKEY"
 
 ```
-$ dig icann.org DNSKEY
+$ dig icann.org DNSKEY +multi
 ```
 
 You can mix the known options such as redirecting to a specific name server, adding multilign option, etc.
@@ -188,4 +186,11 @@ You can mix the known options such as redirecting to a specific name server, add
 
 ```
 $ dig icann.org DS
+```
+
+There are also some special DNSSEC records that you can not actually send queries for,
+but will be contained in negative answers. Look for NSEC or NSEC3 records.
+
+```
+$ dig sdlkhghkj.icann.org +dnssec
 ```

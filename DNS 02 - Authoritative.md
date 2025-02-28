@@ -27,18 +27,20 @@ following ip addresses:
 
 Our zone configuration must be compatible with that.
 
-## Setting up the authoritative zone
+## Setting up the primary
 
 Use the "SOA" server as primary authoritative server for the  **grpX.\<lab domain\>** zone.
 
-Please follow [DNS 02a](http://DNS%2002a%20-%20Bind.md) for installation of the primary server.
+Your instructor will tell you which instructions to follow for installation of your primary server.
+
+- [DNS 02a - Bind](http://DNS%2002a%20-%20Bind.md) 
+
+## Setting up the secondaries
 
 Your instructor will tell you which instructions to follow for installation of your secondary servers.
 
 - [Bind9](http://DNS%2002b%20-%20Bind%20Secondary.md)
-- [Knot DNS](http://DNS%2002c%20-%20Knot)
-- [NSD](http://DNS%2002d%20-%20NSD)
-- [PowerDNS](http://DNS%2002e%20-%20PowerDNS)
+- [NSD](http://DNS%2002b%20-%20NSD)
 
 Once you are done with the configuration of your primary and secondary servers, please come back here and conitinue with the next section!
 

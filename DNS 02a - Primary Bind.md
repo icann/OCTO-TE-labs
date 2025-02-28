@@ -1,5 +1,8 @@
 # Configure your DNS zone
 
+The official Bind 9 configuration reference manual can be found at 
+[https://bind9.readthedocs.io/en/latest/reference.html](https://bind9.readthedocs.io/en/latest/reference.html)
+
 > [!IMPORTANT]
 >
 > In all this lab, be carefull to always replace ***X*** by your Group number in IP addresses, server name and any other place where required. Same for \<lab domain\> to be replace by the domain name registered for the class.
