@@ -24,3 +24,12 @@ jobs:
           rm tmp.md
           echo "" >> README.md
           git branch --format='%(refname:short)' | sed 's/* //g' | xargs -I {} echo "* [{}](https://github.com/icann/OCTO-TE-labs/tree/{})" >> README.md
+          git diff --quiet README.md
+          if [ $? -eq 1 ]; then
+            git add README.md
+            git commit -m "Update README with branch list"
+            git push origin main
+          else
+            echo "NO CHANGES"
+          fi
+          echo "DONE"          
