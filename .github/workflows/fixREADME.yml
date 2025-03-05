@@ -23,3 +23,4 @@ jobs:
           perl -n -e 'print $_ if !$found; $found=1 if m/# LABS/;' tmp.md > README.md
           rm tmp.md
           echo "" >> README.md
+          git branch --format='%(refname:short)' | sed 's/* //g' | xargs -I {} echo "* [{}](https://github.com/icann/OCTO-TE-labs/tree/{})" >> README.md
