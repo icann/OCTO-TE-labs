@@ -20,3 +20,16 @@ If you want to make changes for a special workshop start a branch for that.
 
 # LABS
 
+sdfsdfdsf
+sdfsddsf
+sdfsdsdf
+sdfsdfsdf
+sdfsdfs
+
+* [extended](https://github.com/icann/OCTO-TE-labs/tree/extended)
+* [main](https://github.com/icann/OCTO-TE-labs/tree/main)
+* [original](https://github.com/icann/OCTO-TE-labs/tree/original)
+* [origin/extended](https://github.com/icann/OCTO-TE-labs/tree/origin/extended)
+* [origin/main](https://github.com/icann/OCTO-TE-labs/tree/origin/main)
+* [origin/master](https://github.com/icann/OCTO-TE-labs/tree/origin/master)
+* [origin/original](https://github.com/icann/OCTO-TE-labs/tree/origin/original)

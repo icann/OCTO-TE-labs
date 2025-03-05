@@ -1,0 +1,54 @@
+name: Format
+
+on: push
+
+jobs:
+  format-code:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Add actions that modify files here
+      - name: Modify files
+        run: |
+          echo "change files here"        
+
+          # Commit all changed files back to the repository
+      - uses: stefanzweifel/git-auto-commit-action@v5
+
+
+
+      name: Update README
+
+on:
+  branch:
+    created:
+      types: [branch]
+      branches: [**main**] # only update main branch
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Update README
+        run: |
+          git checkout main
+          mv README.md tmp.md
+          perl -n -e 'print $_ if !$found; $found=1 if m/# LABS/;' tmp.md > README.md
+          rm tmp.md
+          echo "" >> README.md
+          git branch -a --format='%(refname:short)' | sed 's/* //g' | xargs -I {} echo "* [{}](https://github.com/icann/OCTO-TE-labs/tree/{})" >> README.md
+          git diff --quiet README.md
+          if [ $? -eq 1 ]; then
+            git add README.md
+            git commit -m "Update README with branch list"
+            git push origin main
+          fi          
