@@ -4,6 +4,9 @@ on:
   create:
     branches:
       - '**'
+  delete:
+    branches:
+      - '**'
 
 jobs:
   update-readme:
@@ -11,9 +14,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Update README
         run: |
-          git checkout main
           mv README.md tmp.md
           perl -n -e 'print $_ if !$found; $found=1 if m/# LABS/;' tmp.md > README.md
           rm tmp.md
