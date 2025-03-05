@@ -4,7 +4,7 @@ on:
   branch:
     created:
       types: [branch]
-      branches: [**main**] # only update main branch
+      branches: 
 
 jobs:
   update-readme:
