@@ -1,10 +1,11 @@
 # DNS Tools
 
-You probably have heard the "It's always DNS" saying.
+You probably have heard the saying "It's always DNS".
 
 That makes it so much more important to be able to find bugs, errors and misconfigurations in DNS.
 
 In this lab we will go through some of the tools and techniques you can use to find bugs in your (or others) DNS configuration.
+Or verify the correctness of your configuration.
 
 - [DNS 01a - Dig](DNS%2001a%20-%20Dig.md)
 - [DNS 01b - EDE](DNS%2001b%20-%20EDE.md)
