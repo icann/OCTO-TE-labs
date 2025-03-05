@@ -28,8 +28,8 @@ jobs:
           perl -n -e 'print $_ if !$found; $found=1 if m/# LABS/;' tmp.md > README.md
           rm tmp.md
           echo "" >> README.md
-          git branch --format='%(refname:short)'
-          git branch --format='%(refname:short)' | sed 's/* //g' | xargs -I {} echo "* [{}](https://github.com/icann/OCTO-TE-labs/tree/{})" >> README.md
+          git branch -r --format='%(refname:short)'
+          git branch -r --format='%(refname:short)' | grep '^origin/' | sed 's|^origin/||' | xargs -I {} echo "* [{}](https://github.com/icann/OCTO-TE-labs/tree/{})" >> README.md
           CHECKOUT="NO"
           git diff --quiet README.md || CHECKOUT="YES"
           if [ "$CHECKOUT" == "YES" ]; then
