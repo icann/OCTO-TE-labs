@@ -1,30 +1,4 @@
-name: Format
-
-on: push
-
-jobs:
-  format-code:
-    runs-on: ubuntu-latest
-
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
-      contents: write
-
-    steps:
-      - uses: actions/checkout@v4
-
-      # Add actions that modify files here
-      - name: Modify files
-        run: |
-          echo "change files here"        
-
-          # Commit all changed files back to the repository
-      - uses: stefanzweifel/git-auto-commit-action@v5
-
-
-
-      name: Update README
+name: Update README
 
 on:
   branch:
