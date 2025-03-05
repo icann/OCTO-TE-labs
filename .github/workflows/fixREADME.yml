@@ -20,13 +20,3 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           mv README.md tmp.md
-          perl -n -e 'print $_ if !$found; $found=1 if m/# LABS/;' tmp.md > README.md
-          rm tmp.md
-          echo "" >> README.md
-          git branch --format='%(refname:short)' | sed 's/* //g' | xargs -I {} echo "* [{}](https://github.com/icann/OCTO-TE-labs/tree/{})" >> README.md
-          git diff --quiet README.md
-          if [ $? -eq 1 ]; then
-            git add README.md
-            git commit -m "Update README with branch list"
-            git push origin main
-          fi          
