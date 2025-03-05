@@ -1,4 +1,4 @@
-# Configure your DNS zone
+# Primary Setup with Bind9
 
 The official Bind 9 configuration reference manual can be found at 
 [https://bind9.readthedocs.io/en/latest/reference.html](https://bind9.readthedocs.io/en/latest/reference.html)
@@ -7,30 +7,7 @@ The official Bind 9 configuration reference manual can be found at
 >
 > In all this lab, be carefull to always replace ***X*** by your Group number in IP addresses, server name and any other place where required. Same for \<lab domain\> to be replace by the domain name registered for the class.
 
-## Configure primary authoritative server (BIND)
-
-### Intro
-
-We are going to configure a hidden authoritative server and create the authoritative zone **grpX.\<lab domain\>**.
-
-### What we already know
-
-Our "parent" (**\<lab domain\>**) has already created the following in its own zone:
-
-```
-; grpX
-grpX             NS          <lab domain>.
-; ---Placeholder for grpX DS record (DO NOT MANUALLY EDIT THIS LINE)---
-ns1.grpX         A           100.100.X.130
-ns1.grpX         AAAA        fd73:7c99:X:128::130
-ns2.grpX         A           100.100.X.131
-ns2.grpX         AAAA        fd73:7c99:X:128::131
-
-```
-
-Our zone configuration must be compatible with that.
-
-### Setting the authoritative zone
+## Setting the authoritative zone
 
 We use the container "SOA" (hidden primary authoritative)
 
@@ -57,8 +34,8 @@ $TTL    300
 ;
 
 ; grpX 
-@             NS           <lab domain>.
-
+@           NS          <lab domain>.
+@           TXT         "DNS IS FUN" 
 ns1         A           100.100.X.130
 ns1         AAAA        fd73:7c99:X:128::130
 ns2         A           100.100.X.131
@@ -68,12 +45,33 @@ www         A           100.100.X.130
 
 You can add more records as you want.
 
-> [!TIP]
->
-> Once done, it is important to verify the zone file format. Use ***named-checkzone*** command with appropriate parameters to do that.
-
 In the configuration file ***/etc/bind/named.conf.local*** , create a new "zone" statement as below:
 
+```
+zone "grpX.<lab_domain>." {
+	type primary;
+	file "/var/lib/bind/zones/db.grpX";
+	allow-transfer { ns1; ns2; };
+	also-notify {100.100.X.130; fd73:7c99:X:128::131; };
+}; 
+```
+
+Restart the DNS service and verify its status. You should see an output as the below
+
+```
+$ rndc reload
+
+OUTPUT
+```
+
+One important aspect of using rndc to manage bind is, that bind tries to load the new 
+configuration and if something fails it continues to use the old configuration.
+
+Now, let's fix our configuration
+
+```
+In the configuration file ***/etc/bind/named.conf.local*** , create a new "zone" statement as below:
+(pay attention to the `allow-transfer` statement)
 ```
 zone "grpX.<lab_domain>." {
 	type primary;
@@ -86,35 +84,22 @@ zone "grpX.<lab_domain>." {
 > [!TIP]
 > Once done, use ***named-checkconf*** to verify that your BIND config is correct.
 
+```
+$ sudo named-checkconf
+```
 Restart the DNS service and verify its status. You should see an output as the below
 
 ```
 $ rndc reload
+
+OUTPUT
 ```
 
 Then, query your zone on the local server:
 
 ```
-$ dig @localhost soa grpX.<lab domain>
-; <<>> DiG 9.16.1-Ubuntu <<>> @localhost soa grpX.<lab domain>.
-; (2 servers found)
-;; global options: +cmd
-;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 64339
-;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
-
-;; OPT PSEUDOSECTION:
-; EDNS: version: 0, flags:; udp: 4096
-; COOKIE: 270e2c46ed443c1c01000000609c59f04ba85015ff71998d (good)
-;; QUESTION SECTION:
-;grpX.<lab_domain>.te-labs.training.        IN      SOA
-
+$ dig @localhost soa grpX.<lab domain> +noall + answer
 ;; ANSWER SECTION:
 grpX.<lab domain>. 30 IN   SOA     grpX.<lab domain>. dnsadmin.<lab domain>. 1 604800 86400 2419200 86400
-
-;; Query time: 0 msec
-;; SERVER: ::1#53(::1)
-;; WHEN: Wed May 12 22:42:56 UTC 2021
-;; MSG SIZE  rcvd: 170
 ```
 

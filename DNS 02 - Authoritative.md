@@ -1,15 +1,16 @@
 # Configure primary authoritative server
 
-We are going to configure a hidden authoritative server and create the authoritative zone **grpX.\<lab domain\>**.
+We are going to build a "hidden primary" setup, where the SOA server is the hidden primary and NS1 and NS2
+will server the zone externaly.
 
-> [!TIP]
-> This is a very important DNS concept! 
-> If you haven't heard of or unsure about the "hidden primary" 
+> [!IMPORTANT]
+> "Hidden primary" is a very important DNS concept! 
+> If you haven't heard of or unsure about the 
 > configuration, please ask your instructor. 
 
 ## From the parent zone
 
-Our "parent" (**\<lab domain\>**) has already created the following in its own zone:
+Our "parent" (***\<lab domain\>***) has already created the following in its own zone:
 
 ```
 ; grpX
@@ -33,14 +34,14 @@ Use the "SOA" server as primary authoritative server for the  **grpX.\<lab domai
 
 Your instructor will tell you which instructions to follow for installation of your primary server.
 
-- [DNS 02a - Bind](http://DNS%2002a%20-%20Bind.md) 
+- [DNS 02a - Bind](http://DNS%2002a%20-%20Primary%20Bind.md) 
 
 ## Setting up the secondaries
 
 Your instructor will tell you which instructions to follow for installation of your secondary servers.
 
-- [Bind9](http://DNS%2002b%20-%20Bind%20Secondary.md)
-- [NSD](http://DNS%2002b%20-%20NSD)
+- [Bind9](http://DNS%2002b%20-%20Secondary%20Bind.md)
+- [NSD](http://DNS%2002b%20-%20Secondary%20NSD)
 
 Once you are done with the configuration of your primary and secondary servers, please come back here and conitinue with the next section!
 
@@ -50,19 +51,14 @@ We will now use *dig* tool to verify the zone configuration and propagation, the
 
 On the **cli** instance
 
-1. `dig @100.100.X.66  grpX.<lab domain>. SOA`
-1. `dig @100.100.X.130 grpX.<lab domain>. SOA`
-1. `dig @100.100.X.131 grpX.<lab domain>. SOA`
-1. `dig @100.100.X.131 grpX.<lab domain>. SOA +short`
-1. `dig @100.100.X.131 grpX.<lab domain>. SOA +multi`
-1. `dig @100.100.X.130 grpX.<lab domain>. NS  +multi`
-1. `dig @100.100.X.131 grpX.<lab domain>. NS`
-1. `dig grpX.<lab domain>. NS +nsid`
+1. `dig @100.100.X.66  grpX.<lab domain> SOA`
+1. `dig @100.100.X.130 grpX.<lab domain> SOA`
+1. `dig @100.100.X.131 grpX.<lab domain> SOA`
 
 Please repeat the following queries at least once
 ```
-1. `dig @<lab domain>. NS +nsid`
-1. `dig @<lab domain> hostname.bind txt CHAOS`
-1. `dig @<lab domain> version.bind  txt CHAOS`
-1. `dig @<lab domain> id.server     txt CHAOS`
+1. `dig @<lab domain> grpX.<lab domain> NS         +nsid`
+1. `dig @<lab domain> hostname.bind     TXT CHAOS`
+1. `dig @<lab domain> version.bind      TXT CHAOS`
+1. `dig @<lab domain> id.server         TXT CHAOS`
 ```

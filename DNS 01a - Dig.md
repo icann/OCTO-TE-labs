@@ -194,3 +194,32 @@ but will be contained in negative answers. Look for NSEC or NSEC3 records.
 ```
 $ dig sdlkhghkj.icann.org +dnssec
 ```
+
+# Argument sequence
+
+
+The official documentation says:
+```
+$ dig -h
+Usage:  dig [@global-server] [domain] [q-type] [q-class] {q-opt} [...]
+```
+
+But ***dig*** is actually very forgiving and allows to give arguments in any sequence.
+
+The following commands will yield the same result:
+```
+$ dig @9.9.9.9 icann.org MX
+$ dig MX icann.org @9.9.9.9
+```
+
+## Unintended consequences
+
+Challenge: Try to dig for the SOA record of Switzerland (.ch).
+
+Your result should look something like:
+```
+[...]
+;; ANSWER SECTION:
+ch. 900 IN SOA a.nic.ch. dns-operation.switch.ch. 2025030412 900 600 1209600 900
+[...]
+```
