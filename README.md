@@ -20,4 +20,7 @@ If you want to make changes for a special workshop start a branch for that.
 
 # LABS
 
+* [extended](https://github.com/icann/OCTO-TE-labs/tree/extended)
 * [main](https://github.com/icann/OCTO-TE-labs/tree/main)
+* [original](https://github.com/icann/OCTO-TE-labs/tree/original)
+* [test7](https://github.com/icann/OCTO-TE-labs/tree/test7)
