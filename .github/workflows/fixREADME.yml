@@ -2,9 +2,9 @@ name: Update README
 
 on:
   branch:
-    created:
-      types: [branch]
-      branches: 
+    create:
+      branches:
+        - '**'
 
 jobs:
   update-readme:
