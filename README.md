@@ -16,18 +16,19 @@ All Contributions and improvements are subject to the same license terms.
 
 All developement should be done in its own branch.
 
-> [!IMPORTANT] All branches need to contain the license and a README referencing the license.
+> [!IMPORTANT]
+> All branches need to contain the license and a README referencing the license.
 
 # Special Instructions for a workshop
 
 If you want to make changes for a special workshop start a branch for that.
 
-> [!IMPORTANT] All branches need to contain the license and a README referencing the license.
+> [!IMPORTANT]
+> All branches need to contain the license and a README referencing the license.
 
 # Contributing
 
 > [!IMPORTANT]
->
 > Contributions are subject to the same license terms as this repository.
 
 Please open github issues for corrections or feature requests.
