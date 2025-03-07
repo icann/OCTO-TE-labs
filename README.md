@@ -1,10 +1,6 @@
 # ICANN Office of the CTO (OCTO) Technical Engagement (TE) Labs
 
-This repository contains lab scripts for a number of different lab types, namely
-
-- DNS
-- Resolvers
-- Routing/RPKI
+This repository contains lab scripts for a number of different lab types for DNS and Routing.
 
 # LICENSE
 
@@ -36,6 +32,8 @@ Pull-requests are always welcome!
 
 
 # LABS
+
+Ask your instructor on which lab you should run.
 
 * [extended](https://github.com/icann/OCTO-TE-labs/tree/extended)
 * [main](https://github.com/icann/OCTO-TE-labs/tree/main)
