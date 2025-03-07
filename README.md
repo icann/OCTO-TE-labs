@@ -12,11 +12,17 @@ All contents of this repository are covered by the LICENSE. Please see [license]
 
 All Contributions and improvements are subject to the same license terms.
 
-# OCTO-TE
+# Development
 
 All developement should be done in its own branch.
 
+> [!IMPORTANT] All branches need to contain the license and a README referencing the license.
+
+# Special Instructions for a workshop
+
 If you want to make changes for a special workshop start a branch for that.
+
+> [!IMPORTANT] All branches need to contain the license and a README referencing the license.
 
 # LABS
 
