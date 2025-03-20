@@ -41,7 +41,7 @@ Your instructor will tell you which instructions to follow for installation of y
 Your instructor will tell you which instructions to follow for installation of your secondary servers.
 
 - [Bind9](https://github.com/icann/OCTO-TE-labs/blob/extended/DNS%2002b%20-%20Secondary%20Bind.md)
-- [NSD](http://DNS%2002b%20-%20Secondary%20NSD)
+- [NSD](https://github.com/icann/OCTO-TE-labs/blob/extended/DNS%2002b%20-%20Secondary%20NSD.md)
 
 Once you are done with the configuration of your primary and secondary servers, please come back here and continue with the next section!
 
