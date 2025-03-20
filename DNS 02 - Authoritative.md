@@ -43,7 +43,7 @@ Your instructor will tell you which instructions to follow for installation of y
 - [Bind9](http://DNS%2002b%20-%20Secondary%20Bind.md)
 - [NSD](http://DNS%2002b%20-%20Secondary%20NSD)
 
-Once you are done with the configuration of your primary and secondary servers, please come back here and conitinue with the next section!
+Once you are done with the configuration of your primary and secondary servers, please come back here and continue with the next section!
 
 ## Test your zone configuration and propagation.
 
@@ -57,7 +57,7 @@ On the **cli** instance
 
 Please repeat the following queries at least once
 ```
-1. `dig @<lab domain> grpX.<lab domain> NS         +nsid`
+1. `dig @<lab domain> grpX.<lab domain> NS +nsid`
 1. `dig @<lab domain> hostname.bind     TXT CHAOS`
 1. `dig @<lab domain> version.bind      TXT CHAOS`
 1. `dig @<lab domain> id.server         TXT CHAOS`
