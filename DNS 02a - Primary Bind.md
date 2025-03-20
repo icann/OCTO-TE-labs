@@ -69,9 +69,9 @@ configuration and if something fails it continues to use the old configuration.
 
 Now, let's fix our configuration
 
-```
 In the configuration file ***/etc/bind/named.conf.local*** , create a new "zone" statement as below:
 (pay attention to the `allow-transfer` statement)
+
 ```
 zone "grpX.<lab_domain>." {
 	type primary;
