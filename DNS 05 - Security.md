@@ -1,35 +1,32 @@
-<img src="https://github.com/yakanho/training/assets/54844453/321060e5-fc84-40f7-8caa-846d0a68494b" alt="ICANN" style="zoom:25%;" />
+# Name Server Security
 
-# Lab Hardening your DNS config (Intro)
+Anything connected to the internet is subjected to a constant barrage of hacking or abuse attempts.
+For new wordpress sites it takes on average below 10 seconds for the first attack to arrive.
+DNS servers are not long behind. Therefore it is of critical importance to harden your servers before
+they go online.
 
-```
-Created by: Yazid AKANHO
-version: 2024042400
-Previous revision : 2024030100
-Modified by: -
-```
+## Hardening the OS
 
+First step in any security for applications is a secure operating system. Security is build in layers and 
+if the foundations aren't safe, it isvery hard (or impossible) to mitigate that.
 
-Now that your zone configuration is working fine (if not, please do not continue here and go back to fix the config before you continue), we need to do some security enhancements to protect our DNS against some types of attacks.
+Hardening the OS, starts with making sure that no unneccessary ports are open, ssh only accepts certificates,
+only users can login (no remote root access) and many other security best practices. Hopefully you or your
+company has already routines in place for hardening your machines.
 
-##Open Zone transfer
-Try to do a manual zone transfer using respectively ns1, ns2 and SOA server IP address from our client machine. What do you notice ? 
+Hardening the OS is beyond this course, but it is the foundation of all further steps.
 
-Tip: the command to use is ***dig axfr <*domain*> @nameserver***. 
+## Hardening Authoritative DNS Servers
 
+The DNS has many attack vectors, from spoofing to DDoS and beyond. But why spoof a response when you easily 
+can change data on the autoritative server? So hardening and protecting your DNS infrastructure is 
+important for the security of your IT infrastructure. DNS is used to secure email, all certificates and 
+even many firewalls use DNS based rules.
 
-Do some Internet research and talk with your classmates to find a solution to avoid open zone transfer.
+Please follow theses two labs to secure your lab infrastructure. Afterwards return to this document and go to the next section.
 
-####Fix the open zone transfer
-If your answer to the above question is ***allow-transfer***, then you are right.
-Go ahead and apply the appropriate configuration update to fix the issue discussed above.
-Then, test again the zone transfer. Is the issue resolved ?
-> Note: allow-transfer is not the single way to achieve this. Other methods exist.
+[DNS 04a - Primary Security](DNS%2004a%20-%20Primary%20Security.md)
+[DNS 04b - Secondary Security](DNS%2004a%20-%20Secondary%20Security.md)
 
+## Hardening Resolvers
 
-## Hidden primary
-Is your hidden primary server really "hidden" ? Try to query your zone on it from any other VM and confirm wheather it replies or not. After this test, can you confirm if it is really "hidden" ?
-
-Discuss with other participants to find a solution to make it a real "hidden" primary nameserver; i.e. it should not respond to DNS queries as it is the primary and not supposed to serve the zone publicly. This is a best practice in DNS. However, do not forget that for troubleshooting purpose, you may always need to query it from some specific (or known) IP addresses.
-
-Apply the solution after you have agreed on a consensus with the training facilitators.

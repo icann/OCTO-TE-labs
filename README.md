@@ -31,6 +31,8 @@ Your domain: grp***X***.\<***lab domain***\>
 
 Every participant gets a number of virtual machines. The machines are placed in different networks.
 
+We use the private 100.64.0.0/10 address space from [RFC 6598](https://www.rfc-editor.org/rfc/rfc6598).
+
 ![network topology](img/topology.png)
 
 | Device Name   | IPv4 Address          | IPv6 Address                | Network  |

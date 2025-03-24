@@ -14,7 +14,7 @@ Previous version:-
 
 ------
 
-As a reminder, your domain is grpX.<lab_domain>.te-labs.training, and your parent is <lab_domain>.te-labs.training.
+As a reminder, your domain is grpX.<lab domain>.te-labs.training, and your parent is <lab domain>.te-labs.training.
 
 > [!IMPORTANT]
 >
@@ -36,13 +36,13 @@ Start by creating a directory to store your DS files for your domain and make su
 Execute the following command to get the DS record and save it in the required file:
 
 ```
-# dnssec-dsfromkey /etc/bind/keys/KgrpX.<lab_domain>.te-labs.training.+XYZ+YOUR-KSK-key-tag.key > /etc/bind/zones/ds/DS_YOUR-KSK-key-tag.grpX
+# dnssec-dsfromkey /etc/bind/keys/KgrpX.<lab domain>.te-labs.training.+XYZ+YOUR-KSK-key-tag.key > /etc/bind/zones/ds/DS_YOUR-KSK-key-tag.grpX
 ```
 
 or you could extract the DS directly from the DNSKEY by querying your domain.
 
 ```
-# dig @localhost dnskey grpX.<lab_domain>.te-labs.training | dnssec-dsfromkey -f - grpX.<lab_domain>.te-labs.training > /etc/bind/zones/ds/DS_YOUR-KSK-key-tag.grpX
+# dig @localhost dnskey grpX.<lab domain>.te-labs.training | dnssec-dsfromkey -f - grpX.<lab domain>.te-labs.training > /etc/bind/zones/ds/DS_YOUR-KSK-key-tag.grpX
 ```
 
 Verify the content of the generated file:
@@ -54,7 +54,7 @@ Verify the content of the generated file:
 Which should contain something similar to the following line:
 
 ```
-grpX.<lab_domain>.te-labs.training. IN DS YOUR-KSK-key-tag 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34DB5A7F3BC10A424D6E
+grpX.<lab domain>.te-labs.training. IN DS YOUR-KSK-key-tag 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34DB5A7F3BC10A424D6E
 ```
 
 
@@ -84,9 +84,9 @@ DS_YOUR-KSK-key-tag.grpX        100%  106   123.6KB/s   00:00
 Query your parent zone and confirm that they have published your DS.
 
 ```
-sysadm@cli:~$ dig DS grpX.<*lab_domain*>.te-labs.training 
+sysadm@cli:~$ dig DS grpX.<*lab domain*>.te-labs.training 
 
-; <<>> DiG 9.16.1-Ubuntu <<>> DS grpX.<*lab_domain*>.te-labs.training
+; <<>> DiG 9.16.1-Ubuntu <<>> DS grpX.<*lab domain*>.te-labs.training
 ;; global options: +cmd
 ;; Got answer:
 ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 57805
@@ -95,10 +95,10 @@ sysadm@cli:~$ dig DS grpX.<*lab_domain*>.te-labs.training
 ;; OPT PSEUDOSECTION:
 ; EDNS: version: 0, flags:; udp: 1232
 ;; QUESTION SECTION:
-;grpX.<*lab_domain*>.te-labs.training.      IN      DS
+;grpX.<*lab domain*>.te-labs.training.      IN      DS
 
 ;; ANSWER SECTION:
-grpX.<*lab_domain*>.te-labs.training. 60    IN      DS      2404 8 2 8A4D8024E59D115331C8ECAF715E1168A429282646E6861420BEF8D1 7F9676E7
+grpX.<*lab domain*>.te-labs.training. 60    IN      DS      2404 8 2 8A4D8024E59D115331C8ECAF715E1168A429282646E6861420BEF8D1 7F9676E7
 
 ;; Query time: 320 msec
 ;; SERVER: 9.9.9.9#53(9.9.9.9)

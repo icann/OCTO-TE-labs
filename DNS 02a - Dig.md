@@ -13,14 +13,12 @@ Working with "dig" and understanding its outputs are crucial for DNS troubleshoo
 
 ## The dig Tool
 
-The tool “*dig*” was originally shipped with BIND and is commonly found on many Unix-like platforms. It stands for *Domain Information Groper*. It collects data about Domain Name Servers and is helpful for troubleshooting DNS problems and/or displaying DNS information.
-
-Other DNS implementations also include similar tools, often with similar names (e.g. kdig). Older tools used for DNS troubleshooting include *nslookup* and *host*.
+The tool ***dig*** was originally shipped with BIND and is commonly found on many Unix-like platforms. It stands for *Domain Information Groper*. It collects data about Domain Name Servers and is helpful for troubleshooting DNS problems and/or displaying DNS information. Other DNS implementations also include similar tools, often with similar names (e.g. kdig).
 
 > [!WARNING]
-> Do not use these older tools, they work very poorly with modern DNS features.
+> Do not use older tools like nslookup, they work very poorly with modern DNS features.
 
-A manual page for dig can be found here or from the command-line. There are a lot of available parameters. You can ignore most of them while you are getting started.
+A manual page for dig can be found [here](https://bind9.readthedocs.io/en/latest/manpages.html#dig-dns-lookup-utility) or from the command-line. There are a lot of available parameters. You can ignore most of them while you are getting started.
 
 ```
 $ man dig
@@ -39,23 +37,32 @@ dig @SERVER NAME TYPE
 For each dig query sent, a response is expected with different sections. Here are few of them:
 
 * The first line displays the version of the dig command.
-* The **HEADER** section shows the information it received from the server. **Flags** refer to the answer format and they are extremely important to understand the overall result of the query. There are six (06) flags: 
-
-	1. **AA**: Authoritative Answer
-	2. **TC**: Truncated Response
-	3. **RD**: Recursion Desired
-	4. **RA**: Recursion Available
-	5. **AD**: Authentic Data
-	6. **CD**: Checking Disabled
+* The **HEADER** section shows the information it received from the server.
 * The **OPT PSEUDOSECTION** displays advanced data such as EDNS (Extension mechanisms for DNS), if used.
 * The **QUESTION** section displays the query data that was sent.
 * The **ANSWER** section: probably the most important section for the user.
-* The **ADDITIONAL** section: contains data that might be usefull in the further processing of the answer
-* The **STATISTICS** section shows metadata about the query: 
+* The **ADDITIONAL** section: contains data that might be usefull in the further processing of the answer.
+* The **STATISTICS** section shows metadata about the query.
+
+### Header Section
+
+**Flags** refer to the answer format and they are extremely important to understand the overall result of the query. There are six flags: 
+
+1. **AA**: Authoritative Answer
+1. **TC**: Truncated Response
+1. **RD**: Recursion Desired
+1. **RA**: Recursion Available
+1. **AD**: Authentic Data
+1. **CD**: Checking Disabled
+
+
+### Statistics Section
+
    * query time (amount of time to get the response); 
    * SERVER (IP address and port of the responding DNS server); 
    * WHEN (timestamp when the command was run); 
    * MSG SIZE rcvd (size of the response packet from the DNS server).
+
 
 ## Sending DNS Queries Using dig
 
@@ -113,7 +120,7 @@ $ dig -x 192.0.47.7
 $ echo "icann.org google.com gmail.com" > test_batch_lookup.txt ; dig -f test_batch_lookup.txt +noall +answer
 ```
 
-# Server Identity
+# Server Identifier and Zone Version
 
 Back in the days engineers thought it was a good idea that you could query
 a server for the software and version it is running. Turns out, bad guys can 
@@ -122,21 +129,20 @@ some preconfigured string, but not the actuall software or version that is runni
 
 BIND servers respond to queries for name version.bind with record type TXT and class CHAOS. By default, this is set to the version of BIND that has been installed
 
-
 The first instances of this have been made by bind, which is reflected in the 
 query name.
 
 * **hostname.bind**: to retrieve the hostname of the server (if allowed to)
 ```
 $ dig @ns.icann.org. hostname.bind TXT CHAOS
-$ dig @d.root-servers.net hostname.bind TXT CHAOS
+$ dig @i.root-servers.net hostname.bind TXT CHAOS
 $ dig hostname.bind TXT CHAOS
 ```
 
 * **version.bind**: to retrieve the version of the server (if allowed to)
 ```
 $ dig @ns.icann.org. version.bind TXT CHAOS
-$ dig @d.root-servers.net version.bind TXT CHAOS
+$ dig @i.root-servers.net version.bind TXT CHAOS
 $ dig version.bind TXT CHAOS
 ```
 
@@ -145,20 +151,26 @@ software manufacturer.
 * **id.server**: 
 ```
 $ dig @ns.icann.org. id.server TXT CHAOS
-$ dig @d.root-servers.net id.server TXT CHAOS
+$ dig @i.root-servers.net id.server TXT CHAOS
 $ dig id.server TXT CHAOS
 ```
 
 All these old query types have one problem. They are a query in itself.
 In modern anycast networks we can't be sure that two queries to the same IP address
 will be received by the same server. So the latest approch allows for the
-server identity to be included in the response.
+server identity and zone version (SOA serial) to be included in the response. 
 
-* **nsid**: retrieve DNS Name Server Identifier (NSID) 
+* **nsid**: retrieve DNS Name Server Identifier
 ```
 $ dig @ns.icann.org. icann.org SOA +nsid
-$ dig @d.root-servers.net icann.org SOA +nsid
 $ dig icann.org SOA +nsid
+$ dig @d.root-servers.net icann.org SOA +nsid
+```
+
+* **zoneversion**: retrieve DNS Zone Version
+```
+$ kdig @ns1.xdp.cz xdp.cz soa +zoneversion
+$ kdig @ns1.dns.nl nl soa +zoneversion +nsid
 ```
 
 ### Using dig to get DNSSEC information

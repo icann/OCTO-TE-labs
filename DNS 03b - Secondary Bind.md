@@ -26,10 +26,10 @@ To do this, in the ***/etc/bind/named.conf.local*** file
 sudoedit /etc/bind/named.conf.local
 ```
 
-Configure the following parameters:
+Configure the following parameters (replace \<server id\> with the hostname of the machine you are configuring)
 
 ```
-server-id "NS?";
+server-id "<server id>";
 version "grpX"
 hostname;
 
