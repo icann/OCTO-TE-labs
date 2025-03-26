@@ -34,9 +34,9 @@ $TTL    300
 @           NS          <lab domain>.
 @           TXT         "DNS IS FUN" 
 ns1         A           100.100.X.130
-ns1         AAAA        fd73:7c99:X:128::130
+ns1         AAAA        fd89:59e0:X:128::130
 ns2         A           100.100.X.131
-ns2         AAAA        fd73:7c99:X:128::131
+ns2         AAAA        fd89:59e0:X:128::131
 ```
 
 You can add more records as you want.
@@ -48,7 +48,7 @@ zone "grpX.<lab domain>." {
 	type primary;
 	file "/var/lib/bind/zones/db.grpX";
 	allow-transfer { ns1; ns2; };
-	also-notify {100.100.X.130; fd73:7c99:X:128::131; };
+	also-notify {100.100.X.130; fd89:59e0:X:128::131; };
 }; 
 ```
 
@@ -77,7 +77,7 @@ zone "grpX.<lab domain>." {
 	type primary;
 	file "/var/lib/bind/zones/db.grpX";
 	allow-transfer { any; };
-	also-notify {100.100.X.130; 100.100.X.131; fd73:7c99:X:128::130; fd73:7c99:X:128::131; };
+	also-notify {100.100.X.130; 100.100.X.131; fd89:59e0:X:128::130; fd89:59e0:X:128::131; };
 }; 
 ```
 

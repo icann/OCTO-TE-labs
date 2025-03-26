@@ -37,12 +37,12 @@ We use the private 100.64.0.0/10 address space from [RFC 6598](https://www.rfc-e
 
 | Device Name   | IPv4 Address          | IPv6 Address                | Network  |
 | ------------- | --------------------- | --------------------------- | -------- |
-| cli           | 100.100.***X***.2     | fd73:7c99:***X***::2        | lan      |
-| resolv1       | 100.100.***X***.67    | fd73:7c99:***X***:64::67    | internal |
-| resolv2       | 100.100.***X***.68    | fd73:7c99:***X***:64::68    | internal |
-| soa           | 100.100.***X***.66    | fd73:7c99:***X***:64::66    | internal |
-| ns1           | 100.100.***X***.130   | fd73:7c99:***X***:128::130  | external |
-| ns2           | 100.100.***X***.131   | fd73:7c99:***X***:128::131  | external |
+| cli           | 100.100.***X***.2     | fd89:59e0:***X***::2        | lan      |
+| resolv1       | 100.100.***X***.67    | fd89:59e0:***X***:64::67    | internal |
+| resolv2       | 100.100.***X***.68    | fd89:59e0:***X***:64::68    | internal |
+| soa           | 100.100.***X***.66    | fd89:59e0:***X***:64::66    | internal |
+| ns1           | 100.100.***X***.130   | fd89:59e0:***X***:128::130  | external |
+| ns2           | 100.100.***X***.131   | fd89:59e0:***X***:128::131  | external |
 
 # The Hands-On Labs
 

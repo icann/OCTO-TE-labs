@@ -75,10 +75,10 @@ server 100.100.X.130 {
 server 100.100.X.131 {
      keys {grpX-key ; };
 };
-server fd73:7c99:X:128::130 {
+server fd89:59e0:X:128::130 {
      keys {grpX-key ; };
 };
-server fd73:7c99:X:128::131 {
+server fd89:59e0:X:128::131 {
      keys {grpX-key ; };
 };
 ```
@@ -144,7 +144,7 @@ key "grpX-key" {
 server 100.100.X.66 {		// here you put the IP of YOUR primary server (SOA)
         keys { grpX-key; };
 };
-server fd73:7c99:X:64::66 {		// here you put the IP of YOUR primary server (SOA)
+server fd89:59e0:X:64::66 {		// here you put the IP of YOUR primary server (SOA)
         keys { grpX-key; };
 };
 ```

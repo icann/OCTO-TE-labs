@@ -22,8 +22,8 @@ following ip addresses:
 
 | Device Name   | IPv4 Address   | IPv6 Address         | 
 | ------------- | -------------- | -------------------- |
-| ns1           | 100.100.X.130  | fd73:7c99:X:128::130 |
-| ns2           | 100.100.X.131  | fd73:7c99:X:128::131 |
+| ns1           | 100.100.X.130  | fd89:59e0:X:128::130 |
+| ns2           | 100.100.X.131  | fd89:59e0:X:128::131 |
 
 Our zone configuration must be compatible with that.
 
