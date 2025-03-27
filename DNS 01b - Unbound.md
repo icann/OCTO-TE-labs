@@ -12,6 +12,8 @@ $ cat /etc/resolv.conf
 search grpX.<lab domain>
 nameserver 100.100.X.67
 nameserver 100.100.X.68
+nameserver fd89:59e0:X:64::67
+nameserver fd89:59e0:X:64::68
 ```
 So again the resolv1 and resolv2 servers are used for resolving.
 Unfortunately we have not yet installed the resolvers.
@@ -147,6 +149,8 @@ Restore `/etc/resolv.conf` to its original content:
 search grpX.<lab domain>
 nameserver 100.100.X.67
 nameserver 100.100.X.68
+nameserver fd89:59e0:X:64::67
+nameserver fd89:59e0:X:64::68
 ```
 
 # Test your resolver again

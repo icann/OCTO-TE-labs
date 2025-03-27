@@ -36,7 +36,12 @@ hostname;
 zone "grpX.<lab domain>" {
     type secondary;
     file "/etc/bind/zones/db.grpX.secondary";
-    masters { 100.100.X.66; fd89:59e0:X::2; };
+    masters { 
+        100.100.X.66; 
+        fd89:59e0:X:64::66;
+        100.100.X.2; 
+        fd89:59e0:X::2; 
+    };
 };
 ```
 

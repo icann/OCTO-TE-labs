@@ -28,16 +28,16 @@ server:
 	zonesdir: "/var/lib/nsd"
     nsid: "NS?"
     hide-version: no
-    version: "grpX"
     hide-identity: no
-    #identity:
-
+    
 pattern:
 	name: "fromprimary"
 	allow-notify: 100.100.X.66 NOKEY
+    allow-notify: fd89:59e0:X:64::66 NOKEY
     allow-notify: fd89:59e0:X::2 NOKEY
 	request-xfr: AXFR 100.100.X.66 NOKEY
-    request-xfr: IXFR fd89:59e0:X::2 NOKEY
+	request-xfr: AXFR fd89:59e0:X:64::66 NOKEY
+    request-xfr: AXFR fd89:59e0:X::2 NOKEY
 
 zone:
 	name: "grpX.<lab domain>."
