@@ -8,16 +8,16 @@ Reverse DNS.
 
 To map your IP address to your domain name, we’ll need to setup a reverse zone. 
 We are going to configure a hidden authoritative server for your reverse zone 
-and create the authoritative zone reverse\_*grpX*.<*lab domain*>.te-labs.training.
+and create the authoritative zone reverse\_grp***X***.***lab_domain***.
 
 ```
-# nano /etc/bind/zones/reverse_grpX.<lab domain>.te-labs.training
+# nano /etc/bind/zones/reverse_grpX.lab_domain.te-labs.training
 ```
 
 
 ```
 $TTL    300
-@		IN		SOA		soa.grpX.<lab domain>.te-labs.training. dnsadmin.<lab domain>.te-labs.training. (                                            
+@		IN		SOA		soa.grpX.lab_domain. dnsadmin.lab_domain. (                                            
                               1         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
@@ -25,13 +25,13 @@ $TTL    300
                           86400 )       ; Negative Cache TTL
 ;
 
-                IN              NS              ns1.grpX.<lab domain>.te-labs.training. ; your name server
-                IN              NS              ns2.grpX.<lab domain>.te-labs.training. ; your name server
-66		IN		PTR		soa.grpX.<lab domain>.te-labs.training.
-67		IN		PTR		resolv1.grpX.<lab domain>.te-labs.training.
-68		IN		PTR		resolv2.grpX.<lab domain>.te-labs.training.
-130		IN		PTR		ns1.grpX.<lab domain>.te-labs.training.
-131		IN		PTR		ns2.grpX.<lab domain>.te-labs.training.
+                IN              NS              ns1.grpX.lab_domain. ; your name server
+                IN              NS              ns2.grpX.lab_domain. ; your name server
+66		IN		PTR		soa.grpX.lab_domain.
+67		IN		PTR		resolv1.grpX.lab_domain.
+68		IN		PTR		resolv2.grpX.lab_domain.
+130		IN		PTR		ns1.grpX.lab_domain.
+131		IN		PTR		ns2.grpX.lab_domain.
 ```
 
 Save and exit.
@@ -39,7 +39,7 @@ Save and exit.
 Run the following command to check for any errors in your setup:
 
 ```
-# named-checkzone X.100.100.in-addr.arpa /etc/bind/zones/reverse_grpX.<lab domain>.te-labs.training
+# named-checkzone X.100.100.in-addr.arpa /etc/bind/zones/reverse_grpX.lab_domain.
 ```
 
 Next, edit the /etc/bind/named.conf.local file and add the following lines:
@@ -47,7 +47,7 @@ Next, edit the /etc/bind/named.conf.local file and add the following lines:
 ```
 zone "X.100.100.in-addr.arpa" {
   type primary;
-  file "/etc/bind/zones/reverse_grpX.<lab domain>.te-labs.training";
+  file "/etc/bind/zones/reverse_grpX.lab_domain.";
   allow-transfer { any; };
   also-notify {100.100.X.130; 100.100.X.131; };
 };

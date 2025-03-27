@@ -9,7 +9,7 @@ ping icann.org
 Let's look at `/etc/resolv.conf`.
 ```
 $ cat /etc/resolv.conf
-search grpX.<lab domain>
+search grpX.lab_domain
 nameserver 100.100.X.67
 nameserver 100.100.X.68
 nameserver fd89:59e0:X:64::67
@@ -122,16 +122,16 @@ Drop-In: /etc/systemd/system/service.d
 	Process: 571 ExecStartPre=/usr/lib/unbound/package-helper chroot_setup (code=exited, status=0/SUCCESS)
 	Process: 574 ExecStartPre=/usr/lib/unbound/package-helper root_trust_anchor_update (code=exited, status=0/SUCCESS)   Main PID: 578 (unbound)      Tasks: 1 (limit: 152822)     Memory: 7.8M     
 	CGroup: /system.slice/unbound.service             		└─578 /usr/sbin/unbound -d
-May 13 03:49:10 resolv2.grpX.<lab domain> unbound[178]: [178:0] info: [25%]=0 median[50%]=0 [75%]=0
-May 13 03:49:10 resolv2.grpX.<lab domain> unbound[178]: [178:0] info: lower(secs) upper(secs) recursions
-May 13 03:49:10 resolv2.grpX.<lab domain> unbound[178]: [178:0] info:    0.000000    0.000001 1
-May 13 03:49:11 resolv2.grpX.<lab domain> package-helper[577]: /var/lib/unbound/root.key has content
-May 13 03:49:11 resolv2.grpX.<lab domain> package-helper[577]: success: the anchor is ok
-May 13 03:49:11 resolv2.grpX.<lab domain> unbound[578]: [578:0] notice: init module 0: subnet
-May 13 03:49:11 resolv2.grpX.<lab domain> unbound[578]: [578:0] notice: init module 1: validator
-May 13 03:49:11 resolv2.grpX.<lab domain> unbound[578]: [578:0] notice: init module 2: iterator
-May 13 03:49:11 resolv2.grpX.<lab domain> unbound[578]: [578:0] info: start of service (unbound 1.9.4).
-May 13 03:49:11 resolv2.grpX.<lab domain> systemd[1]: Started Unbound DNS server.
+May 13 03:49:10 resolv2.grpX.lab_domain unbound[178]: [178:0] info: [25%]=0 median[50%]=0 [75%]=0
+May 13 03:49:10 resolv2.grpX.lab_domain unbound[178]: [178:0] info: lower(secs) upper(secs) recursions
+May 13 03:49:10 resolv2.grpX.lab_domain unbound[178]: [178:0] info:    0.000000    0.000001 1
+May 13 03:49:11 resolv2.grpX.lab_domain package-helper[577]: /var/lib/unbound/root.key has content
+May 13 03:49:11 resolv2.grpX.lab_domain package-helper[577]: success: the anchor is ok
+May 13 03:49:11 resolv2.grpX.lab_domain unbound[578]: [578:0] notice: init module 0: subnet
+May 13 03:49:11 resolv2.grpX.lab_domain unbound[578]: [578:0] notice: init module 1: validator
+May 13 03:49:11 resolv2.grpX.lab_domain unbound[578]: [578:0] notice: init module 2: iterator
+May 13 03:49:11 resolv2.grpX.lab_domain unbound[578]: [578:0] info: start of service (unbound 1.9.4).
+May 13 03:49:11 resolv2.grpX.lab_domain systemd[1]: Started Unbound DNS server.
 ```
 
 # Test your new resolver
@@ -146,7 +146,7 @@ Run the following commands and see if you receive answers:
 
 Restore `/etc/resolv.conf` to its original content:
 ```
-search grpX.<lab domain>
+search grpX.lab_domain
 nameserver 100.100.X.67
 nameserver 100.100.X.68
 nameserver fd89:59e0:X:64::67

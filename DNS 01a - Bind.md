@@ -9,7 +9,7 @@ ping icann.org
 Let's look at `/etc/resolv.conf`.
 ```
 $ cat /etc/resolv.conf
-search grpX.<lab domain>
+search grpX.lab_domain
 nameserver 100.100.X.67
 nameserver 100.100.X.68
 nameserver fd89:59e0:X:64::67
@@ -106,16 +106,16 @@ You should get something similar to the below:
    CGroup: /system.slice/named.service
        └─849 /usr/sbin/named -f -u bind
 
-May 13 01:38:27 resolv1.grpX.<lab domain> named[849]: **command channel listening on ::1#953**
-May 13 01:38:27 resolv1.grpX.<lab domain> named[849]: managed-keys-zone: loaded serial 6
-May 13 01:38:27 resolv1.grpX.<lab domain> named[849]: zone 0.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grpX.<lab domain> named[849]: zone 127.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grpX.<lab domain> named[849]: zone localhost/IN: loaded serial 2
-May 13 01:38:27 resolv1.grpX.<lab domain> named[849]: zone 255.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grpX.<lab domain> named[849]: **all zones loaded**
-May 13 01:38:27 resolv1.grpX.<lab domain> named[849]: **running**
-May 13 01:38:27 resolv1.grpX.<lab domain> named[849]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer>
-May 13 01:38:27 resolv1.grpX.<lab domain> named[849]: resolver priming query complete
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: **command channel listening on ::1#953**
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: managed-keys-zone: loaded serial 6
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: zone 0.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: zone 127.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: zone localhost/IN: loaded serial 2
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: zone 255.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: **all zones loaded**
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: **running**
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer>
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: resolver priming query complete
 ```
 
 # Test your new resolver
@@ -130,7 +130,7 @@ Run the following commands and see if you receive answers:
 
 Restore `/etc/resolv.conf` to its original content:
 ```
-search grpX.<lab domain>
+search grpX.lab_domain
 nameserver 100.100.X.67
 nameserver 100.100.X.68
 nameserver fd89:59e0:X:64::67

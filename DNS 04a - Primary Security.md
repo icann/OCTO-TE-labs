@@ -88,7 +88,7 @@ Don't forget to replace X in "**grpX-key**" ....!
 Then in your zone, change allow-transfer line
 
 ```
-zone "grpX.<lab domain>.te-labs.training" {                                                                               
+zone "grpX.lab_domain.te-labs.training" {                                                                               
         [...]
         allow-transfer { key grpX-key; };
         [...]
@@ -108,7 +108,7 @@ $ rndc reconfig
 
 Test that zone transfer has stopped working.
 ```
-$ dig @100.100.X.66 axfr grpX.<lab domain>.te-labs.training
+$ dig @100.100.X.66 axfr grpX.lab_domain.te-labs.training
 
 ...
 ; Transfer failed.
@@ -119,7 +119,7 @@ A look into the SOA server logs should show something like:
 ```
 $ tail /var/log/syslog
 
-24-May-2022 10:03:29.433 client @0x7f185c006920 100.100.X.130#38993 (grpX.<lab domain>): zone transfer 'grpX.<lab domain>/AXFR/IN' denied
+24-May-2022 10:03:29.433 client @0x7f185c006920 100.100.X.130#38993 (grpX.lab_domain): zone transfer 'grpX.lab_domain/AXFR/IN' denied
 ```
 
 We need the key!
@@ -127,7 +127,7 @@ We need the key!
 You can also test manually as follows:
 
 ```
-$ dig @100.100.X.66 -y hmac-sha256:grpX-key:THIS_IS_MY_KEY axfr grpX.<lab domain>.te-labs.training
+$ dig @100.100.X.66 -y hmac-sha256:grpX-key:THIS_IS_MY_KEY axfr grpX.lab_domain.te-labs.training
 ```
 
 
@@ -154,19 +154,19 @@ Save, exit and restart bind9.
 ### Testing the configuration
 
 On SOA server increase the serial and reload the zone. Then, 
-`$ sudo rndc reload grpX.<lab domain>.te-labs.training`
+`$ sudo rndc reload grpX.lab_domain.te-labs.training`
 
 In ns1, go to logs and validate that the transfer was successful.
 
 ```
 $ tail /var/log/syslog
 
-zone grp2.<lab domain>.te-labs.training/IN: Transfer started.
-transfer of 'grp2.<lab domain>.te-labs.training/IN' from 100.100.2.66#53: connected using 100.100.2.13>
-zone grp2.<lab domain>.te-labs.training/IN: transferred serial 2022052401: TSIG 'grp2-key'
-transfer of 'grp2.<lab domain>.te-labs.training/IN' from 100.100.2.66#53: Transfer status: success
-transfer of 'grp2.<lab domain>.te-labs.training/IN' from 100.100.2.66#53: Transfer completed: 1 messag>
-zone grp2.<lab domain>.te-labs.training/IN: sending notifies (serial 2022052401)
+zone grp2.lab_domain.te-labs.training/IN: Transfer started.
+transfer of 'grp2.lab_domain.te-labs.training/IN' from 100.100.2.66#53: connected using 100.100.2.13>
+zone grp2.lab_domain.te-labs.training/IN: transferred serial 2022052401: TSIG 'grp2-key'
+transfer of 'grp2.lab_domain.te-labs.training/IN' from 100.100.2.66#53: Transfer status: success
+transfer of 'grp2.lab_domain.te-labs.training/IN' from 100.100.2.66#53: Transfer completed: 1 messag>
+zone grp2.lab_domain.te-labs.training/IN: sending notifies (serial 2022052401)
 managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer complete)
 resolver priming query complete
 ```
@@ -202,7 +202,7 @@ Save, exit, verify and restart NSD service.
 ```
 $ nsd-checkconf /etc/nsd/nsd.conf
 $ sudo nsd-control reconfig
-$ sudo nsd-control reload grpX.<lab domain>.te-labs.training
+$ sudo nsd-control reload grpX.lab_domain.te-labs.training
 ```
 
 Check the logs on NS2 and on SOA.

@@ -86,16 +86,16 @@ You should get something similar to the below:
    CGroup: /system.slice/named.service
        └─849 /usr/sbin/named -f -u bind
 
-May 13 01:38:27 resolv1.grpX.<lab domain>.te-labs.training named[849]: **command channel listening on ::1#953**
-May 13 01:38:27 resolv1.grpX.<lab domain>.te-labs.training named[849]: managed-keys-zone: loaded serial 6
-May 13 01:38:27 resolv1.grpX.<lab domain>.te-labs.training named[849]: zone 0.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grpX.<lab domain>.te-labs.training named[849]: zone 127.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grpX.<lab domain>.te-labs.training named[849]: zone localhost/IN: loaded serial 2
-May 13 01:38:27 resolv1.grpX.<lab domain>.te-labs.training named[849]: zone 255.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grpX.<lab domain>.te-labs.training named[849]: **all zones loaded**
-May 13 01:38:27 resolv1.grpX.<lab domain>.te-labs.training named[849]: **running**
-May 13 01:38:27 resolv1.grpX.<lab domain>.te-labs.training named[849]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer>
-May 13 01:38:27 resolv1.grpX.<lab domain>.te-labs.training named[849]: resolver priming query complete
+May 13 01:38:27 resolv1.grpX.lab_domain.te-labs.training named[849]: **command channel listening on ::1#953**
+May 13 01:38:27 resolv1.grpX.lab_domain.te-labs.training named[849]: managed-keys-zone: loaded serial 6
+May 13 01:38:27 resolv1.grpX.lab_domain.te-labs.training named[849]: zone 0.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grpX.lab_domain.te-labs.training named[849]: zone 127.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grpX.lab_domain.te-labs.training named[849]: zone localhost/IN: loaded serial 2
+May 13 01:38:27 resolv1.grpX.lab_domain.te-labs.training named[849]: zone 255.in-addr.arpa/IN: loaded serial 1
+May 13 01:38:27 resolv1.grpX.lab_domain.te-labs.training named[849]: **all zones loaded**
+May 13 01:38:27 resolv1.grpX.lab_domain.te-labs.training named[849]: **running**
+May 13 01:38:27 resolv1.grpX.lab_domain.te-labs.training named[849]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer>
+May 13 01:38:27 resolv1.grpX.lab_domain.te-labs.training named[849]: resolver priming query complete
 ```
 
 ### Test your new validating resolver
@@ -106,12 +106,12 @@ Run the following commands and confirm if you receive the "ad" flag:
 2. dig SOA com. @100.100.X.67 +dnssec
 3. dig A www.icann.org @100.100.X.67
 4. dig NS icann.org @100.100.X.67
-5. dig DNSKEY *grpX*.<*lab domain*>.te-labs.training @100.100.X.67
-6. dig NS *grpX*.<*lab domain*>.te-labs.training @100.100.X.67 +dnssec
-7. dig SOA *grpX*.<*lab domain*>.te-labs.training @100.100.X.67
-8. dig DNSKEY *grpX*.<*lab domain*>.te-labs.training @100.100.X.130
-9. dig DNSKEY *grpX*.<*lab domain*>.te-labs.training @100.100.X.130 +multi
-10. dig SOA *grpX*.<*lab domain*>.te-labs.training @100.100.X.131 +dnssec +multi
+5. dig DNSKEY grp***X***.***lab_domain*** @100.100.X.67
+6. dig NS grp***X***.***lab_domain*** @100.100.X.67 +dnssec
+7. dig SOA grp***X***.***lab_domain*** @100.100.X.67
+8. dig DNSKEY grp***X***.***lab_domain*** @100.100.X.130
+9. dig DNSKEY grp***X***.***lab_domain*** @100.100.X.130 +multi
+10. dig SOA grp***X***.***lab_domain*** @100.100.X.131 +dnssec +multi
 
 Did you receive the "ad" flag for the last three dig queries ? Why ?
 
@@ -137,12 +137,12 @@ Save and exit. Then try the following queries:
 2. dig SOA com. +dnssec
 3. dig A www.icann.org
 4. dig NS icann.org
-5. dig NS *grpX*.<*lab domain*>.te-labs.training
-6. dig NS *grpX*.<*lab domain*>.te-labs.training +dnssec
-7. dig SOA *grpX*.<*lab domain*>.te-labs.training
-8. dig SOA *grpX*.<*lab domain*>.te-labs.training +dnssec +multi
-9. dig DNSKEY *grpX*.<*lab domain*>.te-labs.training
-10. dig DNSKEY *grpX*.<*lab domain*>.te-labs.training +multi
+5. dig NS grp***X***.***lab_domain***
+6. dig NS grp***X***.***lab_domain*** +dnssec
+7. dig SOA grp***X***.***lab_domain***
+8. dig SOA grp***X***.***lab_domain*** +dnssec +multi
+9. dig DNSKEY grp***X***.***lab_domain***
+10. dig DNSKEY grp***X***.***lab_domain*** +multi
 
 Did you get the "ad" flag in all the cases ?
 
@@ -224,16 +224,16 @@ Drop-In: /etc/systemd/system/service.d
 	Process: 571 ExecStartPre=/usr/lib/unbound/package-helper chroot_setup (code=exited, status=0/SUCCESS)
 	Process: 574 ExecStartPre=/usr/lib/unbound/package-helper root_trust_anchor_update (code=exited, status=0/SUCCESS)   Main PID: 578 (unbound)      Tasks: 1 (limit: 152822)     Memory: 7.8M     
 	CGroup: /system.slice/unbound.service             		└─578 /usr/sbin/unbound -d
-May 13 03:49:10 resolv2.grpX.<lab domain>.te-labs.training unbound[178]: [178:0] info: [25%]=0 median[50%]=0 [75%]=0
-May 13 03:49:10 resolv2.grpX.<lab domain>.te-labs.training unbound[178]: [178:0] info: lower(secs) upper(secs) recursions
-May 13 03:49:10 resolv2.grpX.<lab domain>.te-labs.training unbound[178]: [178:0] info:    0.000000    0.000001 1
-May 13 03:49:11 resolv2.grpX.<lab domain>.te-labs.training package-helper[577]: /var/lib/unbound/root.key has content
-May 13 03:49:11 resolv2.grpX.<lab domain>.te-labs.training package-helper[577]: success: the anchor is ok
-May 13 03:49:11 resolv2.grpX.<lab domain>.te-labs.training unbound[578]: [578:0] notice: init module 0: subnet
-May 13 03:49:11 resolv2.grpX.<lab domain>.te-labs.training unbound[578]: [578:0] notice: init module 1: validator
-May 13 03:49:11 resolv2.grpX.<lab domain>.te-labs.training unbound[578]: [578:0] notice: init module 2: iterator
-May 13 03:49:11 resolv2.grpX.<lab domain>.te-labs.training unbound[578]: [578:0] info: start of service (unbound 1.9.4).
-May 13 03:49:11 resolv2.grpX.<lab domain>.te-labs.training systemd[1]: Started Unbound DNS server.
+May 13 03:49:10 resolv2.grpX.lab_domain.te-labs.training unbound[178]: [178:0] info: [25%]=0 median[50%]=0 [75%]=0
+May 13 03:49:10 resolv2.grpX.lab_domain.te-labs.training unbound[178]: [178:0] info: lower(secs) upper(secs) recursions
+May 13 03:49:10 resolv2.grpX.lab_domain.te-labs.training unbound[178]: [178:0] info:    0.000000    0.000001 1
+May 13 03:49:11 resolv2.grpX.lab_domain.te-labs.training package-helper[577]: /var/lib/unbound/root.key has content
+May 13 03:49:11 resolv2.grpX.lab_domain.te-labs.training package-helper[577]: success: the anchor is ok
+May 13 03:49:11 resolv2.grpX.lab_domain.te-labs.training unbound[578]: [578:0] notice: init module 0: subnet
+May 13 03:49:11 resolv2.grpX.lab_domain.te-labs.training unbound[578]: [578:0] notice: init module 1: validator
+May 13 03:49:11 resolv2.grpX.lab_domain.te-labs.training unbound[578]: [578:0] notice: init module 2: iterator
+May 13 03:49:11 resolv2.grpX.lab_domain.te-labs.training unbound[578]: [578:0] info: start of service (unbound 1.9.4).
+May 13 03:49:11 resolv2.grpX.lab_domain.te-labs.training systemd[1]: Started Unbound DNS server.
 ```
 
 ### Test your new validating resolver
@@ -244,12 +244,12 @@ Run the following commands and confirm if you receive the "ad" flag:
 2. dig SOA com. @100.100.X.68 +dnssec
 3. dig A www.icann.org @100.100.X.68
 4. dig NS icann.org @100.100.X.68
-5. dig DNSKEY *grpX*.<*lab domain*>.te-labs.training @100.100.X.68
-6. dig NS *grpX*.<*lab domain*>.te-labs.training @100.100.X.68 +dnssec
-7. dig SOA *grpX*.<*lab domain*>.te-labs.training @100.100.X.68
-8. dig DNSKEY *grpX*.<*lab domain*>.te-labs.training @100.100.X.130
-9. dig DNSKEY *grpX*.<*lab domain*>.te-labs.training @100.100.X.130 +multi
-10. dig SOA *grpX*.<*lab domain*>.te-labs.training @100.100.X.131 +dnssec +multi
+5. dig DNSKEY grp***X***.***lab_domain*** @100.100.X.68
+6. dig NS grp***X***.***lab_domain*** @100.100.X.68 +dnssec
+7. dig SOA grp***X***.***lab_domain*** @100.100.X.68
+8. dig DNSKEY grp***X***.***lab_domain*** @100.100.X.130
+9. dig DNSKEY grp***X***.***lab_domain*** @100.100.X.130 +multi
+10. dig SOA grp***X***.***lab_domain*** @100.100.X.131 +dnssec +multi
 
 Did you receive the "ad" flag for the last three dig queries ? Why ?
 
@@ -275,12 +275,12 @@ Save and exit. Then try the following queries:
 2. dig SOA com. +dnssec
 3. dig A www.icann.org
 4. dig NS icann.org
-5. dig NS *grpX*.<*lab domain*>.te-labs.training
-6. dig NS *grpX*.<*lab domain*>.te-labs.training +dnssec
-7. dig SOA *grpX*.<*lab domain*>.te-labs.training
-8. dig SOA *grpX*.<*lab domain*>.te-labs.training +dnssec +multi
-9. dig DNSKEY *grpX*.<*lab domain*>.te-labs.training
-10. dig DNSKEY *grpX*.<*lab domain*>.te-labs.training +multi
+5. dig NS grp***X***.***lab_domain***
+6. dig NS grp***X***.***lab_domain*** +dnssec
+7. dig SOA grp***X***.***lab_domain***
+8. dig SOA grp***X***.***lab_domain*** +dnssec +multi
+9. dig DNSKEY grp***X***.***lab_domain***
+10. dig DNSKEY grp***X***.***lab_domain*** +multi
 
 Did you get the "ad" flag in all the cases ?
 

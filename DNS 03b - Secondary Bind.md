@@ -33,7 +33,7 @@ server-id "<server id>";
 version "grpX"
 hostname;
 
-zone "grpX.<lab domain>" {
+zone "grpX.lab_domain" {
     type secondary;
     file "/etc/bind/zones/db.grpX.secondary";
     masters { 
@@ -55,7 +55,7 @@ $ rndc reload
 Verify that it restarted correctly:
 
 ```
-$ rndc zonestatus grpX.<lab domain> 
+$ rndc zonestatus grpX.lab_domain 
 ```
 
 At he end of this section please proceed with [DNS 02 - Configure zone](DNS%2002%20-%20Configure%20zone.md#setting-up-the-secondaries)

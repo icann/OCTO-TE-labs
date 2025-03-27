@@ -24,7 +24,7 @@ On most systems, especially any linux based systems, the contents of the `/etc/r
 file decide which resolver gets used. Please have a look at that file. It's contents should 
 look something like
 ```
-search grpX.<lab domain>
+search grpX.lab_domain
 nameserver 100.100.X.67
 nameserver 100.100.X.68
 nameserver fd89:59e0:X:64::67

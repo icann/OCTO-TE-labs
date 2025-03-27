@@ -24,10 +24,10 @@ Your instructor will announce the ***lab domain*** and give you a ***group numbe
 >
 > In all this lab, be carefull to always replace ***X*** by your group
 > number in IP addresses, server name and any other place where
-> required. Same for \<***lab domain***\> to be replace by the 
+> required. ***lab domain*** is to be replaced by the 
 > domain name registered for the class.
 
-Your domain: grp***X***.\<***lab domain***\>
+Your domain: grp***X***.***lab domain***
 
 Every participant gets a number of virtual machines. The machines are placed in different networks.
 

@@ -10,10 +10,10 @@ will server the zone externaly.
 
 ## From the parent zone
 
-Our "parent" (***\<lab domain\>***) has already created the following in its own zone:
+Our "parent" (***lab_domain***) has already created the following in its own zone:
 
 ```
-grpX             NS          <lab domain>.
+grpX             NS          lab_domain.
 ```
 
 The lab uses dnsdist (a DNS proxy) to forward queries to the 
@@ -29,7 +29,7 @@ Our zone configuration must be compatible with that.
 
 ## Setting up the primary
 
-Use the "SOA" server as primary authoritative server for the  **grpX.\<lab domain\>** zone.
+Use the "SOA" server as primary authoritative server for the  grp***X***.***lab_domain*** zone.
 
 Your instructor will tell you which instructions to follow for installation of your primary server.
 
@@ -50,14 +50,14 @@ We will now use *dig* tool to verify the zone configuration and propagation, the
 
 On the **cli** instance
 
-1. `dig @100.100.X.66  grpX.<lab domain> SOA`
-1. `dig @100.100.X.130 grpX.<lab domain> SOA`
-1. `dig @100.100.X.131 grpX.<lab domain> SOA`
+1. `dig @100.100.X.66  grpX.lab_domain SOA`
+1. `dig @100.100.X.130 grpX.lab_domain SOA`
+1. `dig @100.100.X.131 grpX.lab_domain SOA`
 
 Please repeat the following queries at least once
 ```
-1. `dig @<lab domain> grpX.<lab domain> NS         +nsid`
-1. `dig @<lab domain> hostname.bind     TXT CHAOS`
-1. `dig @<lab domain> version.bind      TXT CHAOS`
-1. `dig @<lab domain> id.server         TXT CHAOS`
+1. `dig @lab_domain grpX.lab_domain NS         +nsid`
+1. `dig @lab_domain hostname.bind     TXT CHAOS`
+1. `dig @lab_domain version.bind      TXT CHAOS`
+1. `dig @lab_domain id.server         TXT CHAOS`
 ```
