@@ -57,7 +57,7 @@ On the **cli** instance
 Please repeat the following queries at least once
 ```
 1. `dig @lab_domain grpX.lab_domain NS         +nsid`
-1. `dig @lab_domain hostname.bind     TXT CHAOS`
-1. `dig @lab_domain version.bind      TXT CHAOS`
-1. `dig @lab_domain id.server         TXT CHAOS`
+1. `dig @lab_domain hostname.bind   TXT CHAOS`
+1. `dig @lab_domain version.bind    TXT CHAOS`
+1. `dig @lab_domain id.server       TXT CHAOS`
 ```

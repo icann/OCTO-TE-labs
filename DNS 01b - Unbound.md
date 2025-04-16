@@ -59,7 +59,7 @@ server:
         interface: ::0
 
         access-control: 0.0.0.0/0 allow
-        access-control: ::/32 allow
+        access-control: ::/0 allow
 
         port: 53
 
@@ -67,6 +67,11 @@ server:
         do-tcp: yes
         do-ip4: yes
         do-ip6: yes
+
+        trust-anchor-file:
+        auto-trust-anchor-file:
+        trust-anchor:
+        trusted-keys-file:
 
 include: "/etc/unbound/unbound.conf.d/*.conf"
 ```
@@ -100,39 +105,26 @@ Then restart the server so that it takes the configuration changes:
 # unbound-checkconf
 unbound-checkconf: no errors in /etc/unbound/unbound.conf
 ```
-Now we must enable and start the server
+Before we restart unbound let's look at its current status
 ```
-$ sudo systemctl enable unbound
-$ sudo systemctl start  unbound
+$ sudo unbound-control status
 ```
-
-Check the status of the Unbound process:
-
+Output should be similiar to this
 ```
-$ sudo systemctl status unbound
+version: 1.19.2
+verbosity: 1
+threads: 1
+modules: 3 [ subnetcache validator iterator ]
+uptime: 248 seconds
+options: reuseport control(namedpipe)
+unbound (pid 2233) is running...
 ```
-
-You should obtain an output similar to the following:
-
+Now restart the server with the new configuration. Because we made changes to the interface configuration,
+we have to do a hard restart, not just a configuration reload.
 ```
-● unbound.service - Unbound DNS server     
-Loaded: loaded (/lib/systemd/system/unbound.service; enabled; vendor preset: enabled)    
-Drop-In: /etc/systemd/system/service.d
-	└─lxc.conf     Active: active (running) since Thu 2021-05-13 03:49:11 UTC; 13s ago       Docs: man:unbound(8)
-	Process: 571 ExecStartPre=/usr/lib/unbound/package-helper chroot_setup (code=exited, status=0/SUCCESS)
-	Process: 574 ExecStartPre=/usr/lib/unbound/package-helper root_trust_anchor_update (code=exited, status=0/SUCCESS)   Main PID: 578 (unbound)      Tasks: 1 (limit: 152822)     Memory: 7.8M     
-	CGroup: /system.slice/unbound.service             		└─578 /usr/sbin/unbound -d
-May 13 03:49:10 resolv2.grpX.lab_domain unbound[178]: [178:0] info: [25%]=0 median[50%]=0 [75%]=0
-May 13 03:49:10 resolv2.grpX.lab_domain unbound[178]: [178:0] info: lower(secs) upper(secs) recursions
-May 13 03:49:10 resolv2.grpX.lab_domain unbound[178]: [178:0] info:    0.000000    0.000001 1
-May 13 03:49:11 resolv2.grpX.lab_domain package-helper[577]: /var/lib/unbound/root.key has content
-May 13 03:49:11 resolv2.grpX.lab_domain package-helper[577]: success: the anchor is ok
-May 13 03:49:11 resolv2.grpX.lab_domain unbound[578]: [578:0] notice: init module 0: subnet
-May 13 03:49:11 resolv2.grpX.lab_domain unbound[578]: [578:0] notice: init module 1: validator
-May 13 03:49:11 resolv2.grpX.lab_domain unbound[578]: [578:0] notice: init module 2: iterator
-May 13 03:49:11 resolv2.grpX.lab_domain unbound[578]: [578:0] info: start of service (unbound 1.9.4).
-May 13 03:49:11 resolv2.grpX.lab_domain systemd[1]: Started Unbound DNS server.
+$ sudo systemctl restart unbound
 ```
+Check the status of the Unbound again, look at the uptime counter it should be only a few seconds now.
 
 # Test your new resolver
 

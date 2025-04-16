@@ -7,6 +7,15 @@ The official Bind 9 configuration reference manual can be found at
 >
 > In all this lab, be carefull to always replace ***X*** by your Group number in IP addresses, server name and any other place where required. Same for ***lab_domain*** to be replace by the domain name registered for the class.
 
+## Install Bind 9
+
+```
+$ sudo apt -y install bind9
+$ sudo adduser sysadm bind
+```
+
+This installs bind and allows our current user to use rndc to control bind.
+
 ## Setting the authoritative zone
 
 We use the container "SOA" (hidden primary authoritative)
@@ -47,60 +56,49 @@ In the configuration file ***/etc/bind/named.conf.local*** , create a new "zone"
 zone "grpX.lab_domain." {
 	type primary;
 	file "/var/lib/bind/zones/db.grpX";
-	allow-transfer { ns1; ns2; };
-	also-notify {100.100.X.130; fd89:59e0:X:128::131; };
-}; 
-```
-
-Tell bind to reload the configuration and verify its status. You should see an output as the below
-
-```
-$ rndc reload
-
-OUTPUT
-
-$ rndc zonestatus grpX.lab_domain
-
-OUTPUT
-```
-
-One important aspect of using rndc to manage bind is, that bind tries to load the new 
-configuration and if something fails it continues to use the old configuration.
-
-Now, let's fix our configuration
-
-```
-In the configuration file ***/etc/bind/named.conf.local*** , change the "zone" statement as below:
-(pay attention to the `allow-transfer` statement)
-```
-zone "grpX.lab_domain." {
-	type primary;
-	file "/var/lib/bind/zones/db.grpX";
 	allow-transfer { any; };
-	also-notify {100.100.X.130; 100.100.X.131; fd89:59e0:X:128::130; fd89:59e0:X:128::131; };
+	also-notify {
+		100.100.X.130; 
+		100.100.X.131; 
+		fd89:59e0:X:128::130; 
+		fd89:59e0:X:128::131; 
+	};
 }; 
 ```
 
 > [!TIP]
 > Once done, use ***named-checkconf*** to verify that your BIND config is correct.
+```
+$ named-checkconf
+```
 
-```
-$ sudo named-checkconf
-```
 Tell bind to reload the configuration and verify its status. You should see an output as the below
-
 ```
 $ rndc reload
+server reload successful
 $ rndc zonestatus grpX.lab_domain
-
-OUTPUT
+name: grpX.lab_domain
+type: primary
+files: /var/lib/bind/zones/db.grp1
+serial: 1
+nodes: 3
+last loaded: Fri, 28 Mar 2025 14:19:54 GMT
+secure: no
+dynamic: no
+reconfigurable via modzone: no
 ```
 
-Then, query your zone on the local server:
+> [!IMPORTANT]
+> One important aspect of using rndc to manage bind is, that bind tries to load the new 
+> configuration and if something fails it continues to use the old configuration.
+
+# Check Results
+
+Query your zone on the local server:
 
 ```
 $ dig @localhost soa grpX.lab_domain +noall + answer
-;; ANSWER SECTION:
-grpX.lab_domain. 30 IN   SOA     grpX.lab_domain. dnsadmin.lab_domain. 1 604800 86400 2419200 300
+grpX.lab_domain. 300 IN SOA grpX.lab_domain. dnsadmin.lab_domain. 1 604800 86400 2419200 300
 ```
 
+To continue with the lab with [Setting up the secondaries](DNS%2003%20-%20Authoritative.md#setting-up-the-secondaries)

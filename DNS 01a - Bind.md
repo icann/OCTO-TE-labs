@@ -32,7 +32,7 @@ a numbers of public resolvers that we can temporarily use.
 
 Change your `/etc/resolv.conf` file to:
 ```
-nameserver 9.9.9.9
+$ echo "nameserver 9.9.9.9"|sudo tee /etc/resolv.conf
 ```
 Quad9 is a non-profit organisation in Switzerland that provides a free
 public resolver service. Check them out at https://quad9.org
@@ -40,6 +40,10 @@ public resolver service. Check them out at https://quad9.org
 Now the installation should work
 ```
 $ sudo apt install bind9
+```
+And we add our own user to the bind group so we can use rndc without sudo.
+```
+$ sudo adduser sysadm bind
 ```
 
 # Configuration 
@@ -65,7 +69,7 @@ The file should be as follows:
 ```
 options {
 	directory "/var/cache/bind";
-
+  dnssec-validation no;
 	listen-on port 53 { localhost; 100.100.0.0/16; };
 	listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
 	allow-query { any; };
@@ -82,7 +86,7 @@ Once finish editing the configuration file, verify the configuration syntax:
 Then restart the server so that it takes the configuration changes:
 
 ```
-$ rndc reload 
+$ sudo systemctl restart named 
 ```
 
 Check the status of the bind9 process:
@@ -112,9 +116,9 @@ May 13 01:38:27 resolv1.grpX.lab_domain named[849]: zone 0.in-addr.arpa/IN: load
 May 13 01:38:27 resolv1.grpX.lab_domain named[849]: zone 127.in-addr.arpa/IN: loaded serial 1
 May 13 01:38:27 resolv1.grpX.lab_domain named[849]: zone localhost/IN: loaded serial 2
 May 13 01:38:27 resolv1.grpX.lab_domain named[849]: zone 255.in-addr.arpa/IN: loaded serial 1
-May 13 01:38:27 resolv1.grpX.lab_domain named[849]: **all zones loaded**
-May 13 01:38:27 resolv1.grpX.lab_domain named[849]: **running**
-May 13 01:38:27 resolv1.grpX.lab_domain named[849]: managed-keys-zone: Key 20326 for zone . is now trusted (acceptance timer>
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: all zones loaded
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: running
+May 13 01:38:27 resolv1.grpX.lab_domain named[849]: managed-keys-zone: Key 20326 for zone . is now trusted [...]
 May 13 01:38:27 resolv1.grpX.lab_domain named[849]: resolver priming query complete
 ```
 
@@ -125,6 +129,9 @@ Run the following commands and see if you receive answers:
 1. dig @localhost    com. SOA +noall +answer
 1. dig @100.100.X.67 com. SOA +noall +answer
 1. dig @100.100.X.68 com. SOA +noall +answer
+
+The first command should always succeed. If this is your first resolver install 
+one of the other commands should fail.
 
 # Restore resolv.conf
 
@@ -139,8 +146,6 @@ nameserver fd89:59e0:X:64::68
 
 # Test your resolver again
 
-You should get the same answers as above
-
 1. dig com. SOA +noall +answer
-1. dig com. SOA +noall +answer
-1. dig com. SOA +noall +answer
+1. ping icann.org
+1. ping -6 icann.org

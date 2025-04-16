@@ -80,10 +80,8 @@ Now try other records
 
 ```
 $ dig icann.org NS
-$ dig ricta.org.rw SOA
-$ dig www.ricta.org.rw A
-$ dig @8.8.8.8 www.ricta.org.rw A
-$ dig @ns1.ricta.org.rw ricta.org.rw SOA
+$ dig icann.org TXT
+$ dig icann.org MX
 ```
 
 Again, try to discuss the various outputs with your instructors.
