@@ -1,3 +1,5 @@
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 # Technical Engagement DNS Lab
 
 Welcome to the DNS lab of ICANNs Technical Engagement Team!
@@ -13,6 +15,12 @@ To participate in this lab you will need
 
 The lab consists of a number of presentations that will explain
 parts of the DNS ecosystem and a number of practical hands-on labs.
+
+# License
+
+This repository is licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0)
+
+The contents of this repository were developed by [NSRC](https://nsrc.org) and [ICANN](https://icann.org)
 
 # Lab environment
 
