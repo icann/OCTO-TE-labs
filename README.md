@@ -1,12 +1,15 @@
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 # ICANN Office of the CTO (OCTO) Technical Engagement (TE) Labs
 
 This repository contains lab scripts for a number of different lab types for DNS and Routing.
 
 # LICENSE
 
-All contents of this repository are covered by the LICENSE. Please see [license](LICENSE.md) for more details.
+This repository is licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0)
 
-All Contributions and improvements are subject to the same license terms.
+The contents of this repository were developed by [NSRC](https://nsrc.org) and [ICANN](https://icann.org)
+
 
 # Development
 
