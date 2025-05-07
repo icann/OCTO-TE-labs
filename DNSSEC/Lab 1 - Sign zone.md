@@ -136,9 +136,7 @@ zone "grpX.<lab_domain>.te-labs.training" {
 	file "/var/lib/bind/zones/db.grpX";
 	allow-transfer { any; };
 	also-notify {100.100.X.130; 100.100.X.131; };
-	key-directory "/var/lib/bind/keys";
-	auto-dnssec maintain;
-	inline-signing yes;
+	dnssec-policy "default";
 };
 ```
 
@@ -148,13 +146,8 @@ Then, reconfigure or restart BIND: using `rndc reconfig` or `systemctl restart n
 Some new files should appear in the *zones* directory.
 
 #### Verify that your zone is signed.
-We use the command `rndc signing -list ` to confirm that the zone is signed. You should get an output like:
+We use the command `rndc dnssec status ` to confirm that the zone is signed. You should get an output like:
 
-```
-$ sudo rndc signing -list grpX.<lab_domain>.te-labs.training
-Done signing with key 52159/RSASHA256
-Done signing with key 51333/RSASHA256
-```
 
 #### Use command line tools to query the signed zone.
 We can now use *dig* utility to confirm that the zone is signed and play with the new DNSSEC RRs.
