@@ -68,8 +68,9 @@ Our "parent" (<*lab_domain*>.te-labs.training) has already created the following
 
 ```shell
 ; grpX
-grpX             NS          ns1.grpX.<lab_domain>.te-labs.training.
-grpX             NS          ns2.grpX.<lab_domain>.te-labs.training.
+;grpX             NS          ns1.grpX.<lab_domain>.te-labs.training.
+;grpX             NS          ns2.grpX.<lab_domain>.te-labs.training.
+grpX             NS          <lab_domain>.te-labs.training.
 ; ---Placeholder for grpX DS record (DO NOT MANUALLY EDIT THIS LINE)---
 ns1.grpX         A           100.100.X.130
 ns1.grpX         AAAA        fd89:59e0:X:128::130
@@ -107,8 +108,9 @@ $TTL    300
 ;
 
 ; grpX 
-@             NS           ns1.grpX.<lab_domain>.te-labs.training.
-@             NS           ns2.grpX.<lab_domain>.te-labs.training.
+;@             NS           ns1.grpX.<lab_domain>.te-labs.training.
+;@             NS           ns2.grpX.<lab_domain>.te-labs.training.
+@             NS           <lab_domain>.te-labs.training.
 
 ns1         A           100.100.X.130
 ns1         AAAA        fd89:59e0:X:128::130
