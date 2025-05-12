@@ -14,7 +14,7 @@ Go to your cli machine and try:
 ```
 ping icann.org
 ```
-Your poutput probably looks something like
+Your output probably looks something like
 ```
 ping: icann.org: Temporary failure in name resolution
 ```
@@ -35,8 +35,8 @@ So our first order of business is to fix resolving.
 
 Please chose two of the following labs for your machines resolv1 and resolv2
 
-[Resolver Setup with Bind](DNS%2001a%20-%20Bind.md)
-[Resolver Setup with Unbound](DNS%2001b%20-%20Unbound.md)
+- [Resolver Setup with Bind](DNS%2001a%20-%20Bind.md)
+- [Resolver Setup with Unbound](DNS%2001b%20-%20Unbound.md)
 
 # Testing
 

@@ -25,8 +25,9 @@ even many firewalls use DNS based rules.
 
 Please follow theses two labs to secure your lab infrastructure. Afterwards return to this document and go to the next section.
 
-[DNS 04a - Primary Security](DNS%2004a%20-%20Primary%20Security.md)
-[DNS 04b - Secondary Security](DNS%2004a%20-%20Secondary%20Security.md)
+- [DNS 04a - Primary Security](DNS%2004a%20-%20Primary%20Security.md)
+- [DNS 04b - Secondary Security](DNS%2004a%20-%20Secondary%20Security.md)
 
 ## Hardening Resolvers
+- [DNS 04c - Resolver Security](DNS%2004c%20-%20Resolver%20Security.md)
 

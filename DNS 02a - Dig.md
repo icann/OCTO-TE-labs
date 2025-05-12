@@ -64,7 +64,7 @@ For each dig query sent, a response is expected with different sections. Here ar
    * MSG SIZE rcvd (size of the response packet from the DNS server).
 
 
-## Sending DNS Queries Using dig
+## Sending DNS Queries using dig
 
 Try using dig to query the IPv4 address corresponding to www.icann.org. Here are various ways of doing that; what differences do you see in the output from each of them?
 
@@ -86,7 +86,7 @@ $ dig icann.org MX
 
 Again, try to discuss the various outputs with your instructors.
 
-## Let's continue exploring dig tool with its following options
+## Control dig output
 
 * **+short**: to display only the queried resource record value
 
@@ -118,7 +118,7 @@ $ dig -x 192.0.47.7
 $ echo "icann.org google.com gmail.com" > test_batch_lookup.txt ; dig -f test_batch_lookup.txt +noall +answer
 ```
 
-# Server Identifier and Zone Version
+## Server Identifier and Zone Version
 
 Back in the days engineers thought it was a good idea that you could query
 a server for the software and version it is running. Turns out, bad guys can 
@@ -171,7 +171,7 @@ $ kdig @ns1.xdp.cz xdp.cz soa +zoneversion
 $ kdig @ns1.dns.nl nl soa +zoneversion +nsid
 ```
 
-### Using dig to get DNSSEC information
+## Using dig to get DNSSEC information
 
 * Getting the resource record signatures (RRSIG) for signed domains: 
 
@@ -205,7 +205,7 @@ but will be contained in negative answers. Look for NSEC or NSEC3 records.
 $ dig sdlkhghkj.icann.org +dnssec
 ```
 
-# Argument sequence
+## Argument sequence
 
 
 The official documentation says:
@@ -224,7 +224,7 @@ $ dig MX icann.org @9.9.9.9
 
 ## Unintended consequences
 
-Challenge: Try to dig for the SOA record of Switzerland (.ch).
+Challenge 1: Try to dig for the SOA record of Switzerland (.ch).
 
 Your result should look something like:
 ```
@@ -233,3 +233,15 @@ Your result should look something like:
 ch. 900 IN SOA a.nic.ch. dns-operation.switch.ch. 2025030412 900 600 1209600 900
 [...]
 ```
+
+Challenge 2: Try to dig for the SOA record of Moldova (.md).
+
+Your result should look something like:
+```
+[...]
+;; ANSWER SECTION:
+md. 1800 IN SOA nsa.dns.md. master.dns.md. 2025051000 86400 60 1209600 10800
+[...]
+```
+
+

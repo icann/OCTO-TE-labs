@@ -32,6 +32,6 @@ When everything else fails, `tcpdump`will show you what's going on one the wire.
 
 # Wireshark
 
-`wireshark` is tcpdump best friend. MAkes the collected data so much more readable.
+`wireshark` is tcpdump best friend. Makes the collected data so much more readable.
 
 

@@ -1,8 +1,6 @@
 # Reverse DNS
 
-Everybody knows that the DNS can be used to translate names to ip numbers. But
-actually, the DNS can also translate IP numbers to names. This is done with the
-Reverse DNS.
+Everybody knows that the DNS can be used to translate names to ip numbers. But actually, the DNS can also translate IP numbers to names. This is done with the Reverse DNS.
 
 # Configure the primary authoritative server (SOA)
 
