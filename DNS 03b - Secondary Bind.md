@@ -14,6 +14,9 @@ $ sudo adduser sysadm bind
 
 This installs bind and allows our current user to use rndc to control bind.
 
+> [!TIP]
+> Close and reopen your shell window. The new user permissions only get active after logging out and in again.
+
 # Server configuration
 
 Create the directory and file that will contain our zone.
@@ -24,32 +27,46 @@ $ sudo touch /var/lib/bind/zones/db.grpX.secondary
 $ sudo chown -R bind:bind /var/lib/bind
 ```
 
-To do this, in the ***/etc/bind/named.conf.local*** file
+Configure the server as secondary for our domain grpX.lab_domain.
+
+To do this we edit the bind configuration
 
 ```
 $ sudo nano /etc/bind/named.conf.local
 ```
 
-> Please check which one of the two secondaries ns1/ns2 you are 
-> configuring and replace ***NS?*** in the following configuration 
-> with the correct value.
-
-> Replace ***server_ id*** with a unique id - it's ok to be creative
+Change the file contents to
 
 ```
-server-id "server_id";
-version "grpX"
-hostname;
-
 zone "grpX.lab_domain" {
     type secondary;
     file "/etc/bind/zones/db.grpX.secondary";
     masters { 
         100.100.X.66; 
         fd89:59e0:X:64::66;
-        100.100.X.2; 
-        fd89:59e0:X::2; 
     };
+};
+```
+
+Configure bind options.
+
+```
+$ sudo nano /etc/bind/named.conf.options
+```
+
+> Please replace ***server_id*** and ***host_name*** with something unique - it's ok to be creative
+
+```
+options {
+    directory "/var/cache/bind";
+    server-id "server_id";
+    version "grpX";
+    hostname "host_name";
+    dnssec-validation no;
+    listen-on port 53 { localhost; 100.100.0.0/16; };
+    listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
+    allow-query { any; };
+    recursion yes;
 };
 ```
 

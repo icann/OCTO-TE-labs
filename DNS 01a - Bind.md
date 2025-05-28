@@ -24,7 +24,7 @@ In this lab we use Bind9. An open-source software developed and maintained by
 the non-profit organisation called Internet Systems Consortium (ISC). If you use 
 Bind9 commercially, please consider contributing.
 ```
-$ sudo apt install bind9
+$ sudo apt install -y bind9
 ```
 Most likely that command did fail. It did so because resolving doesn't work.
 We are in a catch22 situation. Luckily for us, the internet today provides
@@ -32,6 +32,7 @@ a numbers of public resolvers that we can temporarily use.
 
 Change your `/etc/resolv.conf` file to:
 ```
+$ sudo mv /etc/resolv.conf /etc/resolv.conf.orig
 $ echo "nameserver 9.9.9.9"|sudo tee /etc/resolv.conf
 ```
 Quad9 is a non-profit organisation in Switzerland that provides a free
@@ -39,12 +40,14 @@ public resolver service. Check them out at https://quad9.org
 
 Now the installation should work
 ```
-$ sudo apt install bind9
+$ sudo apt install -y bind9
 ```
 And we add our own user to the bind group so we can use rndc without sudo.
 ```
 $ sudo adduser sysadm bind
 ```
+> [!TIP]
+> Close and reopen your shell window. The new user permissions only get active after logging out and in again.
 
 # Configuration 
 
@@ -68,12 +71,12 @@ The file should be as follows:
 
 ```
 options {
-	directory "/var/cache/bind";
+  directory "/var/cache/bind";
   dnssec-validation no;
-	listen-on port 53 { localhost; 100.100.0.0/16; };
-	listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
-	allow-query { any; };
-	recursion yes;
+  listen-on port 53 { localhost; 100.100.0.0/16; };
+  listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
+  allow-query { any; };
+  recursion yes;
 };
 ```
 
@@ -122,6 +125,32 @@ May 13 01:38:27 resolv1.grpX.lab_domain named[849]: managed-keys-zone: Key 20326
 May 13 01:38:27 resolv1.grpX.lab_domain named[849]: resolver priming query complete
 ```
 
+Alternatively we can check the status of Bind9 with the rndc tool
+```
+$ rndc status
+version: BIND 9.20.9-1+ubuntu24.04.1+deb.sury.org+1-Ubuntu (Stable Release) <id:>
+running on localhost: Linux x86_64 6.8.0-1029-aws #31-Ubuntu SMP Wed Apr 23 18:42:41 UTC 2025
+boot time: Tue, 27 May 2025 11:15:43 GMT
+last configured: Tue, 27 May 2025 11:15:43 GMT
+configuration file: /etc/bind/named.conf
+CPUs found: 4
+worker threads: 4
+number of zones: 101 (100 automatic)
+debug level: 0
+xfers running: 0
+xfers deferred: 0
+xfers first refresh: 0
+soa queries in progress: 0
+query logging is OFF
+response logging is OFF
+memory profiling is INACTIVE
+recursive clients: 0/900/1000
+recursive high-water: 0
+tcp clients: 0/150
+TCP high-water: 0
+server is up and running
+```
+
 # Test your new resolver
 
 Run the following commands and see if you receive answers:
@@ -137,15 +166,17 @@ one of the other commands should fail.
 
 Restore `/etc/resolv.conf` to its original content:
 ```
-search grpX.lab_domain
-nameserver 100.100.X.67
-nameserver 100.100.X.68
-nameserver fd89:59e0:X:64::67
-nameserver fd89:59e0:X:64::68
+$ sudo mv /etc/resolv.conf.orig /etc/resolv.conf
 ```
 
 # Test your resolver again
 
-1. dig com. SOA +noall +answer
-1. ping icann.org
-1. ping -6 icann.org
+```
+dig com. SOA +noall +answer
+```
+
+Look at the output. The important part is `;; SERVER: 100.100.X.67#53(100.100.X.67) (UDP)`
+
+# Done
+
+Please return to [DNS 01 - Resolving](DNS%2001%20-%20Resolving.md) and continue with the lab.

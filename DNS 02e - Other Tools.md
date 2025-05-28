@@ -21,8 +21,6 @@ on another device (not your DNS server)
 curl -s -O https://data.iana.org/TLD/tlds-alpha-by-domain.txt
 perl -n -e 'chomp; print"$_ DNSKEY\n" if !m/#/;' tlds-alpha-by-domain.txt > data.file
 dnsperf -s 100.100.X.68  -d data.file 
-dnsperf -s 100.100.X.68  -d data.file 
-dnsperf -s fd89:59e0:X:64::68  -d data.file 
 dnsperf -s fd89:59e0:X:64::68  -d data.file 
 ```
 

@@ -24,7 +24,7 @@ In this lab we use Unbound, an open-source software developed and maintained by
 the non-profit organisation called NL-netlabs. If you use Unbound commercially, 
 please consider contributing.
 ```
-$ sudo apt install unbound
+$ sudo apt install -y unbound
 ```
 Most likely that command did fail. It did so because resolving doesn't work.
 We are in a catch22 situation. Luckily for us, the internet today provides
@@ -32,14 +32,15 @@ a numbers of public resolvers that we can temporarily use.
 
 Change your `/etc/resolv.conf` file to:
 ```
-nameserver 9.9.9.9
+$ sudo mv /etc/resolv.conf /etc/resolv.conf.orig
+$ echo "nameserver 9.9.9.9"|sudo tee /etc/resolv.conf
 ```
 Quad9 is a non-profit organisation in Switzerland that provides a free
 public resolver service. Check them out at https://quad9.org
 
 Now the installation should work
 ```
-$ sudo apt install unbound
+$ sudo apt install -y unbound
 ```
 
 # Configuration 
@@ -49,6 +50,8 @@ Lets edit the file
 ```
 $ sudo nano /etc/unbound/unbound.conf
 ```
+
+Delete anything that is already in the file (ctrl-k deletes lines).
 
 We will add the options on which interface and port 
 to listen for queries, and some other parameters. 
@@ -68,12 +71,14 @@ server:
         do-ip4: yes
         do-ip6: yes
 
-        trust-anchor-file:
-        auto-trust-anchor-file:
-        trust-anchor:
-        trusted-keys-file:
+remote-control:
+    control-enable: yes
+```
 
-include: "/etc/unbound/unbound.conf.d/*.conf"
+Let's create neccessary files for unbound-control
+
+```
+$ sudo unbound-control-setup
 ```
 
 Then verify configuration file syntax :
@@ -88,43 +93,22 @@ If all looks good, you should get something similar to the following:
 unbound-checkconf: no errors in /etc/unbound/unbound.conf
 ```
 
-If you get something like 
-```
-/var/lib/unbound/root.key: No such file or directory
-[1742580246] unbound-checkconf[1055:0] fatal error: auto-trust-anchor-file: "/var/lib/unbound/root.key" does not exist
-```
-we must fix this error first.
-```
-$ sudo apt install dns-root-data
-$ sudo cp /usr/share/dns/root.key /var/lib/unbound/root.key
-```
-Now we should get no errors in the configuration.
-
-Then restart the server so that it takes the configuration changes:
-```
-# unbound-checkconf
-unbound-checkconf: no errors in /etc/unbound/unbound.conf
-```
-Before we restart unbound let's look at its current status
-```
-$ sudo unbound-control status
-```
-Output should be similiar to this
-```
-version: 1.19.2
-verbosity: 1
-threads: 1
-modules: 3 [ subnetcache validator iterator ]
-uptime: 248 seconds
-options: reuseport control(namedpipe)
-unbound (pid 2233) is running...
-```
-Now restart the server with the new configuration. Because we made changes to the interface configuration,
+Now start the server with the new configuration. Because we made changes to the interface configuration,
 we have to do a hard restart, not just a configuration reload.
 ```
 $ sudo systemctl restart unbound
 ```
-Check the status of the Unbound again, look at the uptime counter it should be only a few seconds now.
+Check the status of the Unbound, look at the uptime counter it should be only a few seconds now.
+```
+$ sudo unbound-control status
+version: 1.19.2
+verbosity: 1
+threads: 1
+modules: 3 [ subnetcache validator iterator ]
+uptime: 10 seconds
+options: reuseport control(ssl)
+unbound (pid 10445) is running...
+```
 
 # Test your new resolver
 
@@ -138,11 +122,7 @@ Run the following commands and see if you receive answers:
 
 Restore `/etc/resolv.conf` to its original content:
 ```
-search grpX.lab_domain
-nameserver 100.100.X.67
-nameserver 100.100.X.68
-nameserver fd89:59e0:X:64::67
-nameserver fd89:59e0:X:64::68
+sudo mv /etc/resolv.conf.orig /etc/resolv.conf
 ```
 
 # Test your resolver again
@@ -150,5 +130,7 @@ nameserver fd89:59e0:X:64::68
 You should get the same answers as above
 
 1. dig com. SOA +noall +answer
-1. dig com. SOA +noall +answer
-1. dig com. SOA +noall +answer
+
+# Done
+
+Please return to [DNS 01 - Resolving](DNS%2001%20-%20Resolving.md) and continue with the lab.

@@ -14,7 +14,6 @@ The list of all possible EDE values can be found at the [IANA Registry for Exten
 
 Test the following commands and see which error messages you get.
 ```
-$ dig @100.100.X.67 dnssec-failed.org
-$ dig @fd89:59e0:X:64::68 dnssec-failed.org
 $ dig @9.9.9.9 dnssec-failed.org
+$ dig @1.1.1.1 dnssec-failed.org
 ```

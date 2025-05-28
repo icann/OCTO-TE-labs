@@ -4,7 +4,6 @@ The official Bind 9 configuration reference manual can be found at
 [https://bind9.readthedocs.io/en/latest/reference.html](https://bind9.readthedocs.io/en/latest/reference.html)
 
 > [!IMPORTANT]
->
 > In all this lab, be carefull to always replace ***X*** by your Group number in IP addresses, server name and any other place where required. Same for ***lab_domain*** to be replace by the domain name registered for the class.
 
 ## Install Bind 9
@@ -15,6 +14,9 @@ $ sudo adduser sysadm bind
 ```
 
 This installs bind and allows our current user to use rndc to control bind.
+
+> [!TIP]
+> Close and reopen your shell window. The new user permissions only get active after logging out and in again.
 
 ## Setting the authoritative zone
 
@@ -79,7 +81,7 @@ server reload successful
 $ rndc zonestatus grpX.lab_domain
 name: grpX.lab_domain
 type: primary
-files: /var/lib/bind/zones/db.grp1
+files: /var/lib/bind/zones/db.grpX
 serial: 1
 nodes: 3
 last loaded: Fri, 28 Mar 2025 14:19:54 GMT

@@ -66,6 +66,8 @@ For each dig query sent, a response is expected with different sections. Here ar
 
 ## Sending DNS Queries using dig
 
+> [!NOTE] Execute this lab on the cli machine
+
 Try using dig to query the IPv4 address corresponding to www.icann.org. Here are various ways of doing that; what differences do you see in the output from each of them?
 
 ```
@@ -115,7 +117,7 @@ $ dig -x 192.0.47.7
 * **-f**: to look up multiple entries stored in a file
 
 ```
-$ echo "icann.org google.com gmail.com" > test_batch_lookup.txt ; dig -f test_batch_lookup.txt +noall +answer
+$ echo "icann.org ns.icann.org i.root-servers.net" > test_batch_lookup.txt ; dig -f test_batch_lookup.txt +noall +answer
 ```
 
 ## Server Identifier and Zone Version
@@ -161,48 +163,15 @@ server identity and zone version (SOA serial) to be included in the response.
 * **nsid**: retrieve DNS Name Server Identifier
 ```
 $ dig @ns.icann.org. icann.org SOA +nsid
+$ dig @i.root-servers.net icann.org SOA +nsid
 $ dig icann.org SOA +nsid
-$ dig @d.root-servers.net icann.org SOA +nsid
 ```
 
 * **zoneversion**: retrieve DNS Zone Version
 ```
-$ kdig @ns1.xdp.cz xdp.cz soa +zoneversion
-$ kdig @ns1.dns.nl nl soa +zoneversion +nsid
-```
-
-## Using dig to get DNSSEC information
-
-* Getting the resource record signatures (RRSIG) for signed domains: 
-
-```
-$ dig www.icann.org A +dnssec
-$ dig icann.org NS +dnssec
-```
-
-Compare the number of RRSIG you get in the first case to the number you received in the second case.
-
-You can add the `+multi` option to make the results more "readable".
-
-* Retrieve the public keys for the zone: they are stored in a specific resource record type named "DNSKEY"
-
-```
-$ dig icann.org DNSKEY +multi
-```
-
-You can mix the known options such as redirecting to a specific name server, adding multilign option, etc.
-
-* Retrieve the delegation signer info for the zone: they are stored in a specific resource record type named "DS"
-
-```
-$ dig icann.org DS
-```
-
-There are also some special DNSSEC records that you can not actually send queries for,
-but will be contained in negative answers. Look for NSEC or NSEC3 records.
-
-```
-$ dig sdlkhghkj.icann.org +dnssec
+$ kdig @ns1.xdp.cz xdp.cz SOA +zoneversion
+$ kdig @ns1.xdp.cz xdp.cz NS  +zoneversion
+$ kdig @ns1.dns.nl nl     SOA +zoneversion +nsid
 ```
 
 ## Argument sequence

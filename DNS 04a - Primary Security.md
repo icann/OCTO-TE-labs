@@ -23,6 +23,7 @@ Must allow:
 Must not allow:
 - queries from the internet
 - axfr/ixfr requests from other servers then secondaries
+- recursion
 
 Depending on how you update your zone, you might want to allow DDNS updates from some specific
 machines, but not from the internet. 
