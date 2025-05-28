@@ -31,7 +31,7 @@ In the ***/etc/nsd/nsd.conf*** file, configure the following parameters:
 include: "/etc/nsd/nsd.conf.d/*.conf"
 
 server:
-	zonesdir: "/var/lib/nsd"
+    zonesdir: "/var/lib/nsd"
     nsid: "ascii_grpX NSD nsid"
     hide-version: no
     hide-identity: no
