@@ -66,7 +66,7 @@ Please don't skip any of the labs as they build on each other.
 
 - [DNS 01 - Resolving](DNS%2001%20-%20Resolving.md)
     - [DNS 01a - Bind](DNS%2001a%20-%20Bind.md)
-- [DNS 01b - Unbound](DNS%2001b%20-%20Unbound.md)
+    - [DNS 01b - Unbound](DNS%2001b%20-%20Unbound.md)
 - [DNS 02 - DNS Tools](DNS%2002%20-%20DNS%20Tools.md)
     - [DNS 02a - Dig](DNS%2002a%20-%20Dig.md)
     - [DNS 02b - EDE](DNS%2002b%20-%20EDE.md)
@@ -76,7 +76,7 @@ Please don't skip any of the labs as they build on each other.
 - [DNS 03 - Authoritative](DNS%2003%20-%20Authoritative.md)
     - [DNS 03a - Primary Bind](DNS%2003a%20-%20Primary%20Bind.md)
     - [DNS 03b - Secondary Bind](DNS%2003b%20-%20Secondary%20Bind.md)
-    - [DNS 03b - Secondary NSD](DNS%2003b%20-%20.Secondary%20NSDmd)
+    - [DNS 03b - Secondary NSD](DNS%2003b%20-%20Secondary%20NSD.md)
 - [DNS 04 - Security](DNS%2005%20-%20Security.md)
     - [DNS 04a - Authoritative Security](DNS%2005a%20-%20Authoritative%20Security.md)
     - [DNS 04b - Resolver Security](DNS%2005b%20-%20Resolver%20Security.md)

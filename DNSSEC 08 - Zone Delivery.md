@@ -89,7 +89,12 @@ to the following content
 #!/bin/bash
 exit 5;
 ```
-
+And make it executable with 
+```
+$ sudo chmod +x /var/lib/nsd/test.sh
+$ sudo chown nsd:nsd /var/lib/nsd/test.sh
+```
+ 
 Ready to restart
 
 1. Open another shell window on the soa machine
