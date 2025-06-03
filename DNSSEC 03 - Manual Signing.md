@@ -6,4 +6,4 @@ canjust chose the default settings or make decision of timing and key handling
 yourself.
 
 Please follow one of labs below depending on which software you chose in lab DNS 03.
-- [DNSSEC 03a - Signing with Bind](DNSSEC%2003a%20-%20Signing%20with%20Bind.md) 
+- [DNSSEC 03a - Signing with Bind](DNSSEC%2003a%20-%20Manual%20Signing%20with%20Bind.md) 
