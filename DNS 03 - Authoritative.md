@@ -39,8 +39,8 @@ Your instructor will tell you which instructions to follow for installation of y
 
 Your instructor will tell you which instructions to follow for installation of your secondary servers.
 
-- [Bind9](http://DNS%2002b%20-%20Secondary%20Bind.md)
-- [NSD](http://DNS%2002b%20-%20Secondary%20NSD)
+- [DNS 03b - Secondary Bind9](./DNS%2003b%20-%20Secondary%20Bind.md)
+- [DNS 03b - Secondary NSD](./DNS%2003b%20-%20Secondary%20NSD)
 
 Once you are done with the configuration of your primary and secondary servers, please come back here and continue with the next section!
 
