@@ -33,7 +33,7 @@ Use the "SOA" server as primary authoritative server for the  grp***X***.***lab_
 
 Your instructor will tell you which instructions to follow for installation of your primary server.
 
-- [DNS 02a - Bind](./DNS%2002a%20-%20Primary%20Bind.md) 
+- [DNS 03a - Bind](./DNS%2003a%20-%20Primary%20Bind.md) 
 
 ## Setting up the secondaries
 
