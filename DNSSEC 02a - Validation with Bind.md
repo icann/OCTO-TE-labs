@@ -32,8 +32,8 @@ $ rndc reload
 
 Run the following commands and confirm if you receive the "ad" flag:
 
-1. dig @localhost com. SOA 
-2. dig @localhost com. SOA +dnssec
+1. dig @localhost com SOA 
+2. dig @localhost com SOA +dnssec
 
 Now try the same tests as in Lab DNSSEC 01
 
