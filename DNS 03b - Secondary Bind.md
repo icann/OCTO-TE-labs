@@ -90,8 +90,3 @@ The following two dig commands should produce the same result
 $ dig @100.100.X.66 grpX.lab_domain SOA +noall +answer
 $ dig @localhost grpX.lab_domain SOA +noall +answer
 ``` 
-
-# Done
-
-Congratulations! You Secondary name server instance is configured
-Please proceed with [DNS 02 - Configure zone](DNS%2002%20-%20Configure%20zone.md#setting-up-the-secondaries)
