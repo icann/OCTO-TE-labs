@@ -172,7 +172,7 @@ $ sudo mv /etc/resolv.conf.orig /etc/resolv.conf
 # Test your resolver again
 
 ```
-dig com. SOA +noall +answer
+dig com. SOA
 ```
 
 Look at the output. The important part is `;; SERVER: 100.100.X.67#53(100.100.X.67) (UDP)`

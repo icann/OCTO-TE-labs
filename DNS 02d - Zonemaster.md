@@ -10,7 +10,7 @@ From zonemaster.net:
 > that different hosts can be accessed and that IP addresses are valid. 
 > This is all to make sure that your domain name runs as smoothly as possible.
 
-Please try the tool on the following domains:
+Please try [Zonemaster](https://zonemaster.net) on the following domains:
 - icann.org
 - au.
 - dnssec-failed.org

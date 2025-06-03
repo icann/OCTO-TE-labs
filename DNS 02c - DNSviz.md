@@ -8,7 +8,7 @@ From dnsviz.net:
 > and its resolution path in the DNS namespace, and it lists configuration 
 > errors detected by the tool. 
 
-Please try the tool on the following domains:
+Please try [DNSviz](https://dnsviz.net) on the following domains:
 - icann.org
 - au.
 - dnssec-failed.org
