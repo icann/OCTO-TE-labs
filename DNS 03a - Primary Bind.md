@@ -36,7 +36,7 @@ Then, update the db.grp***X*** zone to look like the below:
 ; grpX 
 
 $TTL    300
-@       IN      SOA     lab_domain. dnsadmin.grpX.lab_domain. (                                            
+@       IN      SOA     lab_domain. te-labs.icann.org. (                                            
                               1         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
