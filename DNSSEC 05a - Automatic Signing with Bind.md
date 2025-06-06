@@ -3,7 +3,7 @@
 > [!IMPORTANT]
 > If you did the manual signing and confirm that your public nameservers are serving the signed zone, you should:
 >
-> 1. revert back `named.conf.local` to its previous configuration, i.e. configure BIND to serve the unsigned zone file as before the manual signing configuration which was: `file "/etc/bind/zones/db.grpX";` 
+> 1. revert back `named.conf.local` to its previous configuration, i.e. configure BIND to serve the unsigned zone file as before the manual signing configuration which was: `file "/var/lib/bind/zones/db.grpX";` 
 > 1. delete the signed zone file (.signed) BIND will create its own signed zone file in the next step.
 > 1. increase the serial in the unsigned zone file and reload BIND.
 

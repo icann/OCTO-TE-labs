@@ -5,7 +5,7 @@
 dnssec-policy lightspeed {
     cdnskey yes;
     cds-digest-types { SHA-256; };
-    dnskey-ttl 5s;
+    dnskey-ttl 5;
     inline-signing yes;
     keys {
         ksk key-directory lifetime 15m algorithm ecdsa256;
@@ -21,7 +21,7 @@ dnssec-policy lightspeed {
     signatures-jitter 31s;
     signatures-refresh 1m;
     signatures-validity 10m;
-    signatures-validity-dnskey 10m;
+    signatures-validity-dnskey 1m;
     zone-propagation-delay 1s;
 };
 ```
