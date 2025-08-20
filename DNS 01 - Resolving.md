@@ -18,7 +18,7 @@ Your output probably looks something like
 ```
 ping: icann.org: Temporary failure in name resolution
 ```
-This is of course because we do not have any resolver yet.
+This is because we do not have any resolver yet.
 
 On most systems, especially any linux based systems, the contents of the `/etc/resolv.conf`
 file decide which resolver gets used. Please have a look at that file. It's contents should 

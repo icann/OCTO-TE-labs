@@ -95,3 +95,11 @@ Please don't skip any of the labs as they build on each other.
 - [DNSSEC 07 - Automated DNSSEC](DNSSEC%2006%20-%20Automated%20DNSSEC.md)
 - [DNSSEC 08 - Zone Delivery](DNSSEC%2006%20-%20Zone%20Delivery.md)
 - [DNSSEC 09 - Going Insecure](DNSSEC%2006%20-%20Going%20insecure.md)
+
+# Roadmap
+- ZONEMD
+- RPZ
+- Catalog Zones
+- Pre Delegation Testing
+- PowerDNS / Recursor
+- Knot DNS / Resolver

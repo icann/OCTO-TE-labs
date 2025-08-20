@@ -74,6 +74,32 @@ zone "grpX.lab_domain." {
 $ named-checkconf
 ```
 
+Configure bind options.
+
+```
+$ sudo nano /etc/bind/named.conf.options
+```
+
+> Please replace ***server_id*** and ***host_name*** with something unique - it's ok to be creative
+
+```
+options {
+    directory "/var/cache/bind";
+    server-id "server_id";
+    version "grpX";
+    hostname "host_name";
+    dnssec-validation no;
+    listen-on port 53 { localhost; 100.100.0.0/16; };
+    listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
+    allow-query { any; };
+    recursion yes;
+};
+```
+Once again
+```
+$ named-checkconf
+```
+
 Tell bind to reload the configuration and verify its status. You should see an output as the below
 ```
 $ rndc reload
