@@ -286,7 +286,7 @@ Create directory that will contain our zone file in the nameserver:
 
 ```
 $ sudo mkdir -p /var/lib/nsd
-$ sudo chown -R bind:bind /var/lib/nsd
+$ sudo chown -R nsd:nsd /var/lib/nsd
 ```
 
 To do this, in the ***/etc/nsd/nsd.conf*** file, configure the following parameters:
