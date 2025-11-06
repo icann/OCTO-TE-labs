@@ -45,7 +45,7 @@ Retry until the answer looks like
 grpX.lab_domain. 60    IN      DS      2404 8 2 8A4D8024E59D115331C8ECAF715E1168A429282646E6861420BEF8D1 7F9676E7
 ```
 
-Now see if your resolver returns the AD flag.
+Now see if your resolver returns the ad flag.
 
 ```
 $ dig grpX.lab_domain SOA
