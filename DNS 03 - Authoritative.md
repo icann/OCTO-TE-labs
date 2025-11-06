@@ -54,10 +54,9 @@ On the **cli** instance
 1. `dig @100.100.X.130 grpX.lab_domain SOA`
 1. `dig @100.100.X.131 grpX.lab_domain SOA`
 
-Please repeat the following queries at least once
-```
-1. `dig @lab_domain grpX.lab_domain NS         +nsid`
-1. `dig @lab_domain hostname.bind   TXT CHAOS`
-1. `dig @lab_domain version.bind    TXT CHAOS`
-1. `dig @lab_domain id.server       TXT CHAOS`
-```
+Please repeat the following queries several times
+
+```dig @lab_domain grpX.lab_domain SOA        +nsid```
+
+
+
