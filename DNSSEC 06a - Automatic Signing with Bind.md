@@ -1,5 +1,17 @@
 # Automatic zone signing
 
+> [!WARNING]
+> To change to automatic signing we will have to change keys. This can be done in two ways: 
+> 1. With a Key Rollover, your domain stays signed all the time
+> 2. With going insecure
+> We will do the later in this step. (KSK Rollover is another lab)
+
+## Going Insecure
+
+Remove the DS record from the parent. Easiest done on the web page for your lab group. At the bottom you will find a button `Delete all DS records`.
+
+## Revert to unsigned zone
+
 > [!IMPORTANT]
 > If you did the manual signing and confirm that your public nameservers are serving the signed zone, you should:
 >
