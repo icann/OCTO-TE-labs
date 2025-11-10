@@ -3,14 +3,8 @@
 
 ```
 dnssec-policy lightspeed {
-    cdnskey yes;
-    cds-digest-types { SHA-256; };
-    dnskey-ttl 5;
     inline-signing yes;
-    keys {
-        ksk key-directory lifetime 15m algorithm ecdsa256;
-        zsk key-directory lifetime 10m algorithm ecdsa256;
-    };
+    dnskey-ttl 5;
     max-zone-ttl 3600;
     offline-ksk false;
     parent-ds-ttl 60s;
@@ -21,7 +15,15 @@ dnssec-policy lightspeed {
     signatures-jitter 31s;
     signatures-refresh 1m;
     signatures-validity 10m;
-    signatures-validity-dnskey 1m;
+    signatures-validity-dnskey 2m;
     zone-propagation-delay 1s;
+    keys {
+        ksk key-directory lifetime 15m algorithm ecdsa256;
+        zsk key-directory lifetime 10m algorithm ecdsa256;
+    };
+    parental-agents { 100.100.X.67; fd89:59e0:X:64::68; };
+    checkds no;
+    cdnskey yes;
+    cds-digest-types { SHA-256; };
 };
 ```
