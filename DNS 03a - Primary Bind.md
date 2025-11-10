@@ -35,13 +35,13 @@ Then, update the db.grp***X*** zone to look like the below:
 ```
 ; grpX 
 
-$TTL    300
+$TTL    30
 @       IN      SOA     lab_domain. te-labs.icann.org. (                                            
                               1         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
                         2419200         ; Expire
-                            300 )       ; Negative Cache TTL
+                             30 )       ; Negative Cache TTL
 @           NS          lab_domain.
 @           TXT         "DNS IS FUN" 
 ns1         A           100.100.X.130
