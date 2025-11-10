@@ -25,6 +25,12 @@ Your output should look something similar to the following line:
 grpX.lab_domain. IN DS 12345 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34DB5A7F3BC10A424D6E
 ```
 
+## Check DS record
+
+Before publishing your DS record use [zonemaster.net](zonemaster.net) to check if your DS record is correct. 
+
+> [!TIP] See Options below the zonemaster search box!
+
 ## Push the DS to your parent
 
 Got to your group page on the labs web and submit your DS record in the form.
