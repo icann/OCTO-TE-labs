@@ -4,9 +4,7 @@ In this lab we will use the signing method with two keys, a Key-Signing-Key (KSK
 
 The KSK signs the DNSKEY set (and potential CDS / CDNSKEY / CSYNC records), the ZSK signs all other data.
 
-
 To sign the zone we first need two pairs of keys: a ZSK and a KSK. 
-
 
 Position yourself in BIND configuration folder and then backup your zone file:
 
@@ -43,6 +41,8 @@ $ sudo chown -R bind:bind /var/lib/bind/keys
 We start with manual zone signing.
 
 > [!IMPORTANT] Don't do this in production! This lab is meant to give you an impression of what is going on behind the scenes when you use the automation.
+
+> [!IMPORTANT] Bind is very strict about SOA serial numbers. Before signing check which serial your server is currently using and then edit your zone file and increase the serial number to something bigger then the current number.
 
 ```
 $ sudo dnssec-signzone -S -K /var/lib/bind/keys -o grpX.lab_domain /var/lib/bind/zones/db.grpX
