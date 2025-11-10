@@ -24,7 +24,34 @@ Remove the DS record from the parent. Easiest done on the web page for your lab 
 
 Update your zone configuration statement in `/etc/bind/named.conf.local`, to look like the below : 
 
+> [!WARNING] This DNSSEC policy configures extremly fast DNSSEC data changes for the purpose of running an efficient lab environment. This will break your domains when used in production. 
+
 ```
+dnssec-policy NotForProduction {
+    inline-signing yes;
+    dnskey-ttl 5;
+    max-zone-ttl 300;
+    offline-ksk false;
+    parent-ds-ttl 60s;
+    parent-propagation-delay 1s;
+    publish-safety 0s;
+    purge-keys 1h;
+    retire-safety 1m;
+    signatures-jitter 31s;
+    signatures-refresh 1m;
+    signatures-validity 10m;
+    signatures-validity-dnskey 2m;
+    zone-propagation-delay 1s;
+    keys {
+        ksk key-directory lifetime unlimited algorithm ecdsa256;
+        zsk key-directory lifetime unlimited algorithm ecdsa256;
+    };
+    parental-agents { };
+    checkds no;
+    cdnskey no;
+    cds-digest-types { };
+};
+
 zone "grpX.lab_domain." {
 	type primary;
 	file "/var/lib/bind/zones/db.grpX";
@@ -35,7 +62,7 @@ zone "grpX.lab_domain." {
 		fd89:59e0:X:128::130; 
 		fd89:59e0:X:128::131; 
 	};
-	dnssec-policy default;
+	dnssec-policy NotForProduction;
 }; 
 ```
 
