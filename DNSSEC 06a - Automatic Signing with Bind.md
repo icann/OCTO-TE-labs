@@ -5,7 +5,7 @@
 > 1. With a Key Rollover, your domain stays signed all the time
 > 2. With going insecure
 >
-> We will do the later in this step. (KSK Rollover is another lab)
+> We will do the later in this step. 
 
 ## Going Insecure
 
@@ -17,7 +17,7 @@ Remove the DS record from the parent. Easiest done on the web page for your lab 
 > If you did the manual signing and confirm that your public nameservers are serving the signed zone, you should:
 >
 > 1. revert back `named.conf.local` to its previous configuration, i.e. configure BIND to serve the unsigned zone file as before the manual signing configuration which was: `file "/var/lib/bind/zones/db.grpX";` 
-> 1. delete the signed zone file (.signed) BIND will create its own signed zone file in the next step.
+> 1. delete the signed zone file (/var/lib/bind/zones/db.grpX.signed) BIND will create its own signed zone file in the next step.
 > 1. increase the serial in the unsigned zone file and reload BIND.
 
 ## Edit config file.
@@ -25,6 +25,8 @@ Remove the DS record from the parent. Easiest done on the web page for your lab 
 Update your zone configuration statement in `/etc/bind/named.conf.local`, to look like the below : 
 
 > [!WARNING] This DNSSEC policy configures extremly fast DNSSEC data changes for the purpose of running an efficient lab environment. This will break your domains when used in production. 
+
+> [!Tip] Bind has a pre-configured policy that you absolutely should consider using instead of defining your own just use `dnssec-policy default`.
 
 ```
 dnssec-policy NotForProduction {
@@ -46,8 +48,6 @@ dnssec-policy NotForProduction {
         ksk key-directory lifetime unlimited algorithm ecdsa256;
         zsk key-directory lifetime unlimited algorithm ecdsa256;
     };
-    parental-agents { };
-    checkds no;
     cdnskey no;
     cds-digest-types { };
 };
@@ -63,18 +63,21 @@ zone "grpX.lab_domain." {
 		fd89:59e0:X:128::131; 
 	};
 	dnssec-policy NotForProduction;
+    checkds no;
 }; 
 ```
 
 Then, reconfigure or restart BIND: using 
 ```
-$ rndc reconfig
-$ rndc reload
+rndc reconfig
+rndc reload
 ```
 
 Check DNSSEC status of your zone:
 ```
-$ rndc dnssec -status grpX.lab_domain
+rndc dnssec -status grpX.lab_domain
+```
+```
 dnssec-policy: default
 current time:  Wed May 28 14:14:13 2025
 

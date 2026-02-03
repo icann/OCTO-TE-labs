@@ -8,8 +8,8 @@ These servers are the ones that expose our zone publicly (so they will be open-t
 # Install Bind 9
 
 ```
-$ sudo apt -y install bind9
-$ sudo adduser sysadm bind
+sudo apt -y install bind9
+sudo adduser sysadm bind
 ```
 
 This installs bind and allows our current user to use rndc to control bind.
@@ -22,9 +22,9 @@ This installs bind and allows our current user to use rndc to control bind.
 Create the directory and file that will contain our zone.
 
 ```
-$ sudo mkdir -p /var/lib/bind/zones
-$ sudo touch /var/lib/bind/zones/db.grpX.secondary
-$ sudo chown -R bind:bind /var/lib/bind
+sudo mkdir -p /var/lib/bind/zones
+sudo touch /var/lib/bind/zones/db.grpX.secondary
+sudo chown -R bind:bind /var/lib/bind
 ```
 
 Configure the server as secondary for our domain grpX.lab_domain.
@@ -32,7 +32,7 @@ Configure the server as secondary for our domain grpX.lab_domain.
 To do this we edit the bind configuration
 
 ```
-$ sudo nano /etc/bind/named.conf.local
+sudo nano /etc/bind/named.conf.local
 ```
 
 Change the file contents to
@@ -51,7 +51,7 @@ zone "grpX.lab_domain" {
 Configure bind options.
 
 ```
-$ sudo nano /etc/bind/named.conf.options
+sudo nano /etc/bind/named.conf.options
 ```
 
 > Please replace ***server_id*** and ***host_name*** with something unique - it's ok to be creative
@@ -67,26 +67,30 @@ options {
     listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
     allow-query { any; };
     recursion yes;
+    cookie-secret "71ff147d946b942ed66e608b64dc54c9";
 };
 ```
 
 Verify the configuration and if there are no errors, restart the server:
 
 ```
-$ named-checkconf
-$ rndc reload
+named-checkconf
+```
+and if no errors are reported run
+```
+sudo rndc reload
 ```
 
 Verify that it restarted correctly:
 
 ```
-$ rndc zonestatus grpX.lab_domain 
+sudo rndc zonestatus grpX.lab_domain 
 ```
 
 # Check if the instance is working
 
 The following two dig commands should produce the same result
 ```
-$ dig @100.100.X.66 grpX.lab_domain SOA +noall +answer
-$ dig @localhost grpX.lab_domain SOA +noall +answer
+dig @100.100.X.66 grpX.lab_domain SOA +noall +answer
+dig @localhost grpX.lab_domain SOA +noall +answer
 ``` 

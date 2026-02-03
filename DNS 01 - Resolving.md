@@ -44,8 +44,8 @@ Now that you have setup two resolvers, resolving should be working on your cli m
 
 Please run the following tests:
 
-1. dig com SOA 
-1. dig icann.org AAAA
-1. dig icann.org MX
-1. dig icann.org TXT
-1. dig org NS
+1. `dig com SOA`
+1. `dig icann.org AAAA`
+1. `dig icann.org MX`
+1. `dig icann.org TXT`
+1. `dig org NS`

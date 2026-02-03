@@ -9,43 +9,45 @@ To sign the zone we first need two pairs of keys: a ZSK and a KSK.
 Position yourself in BIND configuration folder and then backup your zone file:
 
 ```
-$ sudo cp /var/lib/bind/zones/db.grpX /var/lib/bind/zones/db.grpX.backup
+sudo cp /var/lib/bind/zones/db.grpX /var/lib/bind/zones/db.grpX.backup
 ```
 
 Create a directory to hold your DNSSEC keys
 
 ```
-$ sudo mkdir -p /var/lib/bind/keys
+sudo mkdir -p /var/lib/bind/keys
 ```
 
 Generate the **ZSK**
 
 ```
-$ sudo dnssec-keygen -f ZSK -a ECDSAP256SHA256 -K /var/lib/bind/keys grpX.lab_domain
+sudo dnssec-keygen -f ZSK -a ECDSAP256SHA256 -K /var/lib/bind/keys grpX.lab_domain
 ```
 
 Generate **KSK**
 
 ```
-$ sudo dnssec-keygen -f KSK -a ECDSAP256SHA256 -K /var/lib/bind/keys grpX.lab_domain
+sudo dnssec-keygen -f KSK -a ECDSAP256SHA256 -K /var/lib/bind/keys grpX.lab_domain
 ```
 
 Change ownership to the zones and keys folders
 
 ```
-$ sudo chown -R bind:bind /var/lib/bind/keys
+sudo chown -R bind:bind /var/lib/bind/keys
 ```
 
 # Manual zone signing.
 
 We start with manual zone signing.
 
-> [!IMPORTANT] Don't do this in production! This lab is meant to give you an impression of what is going on behind the scenes when you use the automation.
+> [!IMPORTANT]
+> Don't do this in production! This lab is meant to give you an impression of what is going on behind the scenes when you use the automation.
 
-> [!IMPORTANT] Bind is very strict about SOA serial numbers. Before signing check which serial your server is currently using and then edit your zone file and increase the serial number to something bigger then the current number.
+> [!IMPORTANT]
+> Bind is very strict about SOA serial numbers. Before signing check which serial your server is currently using and then edit your zone file and increase the serial number to something bigger then the current number.
 
 ```
-$ sudo dnssec-signzone -S -K /var/lib/bind/keys -o grpX.lab_domain /var/lib/bind/zones/db.grpX
+sudo dnssec-signzone -S -K /var/lib/bind/keys -o grpX.lab_domain /var/lib/bind/zones/db.grpX
 ```
 
 You should get an output similar to the follwing:
@@ -63,7 +65,9 @@ Algorithm: ECDSAP256SHA256: KSKs: 1 active, 0 stand-by, 0 revoked
 
 Now, replace the *db.grpX* file in `named.conf.local` with the `db.grpX.signed` and reload the server using 
 
-```rndc reload```.
+```
+rndc reload
+```
 
 # Verify the configuration
 

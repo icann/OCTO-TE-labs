@@ -21,7 +21,7 @@ The tool ***dig*** was originally shipped with BIND and is commonly found on man
 A manual page for dig can be found [here](https://bind9.readthedocs.io/en/latest/manpages.html#dig-dns-lookup-utility) or from the command-line. There are a lot of available parameters. You can ignore most of them while you are getting started.
 
 ```
-$ man dig
+man dig
 ```
 
 A typical invocation of dig looks like:
@@ -71,9 +71,9 @@ For each dig query sent, a response is expected with different sections. Here ar
 Try using dig to query the IPv4 address corresponding to www.icann.org. Here are various ways of doing that; what differences do you see in the output from each of them?
 
 ```
-$ dig www.icann.org A
-$ dig @8.8.8.8 www.icann.org A
-$ dig @one.one.one.one www.icann.org A
+dig www.icann.org A
+dig @8.8.8.8 www.icann.org A
+dig @one.one.one.one www.icann.org A
 ```
 
 For each answer that you got, discuss the different section of the answer with the facilitators. You will be surprised to see that dig tool provides a sea of information.
@@ -81,9 +81,9 @@ For each answer that you got, discuss the different section of the answer with t
 Now try other records
 
 ```
-$ dig icann.org NS
-$ dig icann.org TXT
-$ dig icann.org MX
+dig icann.org NS
+dig icann.org TXT
+dig icann.org MX
 ```
 
 Again, try to discuss the various outputs with your instructors.
@@ -93,31 +93,31 @@ Again, try to discuss the various outputs with your instructors.
 * **+short**: to display only the queried resource record value
 
 ```
-$ dig www.icann.org A +short
+dig www.icann.org A +short
 ```
 
 * **+noall +answer**: to get detailed information of the answers section only
 
 ```
-$ dig www.icann.org A +noall +answer
+dig www.icann.org A +noall +answer
 ```
 
 * **+trace**: lists each different server the query goes through to its final destination. Good for troubleshooting
 
 ```
-$ dig www.icann.org A +trace
+dig www.icann.org A +trace
 ```
 
 * **-x**: to lookup a domain name by its IP address (**reverse lookup**)
 
 ```
-$ dig -x 192.0.47.7
+dig -x 192.0.47.7
 ```
 
 * **-f**: to look up multiple entries stored in a file
 
 ```
-$ echo "icann.org ns.icann.org i.root-servers.net" > test_batch_lookup.txt ; dig -f test_batch_lookup.txt +noall +answer
+echo "icann.org ns.icann.org i.root-servers.net" > test_batch_lookup.txt ; dig -f test_batch_lookup.txt +noall +answer
 ```
 
 ## Server Identifier and Zone Version
@@ -134,25 +134,25 @@ query name.
 
 * **hostname.bind**: to retrieve the hostname of the server (if allowed to)
 ```
-$ dig @ns.icann.org. hostname.bind TXT CHAOS
-$ dig @i.root-servers.net hostname.bind TXT CHAOS
-$ dig hostname.bind TXT CHAOS
+dig @ns.icann.org. hostname.bind TXT CHAOS
+dig @i.root-servers.net hostname.bind TXT CHAOS
+dig hostname.bind TXT CHAOS
 ```
 
 * **version.bind**: to retrieve the version of the server (if allowed to)
 ```
-$ dig @ns.icann.org. version.bind TXT CHAOS
-$ dig @i.root-servers.net version.bind TXT CHAOS
-$ dig version.bind TXT CHAOS
+dig @ns.icann.org. version.bind TXT CHAOS
+dig @i.root-servers.net version.bind TXT CHAOS
+dig version.bind TXT CHAOS
 ```
 
 A newer approch has been the query for **id.server** as it is independent of the 
 software manufacturer.
 * **id.server**: 
 ```
-$ dig @ns.icann.org. id.server TXT CHAOS
-$ dig @i.root-servers.net id.server TXT CHAOS
-$ dig id.server TXT CHAOS
+dig @ns.icann.org. id.server TXT CHAOS
+dig @i.root-servers.net id.server TXT CHAOS
+dig id.server TXT CHAOS
 ```
 
 All these old query types have one problem. They are a query in itself.
@@ -162,16 +162,16 @@ server identity and zone version (SOA serial) to be included in the response.
 
 * **nsid**: retrieve DNS Name Server Identifier
 ```
-$ dig @ns.icann.org. icann.org SOA +nsid
-$ dig @i.root-servers.net icann.org SOA +nsid
-$ dig icann.org SOA +nsid
+dig @ns.icann.org. icann.org SOA +nsid
+dig @i.root-servers.net icann.org SOA +nsid
+dig icann.org SOA +nsid
 ```
 
 * **zoneversion**: retrieve DNS Zone Version
 ```
-$ kdig @ns1.xdp.cz xdp.cz SOA +zoneversion
-$ kdig @ns1.xdp.cz xdp.cz NS  +zoneversion
-$ kdig @ns1.dns.nl nl     SOA +zoneversion +nsid
+kdig @ns1.xdp.cz xdp.cz SOA +zoneversion
+kdig @ns1.xdp.cz xdp.cz NS  +zoneversion
+kdig @ns1.dns.nl nl     SOA +zoneversion +nsid
 ```
 
 ## Argument sequence
@@ -179,7 +179,7 @@ $ kdig @ns1.dns.nl nl     SOA +zoneversion +nsid
 
 The official documentation says:
 ```
-$ dig -h
+dig -h
 Usage:  dig [@global-server] [domain] [q-type] [q-class] {q-opt} [...]
 ```
 
@@ -187,8 +187,8 @@ But ***dig*** is actually very forgiving and allows to give arguments in any seq
 
 The following commands will yield the same result:
 ```
-$ dig @9.9.9.9 icann.org MX
-$ dig MX icann.org @9.9.9.9
+dig @9.9.9.9 icann.org MX
+dig MX icann.org @9.9.9.9
 ```
 
 ## Unintended consequences

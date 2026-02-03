@@ -9,35 +9,25 @@ steps check if earlier steps succeeded and did the right thing.
 1. Validate all signatures
 1. Check NSEC or NSEC3 chains
 
+Currently the primary delivers the zone directly to the secondaries. We will
+use NSD to implement an additional checking step.
+
 In our lab we will only use a very simple mock-up script for checking a zone.
 
 # Configuration of hidden primary
 
-Currently the primary delivers the zone directly to the secondaries. We will
-use NSD to implement an additional checking step.
+On our soa machine we change the bind configuration to use a non-standard port 
+and only on the localhost interface.
 
-We start with changing `/etc/bind/named.conf.options` to
+We start with changes to  `/etc/bind/named.conf.options`
 ```
-options {
-    directory "/var/cache/bind";
-    server-id "hidden primary";
-    listen-on port 5353 { localhost; 100.100.0.0/16; };
-    listen-on-v6 port 5353 { localhost; fd89:59e0::/32; };
-    allow-query { any; };
-    recursion no;
-};
+    listen-on port 5353 { localhost; };
+    listen-on-v6 port 5353 { localhost; };
 ```
-And the `/etc/bind/named.conf.local`file to
+And in file `/etc/bind/named.conf.local`
 ```
-zone "grpX.lab_domain." {
-    type primary;
-    file "/var/lib/bind/zones/db.grpX";
     allow-transfer { ::1; };
-    also-notify {
-        ::1;
-    };
-    dnssec-policy default;
-};
+    also-notify { ::1; };
 ```
 
 # Install NSD checking server

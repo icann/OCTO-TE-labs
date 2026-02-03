@@ -16,7 +16,7 @@ Now let's fix this!
 Execute the following command to get the DS record
 
 ```
-$ dig @localhost grpX.lab_domain DNSKEY | dnssec-dsfromkey -f - grpX.lab_domain
+dig @localhost grpX.lab_domain DNSKEY | dnssec-dsfromkey -f - grpX.lab_domain
 ```
 
 Your output should look something similar to the following line:
@@ -36,13 +36,23 @@ It will take approx. 2 or 3 minutes to publish the DS record.
 Query your parent zone and confirm that they have published your DS.
 
 ```
-$ dig grpX.lab_domain DS +nocomments +noall +answer
+dig grpX.lab_domain DS +nocomments +noall +answer
 ```
 
 Retry until the answer looks like
 
 ```
 grpX.lab_domain. 60    IN      DS      2404 8 2 8A4D8024E59D115331C8ECAF715E1168A429282646E6861420BEF8D1 7F9676E7
+```
+To speed this up you can flush the cache of your resolvers.
+
+On resolv1 run
+```
+sudo rndc flushname grpX.lab_domain
+```
+On resolv2 run
+```
+sudo unbound-control flush grpX.lab_domain
 ```
 
 Now see if your resolver returns the ad flag.

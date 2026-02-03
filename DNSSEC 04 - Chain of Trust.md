@@ -16,7 +16,7 @@ Now let's fix this!
 Execute the following command to get the DS record
 
 ```
-$ dig @localhost grpX.lab_domain DNSKEY | dnssec-dsfromkey -f - grpX.lab_domain
+dig @localhost grpX.lab_domain DNSKEY | dnssec-dsfromkey -f - grpX.lab_domain
 ```
 
 Your output should look something similar to the following line:
@@ -27,7 +27,7 @@ grpX.lab_domain. IN DS 12345 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34D
 
 ## Check DS record
 
-Before publishing your DS record use [zonemaster.net](zonemaster.net) to check if your DS record is correct. 
+Before publishing your DS record use [zonemaster.net](https://zonemaster.net) to check if your DS record is correct. 
 
 > [!TIP] See Options below the zonemaster search box!
 
@@ -42,7 +42,7 @@ It will take approx. 2 or 3 minutes to publish the DS record.
 Query your parent zone and confirm that they have published your DS.
 
 ```
-$ dig grpX.lab_domain DS +nocomments +noall +answer
+dig grpX.lab_domain DS +nocomments +noall +answer
 ```
 
 Retry until the answer looks like
@@ -54,7 +54,7 @@ grpX.lab_domain. 60    IN      DS      2404 8 2 8A4D8024E59D115331C8ECAF715E1168
 Now see if your resolver returns the ad flag.
 
 ```
-$ dig grpX.lab_domain SOA
+dig grpX.lab_domain SOA
 ```
 
 And finally go back to [dnsviz.net](https://dnsviz.net) and retest your domain. This time a DS record should be shown.

@@ -34,7 +34,9 @@ In the server section of the configuration we need to add:
 
 Save the changes and run `unbound-checkconf`
 ```
-$ sudo unbound-checkconf /etc/unbound/unbound.conf
+sudo unbound-checkconf /etc/unbound/unbound.conf
+```
+```
 /var/lib/unbound/root.key: No such file or directory
 unbound-checkconf[13615:0] fatal error: auto-trust-anchor-file: "/var/lib/unbound/root.key" does not exist
 ```
@@ -47,14 +49,16 @@ $ sudo cp /usr/share/dns/root.key /var/lib/unbound
 ```
 Let's check the configuration again
 ```
-$ sudo unbound-checkconf /etc/unbound/unbound.conf
+sudo unbound-checkconf /etc/unbound/unbound.conf
+```
+```
 unbound-checkconf: no errors in /etc/unbound/unbound.conf
 ```
 
 Then restart the server so that it takes the configuration changes:
 
 ```
-$ sudo unbound-control reload
+sudo unbound-control reload
 ```
 
 # Test your new validating resolver

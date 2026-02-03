@@ -17,7 +17,7 @@ options {
 To do this, edit the file :
 
 ```
-$ sudo nano named.conf.options
+$ sudo nano /etc/bind/named.conf.options
 ```
 
 You might already have spotted the culprit, please change `dnssec-validation no;` to `dnssec-validation auto;`
@@ -56,7 +56,7 @@ Please discuss with your peers and/or your instructor
 
 # Temporary disable DNSSEC validation for broken domains
 
-A zone can become broken due to issues with its DNSSEC configuration. In that case, validating resolvers may return DNS answers with status bogus, servfail, etc. Users behind such recursive resolver will get impacted for those domains. While it is generally the responsibility of the domain administrator to fix the issue, the recursive resolver administrator can take action to temporarily disable DNSSEC validation for such domain that is broken at validation level.
+A zone can become broken due to issues with its DNSSEC configuration. In that case, validating resolvers may return DNS answers with status servfail. Users behind such recursive resolver will get impacted for those domains. While it is generally the responsibility of the domain administrator to fix the issue, the recursive resolver administrator can take action to temporarily disable DNSSEC validation for such domain that is broken at validation level.
 
 Please follow these steps:
 1. Run `dig @localhost www.dnssec-failed.org`

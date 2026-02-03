@@ -9,8 +9,8 @@ The official Bind 9 configuration reference manual can be found at
 ## Install Bind 9
 
 ```
-$ sudo apt -y install bind9
-$ sudo adduser sysadm bind
+sudo apt -y install bind9
+sudo adduser sysadm bind
 ```
 
 This installs bind and allows our current user to use rndc to control bind.
@@ -25,12 +25,16 @@ We use the container "SOA" (hidden primary authoritative)
 We create a new folder for our zone files. Inside that new folder, we then create a new file for our domain zone data.
 
 ```
-$ sudo mkdir -p /var/lib/bind/zones
-$ sudo touch /var/lib/bind/zones/db.grpX
-$ sudo chown -R bind:bind /var/lib/bind
+sudo mkdir -p /var/lib/bind/zones
+sudo touch /var/lib/bind/zones/db.grpX
+sudo chown -R bind:bind /var/lib/bind
 ```
 
 Then, update the db.grp***X*** zone to look like the below:
+
+```
+sudo nano /var/lib/bind/zones/db.grpX
+```
 
 ```
 ; grpX 
@@ -55,6 +59,10 @@ You can add more records as you want.
 In the configuration file ***/etc/bind/named.conf.local*** , create a new "zone" statement as below:
 
 ```
+sudo nano /etc/bind/named.conf.local
+```
+
+```
 zone "grpX.lab_domain." {
 	type primary;
 	file "/var/lib/bind/zones/db.grpX";
@@ -71,13 +79,13 @@ zone "grpX.lab_domain." {
 > [!TIP]
 > Once done, use ***named-checkconf*** to verify that your BIND config is correct.
 ```
-$ named-checkconf
+named-checkconf
 ```
 
 Configure bind options.
 
 ```
-$ sudo nano /etc/bind/named.conf.options
+sudo nano /etc/bind/named.conf.options
 ```
 
 > Please replace ***server_id*** and ***host_name*** with something unique - it's ok to be creative
@@ -85,26 +93,34 @@ $ sudo nano /etc/bind/named.conf.options
 ```
 options {
     directory "/var/cache/bind";
-    server-id "server_id";
+    server-id "hidden primary";
     version "grpX";
-    hostname "host_name";
+    hostname "grpX-soa";
     dnssec-validation no;
     listen-on port 53 { localhost; 100.100.0.0/16; };
     listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
     allow-query { any; };
+    allow-transfer { any; };
+    also-notify { any; };
     recursion yes;
 };
 ```
 Once again
 ```
-$ named-checkconf
+named-checkconf
 ```
 
 Tell bind to reload the configuration and verify its status. You should see an output as the below
 ```
-$ rndc reload
+sudo rndc reload
+```
+```
 server reload successful
-$ rndc zonestatus grpX.lab_domain
+```
+```
+sudo rndc zonestatus grpX.lab_domain
+```
+```
 name: grpX.lab_domain
 type: primary
 files: /var/lib/bind/zones/db.grpX
@@ -125,7 +141,9 @@ reconfigurable via modzone: no
 Query your zone on the local server:
 
 ```
-$ dig @localhost soa grpX.lab_domain +noall +answer
+dig @localhost soa grpX.lab_domain +noall +answer
+```
+```
 grpX.lab_domain. 300 IN SOA grpX.lab_domain. dnsadmin.lab_domain. 1 604800 86400 2419200 300
 ```
 

@@ -12,7 +12,7 @@
 # Install NSD
 
 ```
-$ sudo apt -y install nsd
+sudo apt -y install nsd
 ```
 
 This installs bind and allows our current user to use rndc to control bind.
@@ -20,22 +20,26 @@ This installs bind and allows our current user to use rndc to control bind.
 Create the directory and file that will contain our zone file.
 
 ```
-$ sudo mkdir -p /var/lib/nsd
-$ sudo touch /var/lib/nsd/db.grpX.secondary
-$ sudo chown -R nsd:nsd /var/lib/nsd
+sudo mkdir -p /var/lib/nsd
+sudo touch /var/lib/nsd/db.grpX.secondary
+sudo chown -R nsd:nsd /var/lib/nsd
 ```
 
 In the ***/etc/nsd/nsd.conf*** file, configure the following parameters:
 
 ```
-include: "/etc/nsd/nsd.conf.d/*.conf"
-
+sudo nano /etc/nsd/nsd.conf
+```
+```
 server:
+    log-only-syslog: yes
     zonesdir: "/var/lib/nsd"
     nsid: "ascii_grpX NSD nsid"
     hide-version: no
     hide-identity: no
-    
+    cookie-secret: "71ff147d946b942ed66e608b64dc54c9"
+    answer-cookie: yes
+
 pattern:
     name: "fromprimary"
     allow-notify: 100.100.X.66 NOKEY
@@ -54,13 +58,16 @@ zone:
 Verify the configuration and if there are no errors restart the server:
 
 ```
-$ nsd-checkconf /etc/nsd/nsd.conf
-$ sudo systemctl restart nsd
+nsd-checkconf /etc/nsd/nsd.conf
+```
+and if no errors are reported
+```
+sudo systemctl restart nsd
 ```
 
 Verify that it restarted correctly:
 
 ```
-$ sudo nsd-control status
-$ sudo nsd-control zonestatus grpX.lab_domain
+sudo nsd-control status
+sudo nsd-control zonestatus grpX.lab_domain
 ```
