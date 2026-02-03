@@ -23,17 +23,14 @@ gives you the SOA record for your domain, and that it is signed.
 
 In this lab, we will carry out a manual key rollover of the ZSK. Since we are not changing the KSK, we do not need to generate a new DS record to the parent zone (this will be done in the case of a KSK rollover). 
 
-In this lab we are using the default ZSK rollover methodology which is pre-publication. Double-signature isan other methodology, but we will not use it.
+In this lab we are using the ZSK rollover methodology which is called double-signature. Pre-publication is another possible methodology, but we will not use it.
 
 Out steps will be:
 
 * Create a new ZSK in addition to the existing one (a “**successor** ZSK”).
-* Publish the new ZSK in the DNSKEY RRSet (so it contains two ZSKs).
-* Sign the zone with the old ZSK
+* Publish both ZSK and sign with both ZSK
 * Wait for TTL timeout 
-* Sign the zone with the new ZSK
-* Wait for TTL timeout
-* Remove the old ZSK
+* Remove the old ZSK and sign only with the new ZSK
 
 ## ZSK Rollover
 
@@ -74,10 +71,41 @@ sudo chown -R bind:bind /var/lib/bind/keys
 sudo rndc loadkeys grpX.lab_domain
 ```
 
-### Publish the new ZSK in the DNSKEY RRSet
-### Sign the zone with the old ZSK
-### Sign the zone with the new ZSK
-### Remove the old ZSK
+### * Publish both ZSK and sign with both ZSK
+
+1. Edit the zone and increase the serial
+2. Resign the zone
+```
+sudo dnssec-signzone -S -K /var/lib/bind/keys -o grpX.lab_domain /var/lib/bind/zones/db.grpX
+```  
+Output should be something like 
+```
+etching grpX.lab_domain/ECDSAP256SHA256/14800 (ZSK) from key repository.
+Fetching grpX.lab_domain/ECDSAP256SHA256/65181 (ZSK) from key repository.
+Fetching  grpX.lab_domain/ECDSAP256SHA256/16579 (KSK) from key repository.
+Verifying the zone using the following algorithms:
+- ECDSAP256SHA256
+Zone fully signed:
+Algorithm: ECDSAP256SHA256: KSKs: 1 active, 0 stand-by, 0 revoked
+                            ZSKs: 2 active, 0 stand-by, 0 revoked
+/var/lib/bind/zones/db.grpX.signed
+```
+### Wait for TTL timeout
+
+In this lab timeouts are very short, you can proceed immediately. But on the internet this can easily be one or two days you'll have to wait.
+
+### Remove the old ZSK and sign only with the new ZSK
+
+Hopefully you remember which of the files is the new and which is the old ZSK.
+
+```
+mv /var/lib/bind/keys/KgrpX.lab_domain.te-labs.training.+013+?????.key /var/lib/bind/keys/old_KgrpX.lab_domain.te-labs.training.+013+?????.key
+mv /var/lib/bind/keys/KgrpX.lab_domain.te-labs.training.+013+?????.private /var/lib/bind/keys/old_KgrpX.lab_domain.te-labs.training.+013+?????.private
+```
+and now we sign again, but we will increase the serial before we do that
+```
+sudo dnssec-signzone -S -K /var/lib/bind/keys -o grpX.lab_domain /var/lib/bind/zones/db.grpX
+```  
 
 > [!IMPORTANT]
 >
