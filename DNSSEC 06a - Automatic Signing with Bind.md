@@ -36,6 +36,7 @@ dnssec-policy NotForProduction {
     offline-ksk false;
     parent-ds-ttl 60s;
     parent-propagation-delay 1s;
+    zone-propagation-delay 1s;
     publish-safety 0s;
     purge-keys 1h;
     retire-safety 1m;
@@ -43,7 +44,6 @@ dnssec-policy NotForProduction {
     signatures-refresh 1m;
     signatures-validity 10m;
     signatures-validity-dnskey 2m;
-    zone-propagation-delay 1s;
     keys {
         ksk key-directory lifetime unlimited algorithm ecdsa256;
         zsk key-directory lifetime unlimited algorithm ecdsa256;
@@ -69,13 +69,14 @@ zone "grpX.lab_domain." {
 
 Then, reconfigure or restart BIND: using 
 ```
-rndc reconfig
-rndc reload
+sudo rm /var/lib/bind/zones/db.grpX.signed
+sudo rndc reconfig
+sudo rndc reload
 ```
 
 Check DNSSEC status of your zone:
 ```
-rndc dnssec -status grpX.lab_domain
+sudo rndc dnssec -status grpX.lab_domain
 ```
 ```
 dnssec-policy: default

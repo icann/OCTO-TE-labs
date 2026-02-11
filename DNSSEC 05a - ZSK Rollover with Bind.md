@@ -68,7 +68,6 @@ KgrpX.lab_domain.te-labs.training.+013+12969
 Change the ownership of the new file and reload bind.
 ```
 sudo chown -R bind:bind /var/lib/bind/keys
-sudo rndc loadkeys grpX.lab_domain
 ```
 
 ### * Publish both ZSK and sign with both ZSK
@@ -80,7 +79,7 @@ sudo dnssec-signzone -S -K /var/lib/bind/keys -o grpX.lab_domain /var/lib/bind/z
 ```  
 Output should be something like 
 ```
-etching grpX.lab_domain/ECDSAP256SHA256/14800 (ZSK) from key repository.
+Fetching grpX.lab_domain/ECDSAP256SHA256/14800 (ZSK) from key repository.
 Fetching grpX.lab_domain/ECDSAP256SHA256/65181 (ZSK) from key repository.
 Fetching  grpX.lab_domain/ECDSAP256SHA256/16579 (KSK) from key repository.
 Verifying the zone using the following algorithms:
