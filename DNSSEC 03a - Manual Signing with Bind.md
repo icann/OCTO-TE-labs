@@ -74,7 +74,7 @@ rndc reload
 We can now use *dig* utility to confirm that the zone is signed and play with the new DNSSEC RRs.
 
 ```
-$ dig @localhost soa grpX.lab_domain +dnssec 
+dig @localhost soa grpX.lab_domain +dnssec 
 ```
 
 This should give you an output similiar to
