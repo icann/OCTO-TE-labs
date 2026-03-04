@@ -75,6 +75,10 @@ server:
 
 remote-control:
     control-enable: yes
+
+stub-zone:
+    name: "internal."
+    stub-addr: 100.64.0.54
 ```
 
 Let's create neccessary files for unbound-control

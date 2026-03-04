@@ -82,6 +82,18 @@ options {
 };
 ```
 
+And we add a special instruction for a local domain to named.conf.local
+```
+sudo nano /etc/bind/named.conf.local
+```
+with the following content
+```
+zone "internal." {
+    type forward;
+    forwarders { 100.64.0.54; };
+    forward only;  // only forward, no fallback to root hints
+};
+```
 Once finish editing the configuration file, verify the configuration syntax:
 
 ```
