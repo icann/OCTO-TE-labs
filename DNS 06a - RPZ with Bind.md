@@ -1,89 +1,68 @@
+# RPZ with Bind
+
+We have already setup a RPZ. You "just" need to configure it in your resolver.
+
+On the resolv1 machine the resolver needs to be configured to use the RPZ.
+```
+sudo nano /etc/bind/named.conf.local
+```
+Please add the following section
+```
+zone "rpz" {
+    type secondary;
+    file "/var/lib/bind/zones/db.rpz.secondary";
+    masters { 
+        100.64.0.54; 
+        fd89:59e0::54;
+    };
+    allow-transfer { none; };
+    allow-query { localhost; };
+};
+```
+And to start blocking we need to configure the use of the zone as RPZ.
+```
+sudo nano /etc/bind/named.conf.options
+```
+Please add the following logging section to the file
+```
 logging {
-        channel null { 
-		null; 
-	};
-
-    channel bindlog { 
-		file "bind.log"; 
-		print-time yes; 
-		print-category yes; 
-		print-severity yes; 
-		severity info; 
-	};
-
     channel rpzlog {
-        file "rpz.log" versions unlimited size 1000m;
+      	file "/var/log/named/rpz.log" versions unlimited size 100m;
         print-time yes;
         print-category yes;
         print-severity yes;
         severity info;
     };
 
-    category default { bindlog; };
-    category general { bindlog; };
-    category database { null; };
-    category config { bindlog; };
-    category resolver { null; };
-    category xfer-in { bindlog; };
-    category xfer-out { bindlog; };
-    category notify { bindlog; };
-    category client { null; };
-    category unmatched { null; };
-    category network { bindlog; };
-    category update { bindlog; };
-    category update-security { bindlog; };
-    category queries { null; };
-    category dispatch { null; };
-    category lame-servers { null; };
-    category delegation-only { bindlog; };
-    category edns-disabled { null; };
 	category rpz { rpzlog; };
 };
-
-options {
-    directory "/var/cache/bind";
-    dnssec-validation no;
-    listen-on port 53 { localhost; 100.100.0.0/16; };
-    listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
-    allow-query { any; };
-    recursion yes;
-
-    allow-transfer{ none; };
-	ixfr-from-differences yes;
-	empty-zones-enable yes;
-
-	response-policy {
-		zone "rpz.local";
-	};
-};
-
-In named.conf.local
-
-zone "rpz.local" {
-	type master;
-	file "db.rpz.local";
-	allow-update { none; };
-	allow-transfer { none; };
-	allow-query { localhost; };
-};
-
-zone "rpz.te-labs.training" {
-	type slave;
-	file "db.rpz.te-labs.training";
-	masters { 
-		AWS;
-		AWS;
-	};
-	allow-transfer { none; };
-	allow-query { localhost; };
-};
-
-#------------------------------------------------------------------------------
-# Root hints
-#------------------------------------------------------------------------------
-
-zone "." {
-	type hint;
-	file "root.cache";
-};
-
+```
+And in the already existing options section add
+```
+    response-policy	{
+        zone "rpz" policy given;
+    };
+```
+Almost done, we just need to prepare for the zone file transfer
+```
+sudo mkdir -p /var/lib/bind/zones
+sudo touch /var/lib/bind/zones/db.rpz.secondary
+sudo chown -R bind:bind /var/lib/bind
+sudo mkdir -p /var/log/named
+sudo chmod 775 /var/log/named
+sudo chown -R root:bind /var/log/named
+```
+Check if everything is configured correct
+```
+named-checkconf
+```
+And then restart the resolver
+```
+sudo rndc reconfig
+sudo rndc reload
+```
+Now let's test if it is working
+```
+dig @localhost rpz soa +nocomments +noall +answer
+```
+Should show you a SOA record.
