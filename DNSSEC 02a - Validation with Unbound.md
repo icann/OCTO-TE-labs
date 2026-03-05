@@ -37,21 +37,6 @@ Save the changes and run `unbound-checkconf`
 sudo unbound-checkconf /etc/unbound/unbound.conf
 ```
 ```
-/var/lib/unbound/root.key: No such file or directory
-unbound-checkconf[13615:0] fatal error: auto-trust-anchor-file: "/var/lib/unbound/root.key" does not exist
-```
-
-We added the configuration, but we still do not have a trust-anchor.
-
-Lukily Ubuntu does provide one for us:
-```
-$ sudo cp /usr/share/dns/root.key /var/lib/unbound
-```
-Let's check the configuration again
-```
-sudo unbound-checkconf /etc/unbound/unbound.conf
-```
-```
 unbound-checkconf: no errors in /etc/unbound/unbound.conf
 ```
 
