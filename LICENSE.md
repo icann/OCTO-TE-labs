@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uLICENSE"
+---
+
 Copyright © 2025 Internet Corporation for Assigned Names and Numbers (ICANN) and Network Startup Resource Center (NSRC). All rights reserved.
 
 This documentation is licensed to you under the terms of the [Creative Commons (CC) Attribution 4.0 International license (CC BY)](https://creativecommons.org/licenses/by-sa/4.0).

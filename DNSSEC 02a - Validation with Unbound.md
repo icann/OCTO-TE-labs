@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 02a   Validation with Unbound"
+---
+
 # Set up an Unbound recursive server
 
 Follow this lab on the same machine you installed the Unbound resolver in Lab DNS 01.

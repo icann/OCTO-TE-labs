@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 02b   EDE"
+---
+
 # Extended DNS Errors (EDE)
 
 A few years back the Internet Engineering Task Force (IETF) standardized

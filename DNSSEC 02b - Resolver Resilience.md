@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 02b   Resolver Resilience"
+---
+
 # Resolver Resilience
 
 Resolvers are central to any larger server installation. Only with proper resolving can servers communicate with each other. DNSSEC introduces some new dependencies to the process of resolving.

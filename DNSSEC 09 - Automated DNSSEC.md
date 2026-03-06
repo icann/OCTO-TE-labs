@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 09   Automated DNSSEC"
+---
+
 # Automated DNSSEC
 
 Automated DNSSEC is a collection of different techniques that allow to manage DS records and in many cases even NS records through DNS.

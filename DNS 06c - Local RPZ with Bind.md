@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 06c   Local RPZ with Bind"
+---
+
 # Local RPZ with Bind
 
 Sometimes you need to have local configuration for your RPZ. 

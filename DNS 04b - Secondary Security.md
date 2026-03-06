@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 04b   Secondary Security"
+---
+
 <img src="https://github.com/yakanho/training/assets/54844453/321060e5-fc84-40f7-8caa-846d0a68494b" alt="ICANN" style="zoom:25%;" />
 
 # Lab Hardening your DNS config (Intro)

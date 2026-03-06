@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 06   RPZ"
+---
+
 # RPZ
 
 Response Policy Zones (RPZ) are not a very new addition to DNS

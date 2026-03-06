@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 02   DNS Tools"
+---
+
 # DNS Tools
 
 You probably have heard the saying "It's always DNS".

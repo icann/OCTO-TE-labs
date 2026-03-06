@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 02a   Dig"
+---
+
 # Introduction to Domain Information Groper (dig)
 
 Working with "dig" and understanding its outputs are crucial for DNS troubleshooting and debugging, so don't be shy and ask questions to learn the maximum. 

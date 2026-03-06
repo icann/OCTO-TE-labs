@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 02   Validation"
+---
+
 # DNSSEC Validation
 
 The easiest way to start with DNSSEC is validation. Everybody uses a resolver

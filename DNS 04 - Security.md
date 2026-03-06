@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 04   Security"
+---
+
 # Name Server Security
 
 Anything connected to the internet is subjected to a constant barrage of hacking or abuse attempts.

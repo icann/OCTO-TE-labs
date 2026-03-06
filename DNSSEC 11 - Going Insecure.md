@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 11   Going Insecure"
+---
+
 # Going Insecure
 
 Sometimes it unfortunately becomes neccessary to switch off DNSSEC, with other words "going insecure".

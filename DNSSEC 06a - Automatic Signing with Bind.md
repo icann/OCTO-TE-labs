@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 06a   Automatic Signing with Bind"
+---
+
 # Automatic zone signing
 
 > [!WARNING]

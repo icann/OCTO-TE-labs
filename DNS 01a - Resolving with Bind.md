@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 01a   Resolving with Bind"
+---
+
 # Setting up a recursive server with Bind9
 
 This lab should be executed on your machine resolv1 or resolv2.

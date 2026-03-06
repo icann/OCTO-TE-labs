@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 06a   RPZ with Bind"
+---
+
 # RPZ with Bind
 
 We have already setup a RPZ. You "just" need to configure it in your resolver.

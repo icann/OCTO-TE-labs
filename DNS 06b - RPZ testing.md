@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 06b   RPZ testing"
+---
+
 # RPZ Testing
 
 > [!IMPORTANT]

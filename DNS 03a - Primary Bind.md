@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 03a   Primary Bind"
+---
+
 # Primary Setup with Bind9
 
 The official Bind 9 configuration reference manual can be found at 

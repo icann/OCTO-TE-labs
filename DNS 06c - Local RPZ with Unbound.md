@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 06c   Local RPZ with Unbound"
+---
+
 # Local RPZ with Unbound
 
 Sometimes you need to have local configuration for your RPZ. 

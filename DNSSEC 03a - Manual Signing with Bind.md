@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 03a   Manual Signing with Bind"
+---
+
 # Signing
 
 In this lab we will use the signing method with two keys, a Key-Signing-Key (KSK) and a Zone-Signing-Key (ZSK).

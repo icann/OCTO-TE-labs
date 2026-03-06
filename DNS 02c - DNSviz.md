@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 02c   DNSviz"
+---
+
 # DNSviz
 
 From dnsviz.net:

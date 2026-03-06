@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 09a   Automated DNSSEC with Bind"
+---
+
 > [!WARNING]
 > This is a configuration for this lab, it is absolutely unfit for use in any kind of real world deployment.
 

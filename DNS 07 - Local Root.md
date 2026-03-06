@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 07   Local Root"
+---
+
 # Local Root
 
 Local Root also nown as Hyper-Local is defined in [RFC 8806](https://www.rfc-editor.org/rfc/rfc8806). 

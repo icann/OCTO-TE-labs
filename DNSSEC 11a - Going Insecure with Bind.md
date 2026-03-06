@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 11a   Going Insecure with Bind"
+---
+
 # Going Insecure
 
 Sometimes it unfortunately becomes neccessary to switch off DNSSEC, with other words "going insecure".

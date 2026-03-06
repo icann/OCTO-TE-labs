@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 01b   Resolving with Unbound"
+---
+
 # Setting up a recursive server with Unbound
 
 This lab should be executed on your machine resolv1 or resolv2.

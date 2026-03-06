@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 03b   Secondary Bind"
+---
+
 # Configure secondary server with Bind 9
 
 The official Bind 9 configuration reference manual can be found at 

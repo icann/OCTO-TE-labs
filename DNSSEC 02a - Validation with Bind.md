@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 02a   Validation with Bind"
+---
+
 # Set up a BIND validating recursive server.
 
 Follow this lab on the same machine you installed the bind resolver in Lab DNS 01.

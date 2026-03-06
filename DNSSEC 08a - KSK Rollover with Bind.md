@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 08a   KSK Rollover with Bind"
+---
+
 # KSK Rollover
 
 Currently DNSSEC for your zone is automatically handled by bind. We will now bind tell to roll keys.

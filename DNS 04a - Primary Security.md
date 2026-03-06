@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 04a   Primary Security"
+---
+
 # Primary Security
 
 Hopefully your servers are configured in a hidden primary configuration.

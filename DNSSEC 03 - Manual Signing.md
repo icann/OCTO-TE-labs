@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 03   Manual Signing"
+---
+
 # Signing
 
 Signing a zone used to be a difficult task, but for many years now name servers 

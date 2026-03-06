@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 01   Resolving"
+---
+
 # Resolving
 
 The first contact to DNS for most (all) people is resolving.

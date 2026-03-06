@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 03   Authoritative"
+---
+
 # Configuring authoritative name servers
 
 We are going to build a "hidden primary" setup, where the SOA server is the hidden primary and NS1 and NS2

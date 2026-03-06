@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 02e   Other Tools"
+---
+
 # Other Tools
 
 Here are a few hounorable mentions of tools that can be useful in DNS server

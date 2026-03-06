@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNSSEC 04   Chain of Trust"
+---
+
 
 # Establish a chain of trust
 

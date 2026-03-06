@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 06a   RPZ with Unbound"
+---
+
 # RPZ with Unbound
 
 We have already setup a RPZ. You "just" need to configure it in your resolver.

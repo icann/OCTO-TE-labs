@@ -1,3 +1,8 @@
+---
+layout: page
+title: "uDNS 03b   Secondary NSD"
+---
+
 # Configure secondary server with NSD
 
 > [!TIP]
