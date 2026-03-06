@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "uLICENSE"
+title: "LICENSE"
 ---
 
 Copyright © 2025 Internet Corporation for Assigned Names and Numbers (ICANN) and Network Startup Resource Center (NSRC). All rights reserved.
