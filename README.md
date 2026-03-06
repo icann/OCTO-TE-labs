@@ -61,7 +61,7 @@ Please don't skip any of the labs as they build on each other.
 > Later labs will likely fail if you didn't finish the earlier ones!
 
 > [!WARNING]
-> Any all configurations in this lab are not ready for production systems.
+> Any configuration in this lab is not ready for production systems.
 
 {:toc}
 

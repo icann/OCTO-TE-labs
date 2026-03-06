@@ -199,7 +199,3 @@ dig com. SOA
 ```
 
 Look at the output. The important part is `;; SERVER: 100.100.X.67#53(100.100.X.67) (UDP)`
-
-# Done
-
-Please return to [DNS 01 - Resolving](DNS%2001%20-%20Resolving.md) and continue with the lab.

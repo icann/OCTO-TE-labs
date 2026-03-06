@@ -8,7 +8,7 @@ nav_order: 1
 # Dig DNSSEC
 
 > [!TIP]
-> Please finish the lab [DNS 02a - Dig](DNS%2002a%20-%20Dig.md) first, if you haven't done so already.
+> Please finish the lab [DNS - Dig](../dns/02-tools/dig.md) first, if you haven't done so already.
 
 ## Using dig to get DNSSEC information
 

@@ -40,14 +40,14 @@ Use the "SOA" server as primary authoritative server for the  grp***X***.***lab_
 
 Your instructor will tell you which instructions to follow for installation of your primary server.
 
-- [DNS 03a - Bind](./DNS%2003a%20-%20Primary%20Bind.md) 
+- [Primary Setup with Bind](primarybind.md) 
 
 ## Setting up the secondaries
 
 Your instructor will tell you which instructions to follow for installation of your secondary servers.
 
-- [DNS 03b - Secondary Bind9](./DNS%2003b%20-%20Secondary%20Bind.md)
-- [DNS 03b - Secondary NSD](./DNS%2003b%20-%20Secondary%20NSD.md)
+- [Secondary Setup with Bind](secondarybind.md)
+- [Secondary Setup with NSD](secondarynsd.md)
 
 Once you are done with the configuration of your primary and secondary servers, please come back here and continue with the next section!
 

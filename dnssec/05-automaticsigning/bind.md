@@ -31,9 +31,11 @@ Remove the DS record from the parent. Easiest done on the web page for your lab 
 
 Update your zone configuration statement in `/etc/bind/named.conf.local`, to look like the below : 
 
-> [!WARNING] This DNSSEC policy configures extremly fast DNSSEC data changes for the purpose of running an efficient lab environment. This will break your domains when used in production. 
+> [!WARNING] 
+> This DNSSEC policy configures extremly fast DNSSEC data changes for the purpose of 
+> running an efficient lab environment. This will break your domains when used in production. 
 
-> [!Tip] Bind has a pre-configured policy that you absolutely should consider using instead of defining your own just use `dnssec-policy default`.
+> [!TIP] Bind has a pre-configured policy that you absolutely should consider using instead of defining your own just use `dnssec-policy default`.
 
 ```
 dnssec-policy NotForProduction {

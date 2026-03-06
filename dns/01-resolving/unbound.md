@@ -145,7 +145,3 @@ sudo mv /etc/resolv.conf.orig /etc/resolv.conf
 You should get the same answers as above
 
 1. dig com. SOA +noall +answer
-
-# Done
-
-Please return to [DNS 01 - Resolving](DNS%2001%20-%20Resolving.md) and continue with the lab.

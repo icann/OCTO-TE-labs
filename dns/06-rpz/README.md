@@ -21,13 +21,6 @@ process, which means it is often very slow.
 
 Please do only one of the following labs. We need one resolver do the blocking and the other to not block.
 
-- [DNS 06a - RPZ with Bind](DNS%2006a%20-%20RPZ%20with%20Bind.md)
-- [DNS 06a - RPZ with Unbound](DNS%2006a%20-%20RPZ%20with%20Unbound.md)
-
-Now let's see what RPZ can do
-
-- [DNS 06b - RPZ Testing](DNS%2006b%20-%20RPZ%20Testing.md)
-
-And last but not least let's configure a RPZ. Please use the lab for the same software as you used or DNS 06a.
-- [DNS 06c - Local RPZ with Bind](DNS%2006c%20-%20Local%20RPZ%20with%20Bind.md)
-- [DNS 06c - Local RPZ with Unbound](DNS%2006c%20-%20Local%20RPZ%20with%20Unbound.md)
+> [!IMPORTANT]
+> Please run this lab only for one of your resolvers. Choose the 
+> software you want to use for RPZ and stick with it.

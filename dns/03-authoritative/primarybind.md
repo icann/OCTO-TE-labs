@@ -153,5 +153,3 @@ dig @localhost soa grpX.lab_domain +noall +answer
 ```
 grpX.lab_domain. 300 IN SOA grpX.lab_domain. dnsadmin.lab_domain. 1 604800 86400 2419200 300
 ```
-
-To continue with the lab with [Setting up the secondaries](DNS%2003%20-%20Authoritative.md#setting-up-the-secondaries)
