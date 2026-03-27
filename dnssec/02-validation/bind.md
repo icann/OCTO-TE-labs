@@ -9,30 +9,14 @@ nav_order: 1
 
 Follow this lab on the same machine you installed the bind resolver in Lab DNS 01.
 
-Our current configuration in `/etc/bind/named.conf.options` should be
-```
-options {
-  directory "/var/cache/bind";
-  dnssec-validation no;
-  listen-on port 53 { localhost; 100.100.0.0/16; };
-  listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
-  allow-query { any; };
-  recursion yes;
-};
-```
-
-To do this, edit the file :
-
-```
-$ sudo nano /etc/bind/named.conf.options
-```
+Look at the current configuration. What would you change?
 
 You might already have spotted the culprit, please change `dnssec-validation no;` to `dnssec-validation auto;`
 
 Save your changes and reload the configuration
 
 ```
-$ rndc reload
+rndc reload
 ```
 
 # Test your new validating resolver
@@ -79,4 +63,6 @@ Please discuss with your peers and your instructor:
 
 Please checkout the help page for rndc. You can even specifiy a lifetime for negative trust-anchors.
 
-
+This blog post from Quad9 explains why NTA's are not a good idea, but still
+sometimes neccessary.
+(DNSSEC NTAs: No Good Compromises)[https://quad9.net/news/blog/dnssec-ntas-no-good-compromises/]
