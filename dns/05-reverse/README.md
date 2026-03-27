@@ -16,22 +16,21 @@ We are going to configure a hidden authoritative server for your reverse zone
 and create the authoritative zone reverse\_grp***X***.***lab_domain***.
 
 ```
-# nano /etc/bind/zones/reverse_grpX.lab_domain.te-labs.training
+nano /var/lib/bind/zones/db.X.100.100.in-addr.arpa
 ```
 
-
 ```
-$TTL    300
+$TTL    30
 @		IN		SOA		soa.grpX.lab_domain. dnsadmin.lab_domain. (                                            
                               1         ; Serial
-                         604800         ; Refresh
-                          86400         ; Retry
-                        2419200         ; Expire
-                          86400 )       ; Negative Cache TTL
+                             30         ; Refresh
+                             30         ; Retry
+                             30         ; Expire
+                             30 )       ; Negative Cache TTL
 ;
 
-                IN              NS              ns1.grpX.lab_domain. ; your name server
-                IN              NS              ns2.grpX.lab_domain. ; your name server
+        IN      NS      ns1.grpX.lab_domain. ; your name server
+        IN      NS      ns2.grpX.lab_domain. ; your name server
 66		IN		PTR		soa.grpX.lab_domain.
 67		IN		PTR		resolv1.grpX.lab_domain.
 68		IN		PTR		resolv2.grpX.lab_domain.
@@ -44,17 +43,22 @@ Save and exit.
 Run the following command to check for any errors in your setup:
 
 ```
-# named-checkzone X.100.100.in-addr.arpa /etc/bind/zones/reverse_grpX.lab_domain.
+named-checkzone X.100.100.in-addr.arpa /var/lib/bind/zones/db.X.100.100.in-addr.arpa
 ```
 
 Next, edit the /etc/bind/named.conf.local file and add the following lines:
 
 ```
 zone "X.100.100.in-addr.arpa" {
-  type primary;
-  file "/etc/bind/zones/reverse_grpX.lab_domain.";
-  allow-transfer { any; };
-  also-notify {100.100.X.130; 100.100.X.131; };
+    type primary;
+    file "/var/lib/bind/zones/db.X.100.100.in-addr.arpa";
+    allow-transfer { any; };
+  	also-notify {
+		100.100.X.130; 
+		100.100.X.131; 
+		fd89:59e0:X:128::130; 
+		fd89:59e0:X:128::131; 
+	};
 };
 ```
 
@@ -63,25 +67,22 @@ Save and exit.
 Run the following command to check for any errors in your setup:
 
 ```
-# named-checkconf
+named-checkconf
 ```
 
-Restart Bind 9 and test your reverse DNS using dig
+Restart Bind and test your reverse DNS using dig
 
 ```
-# dig -x 100.100.X.66 @localhost
+dig @localhost -x 100.100.X.66 
 ```
 
 Or
 
 ```
-# dig 66.X.100.100.in-addr.arpa. PTR @localhost
+dig @localhost 66.X.100.100.in-addr.arpa. PTR
 ```
 
-
-Question: Do you get a DNS response with the PTR record in the answer section?
-
-
+Did you get a DNS response with the PTR record in the answer section?
 
 ## Configure the secondary authoritative servers (ns1 and ns2) 
 
@@ -92,8 +93,8 @@ Once you are done with configuration, test your reverse zone propagation.
 ## Test your zone configuration and propagation.
 Use *dig* tool to verify your zone configuration and propagation, then do the same for one or two other groups in the class and share comments. From your client, run the following dig queries. All should return answer otherwise you should review your configurations before continiuing:
 
-1. dig -x 100.100.X.66 @100.100.X.66
-2. dig -x 100.100.X.66 @100.100.X.130
-3. dig -x 100.100.X.66 @100.100.X.131
-4. dig -x 100.100.X.67 @100.100.X.130
-5. dig -x 100.100.X.68 @100.100.X.130
+1. `dig @100.100.X.66  -x 100.100.X.66`
+1. `dig @100.100.X.130 -x 100.100.X.66`
+1. `dig @100.100.X.131 -x 100.100.X.66`
+1. `dig @100.100.X.130 -x 100.100.X.67`
+1. `dig @100.100.X.130 -x 100.100.X.68`
