@@ -1,11 +1,11 @@
 ---
 layout: page
-title: "Resolver BIND"
+title: "Resolver Unbound"
 parent: "Security"
 nav_order: 6
 ---
 
-# Resolver Security BiND
+# Resolver Security Unbound
 
 Open resolvers have been a security challenge on the internet for
 decades. Please do not add to it, secure your resolver, let it only 
