@@ -158,7 +158,7 @@ Look at your server configuration. What would you change?
 # Zone Update
 
 Please edit the zone file of your domain `grpx.lab_domain`. Increase the serial 
-number, save the file and reload the zone `sudo rndc reload grpX.Lab_domain`.
+number, save the file and reload the zone `sudo rndc reload grpX.lab_domain`.
 
 Check if your primary and your secondary serve the same zone version.
 ```
