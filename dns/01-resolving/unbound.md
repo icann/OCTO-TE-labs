@@ -18,11 +18,11 @@ Let's look at `/etc/resolv.conf`.
 cat /etc/resolv.conf
 ```
 ```
-search grpX.lab_domain
-nameserver 100.100.X.67
-nameserver 100.100.X.68
-nameserver fd89:59e0:X:64::67
-nameserver fd89:59e0:X:64::68
+search grp%GRP%.%DOMAIN%
+nameserver 100.100.%GRP%.67
+nameserver 100.100.%GRP%.68
+nameserver fd89:59e0:%GRP%:64::67
+nameserver fd89:59e0:%GRP%:64::68
 ```
 So again the resolv1 and resolv2 servers are used for resolving.
 Unfortunately we have not yet installed the resolvers.
@@ -130,8 +130,8 @@ unbound (pid 10445) is running...
 Run the following commands and see if you receive answers:
 
 1. `dig @localhost    com. SOA +noall +answer`
-1. `dig @100.100.X.67 com. SOA +noall +answer`
-1. `dig @100.100.X.68 com. SOA +noall +answer`
+1. `dig @100.100.%GRP%.67 com. SOA +noall +answer`
+1. `dig @100.100.%GRP%.68 com. SOA +noall +answer`
 
 # Restore resolv.conf
 

@@ -23,8 +23,8 @@ Remove the DS record from the parent. Easiest done on the web page for your lab 
 > [!IMPORTANT]
 > If you did the manual signing and confirm that your public nameservers are serving the signed zone, you should:
 >
-> 1. revert back `named.conf.local` to its previous configuration, i.e. configure BIND to serve the unsigned zone file as before the manual signing configuration which was: `file "/var/lib/bind/zones/db.grpX";` 
-> 1. delete the signed zone file (/var/lib/bind/zones/db.grpX.signed) BIND will create its own signed zone file in the next step.
+> 1. revert back `named.conf.local` to its previous configuration, i.e. configure BIND to serve the unsigned zone file as before the manual signing configuration which was: `file "/var/lib/bind/zones/db.grp%GRP%";` 
+> 1. delete the signed zone file (/var/lib/bind/zones/db.grp%GRP%.signed) BIND will create its own signed zone file in the next step.
 > 1. increase the serial in the unsigned zone file and reload BIND.
 
 ## Edit config file.
@@ -61,15 +61,15 @@ dnssec-policy NotForProduction {
     cds-digest-types { };
 };
 
-zone "grpX.lab_domain." {
+zone "grp%GRP%.%DOMAIN%." {
 	type primary;
-	file "/var/lib/bind/zones/db.grpX";
+	file "/var/lib/bind/zones/db.grp%GRP%";
 	allow-transfer { any; };
 	also-notify {
-		100.100.X.130; 
-		100.100.X.131; 
-		fd89:59e0:X:128::130; 
-		fd89:59e0:X:128::131; 
+		100.100.%GRP%.130; 
+		100.100.%GRP%.131; 
+		fd89:59e0:%GRP:128.::130; 
+		fd89:59e0:%GRP:128.::131; 
 	};
 	dnssec-policy NotForProduction;
     checkds no;
@@ -78,14 +78,14 @@ zone "grpX.lab_domain." {
 
 Then, reconfigure or restart BIND: using 
 ```
-sudo rm /var/lib/bind/zones/db.grpX.signed
+sudo rm /var/lib/bind/zones/db.grp%GRP%.signed
 sudo rndc reconfig
 sudo rndc reload
 ```
 
 Check DNSSEC status of your zone:
 ```
-sudo rndc dnssec -status grpX.lab_domain
+sudo rndc dnssec -status grp%GRP%.%DOMAIN%
 ```
 ```
 dnssec-policy: default
@@ -109,8 +109,8 @@ Some new files should appear in the *zones* directory.
 ## Use command line tools to query the signed zone.
 We can now use *dig* utility to confirm that the zone is signed and play with the new DNSSEC RRs.
 
-1. dig @100.100.X.130 grpX.lab_domain DNSKEY +dnssec
-1. dig @100.100.X.131 grpX.lab_domain DNSKEY +dnssec +multi
+1. dig @100.100.%GRP%.130 grp%GRP%.%DOMAIN% DNSKEY +dnssec
+1. dig @100.100.%GRP%.131 grp%GRP%.%DOMAIN% DNSKEY +dnssec +multi
 
 Please verify:
 1. How many keys did you get?

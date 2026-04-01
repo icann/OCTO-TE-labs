@@ -30,13 +30,11 @@ For details please see [License.md](License.md)
 
 # Lab environment
 
-Every participant in the lab gets their own lab environment
+Every participant in the lab gets their own lab environment. 
 
-Your instructor will announce the ***lab domain*** and give you a ***group number***.
+Your group: %GRP%
 
-Your group: X
-
-Your domain: grpX.lab_domain
+Your domain: grp%GRP%.%DOMAIN%
 
 Every participant gets a number of virtual machines. The machines are placed in different networks.
 
@@ -46,12 +44,12 @@ We use the private 100.64.0.0/10 address space from [RFC 6598](https://www.rfc-e
 
 | Device Name   | IPv4 Address          | IPv6 Address                | Network  |
 | ------------- | --------------------- | --------------------------- | -------- |
-| cli           | 100.100.***X***.2     | fd89:59e0:***X***::2        | lan      |
-| resolv1       | 100.100.***X***.67    | fd89:59e0:***X***:64::67    | internal |
-| resolv2       | 100.100.***X***.68    | fd89:59e0:***X***:64::68    | internal |
-| soa           | 100.100.***X***.66    | fd89:59e0:***X***:64::66    | internal |
-| ns1           | 100.100.***X***.130   | fd89:59e0:***X***:128::130  | external |
-| ns2           | 100.100.***X***.131   | fd89:59e0:***X***:128::131  | external |
+| cli           | 100.100.%GRP%.2     | fd89:59e0:%GRP%::2        | lan      |
+| resolv1       | 100.100.%GRP%.67    | fd89:59e0:%GRP%:64::67    | internal |
+| resolv2       | 100.100.%GRP%.68    | fd89:59e0:%GRP%:64::68    | internal |
+| soa           | 100.100.%GRP%.66    | fd89:59e0:%GRP%:64::66    | internal |
+| ns1           | 100.100.%GRP%.130   | fd89:59e0:%GRP%:128::130  | external |
+| ns2           | 100.100.%GRP%.131   | fd89:59e0:%GRP%:128::131  | external |
 
 # Here be Dragons
 

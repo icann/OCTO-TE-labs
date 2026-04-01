@@ -11,7 +11,7 @@ The official Bind 9 configuration reference manual can be found at
 [https://bind9.readthedocs.io/en/latest/reference.html](https://bind9.readthedocs.io/en/latest/reference.html)
 
 > [!IMPORTANT]
-> In all this lab, be carefull to always replace ***X*** by your Group number in IP addresses, server name and any other place where required. Same for ***lab_domain*** to be replace by the domain name registered for the class.
+> In all this lab, be carefull to always replace %GRP% by your Group number in IP addresses, server name and any other place where required. Same for ***%DOMAIN%*** to be replace by the domain name registered for the class.
 
 ## Install Bind 9
 
@@ -33,32 +33,32 @@ We create a new folder for our zone files. Inside that new folder, we then creat
 
 ```
 sudo mkdir -p /var/lib/bind/zones
-sudo touch /var/lib/bind/zones/db.grpX
+sudo touch /var/lib/bind/zones/db.grp%GRP%
 sudo chown -R bind:bind /var/lib/bind
 ```
 
-Then, update the db.grp***X*** zone to look like the below:
+Then, update the db.grp%GRP% zone to look like the below:
 
 ```
-sudo nano /var/lib/bind/zones/db.grpX
+sudo nano /var/lib/bind/zones/db.grp%GRP%
 ```
 
 ```
-; grpX 
+; grp%GRP% 
 
 $TTL    30
-@       IN      SOA     lab_domain. te-labs.icann.org. (                                            
+@       IN      SOA     %DOMAIN%. te-labs.icann.org. (                                            
                               1         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
                         2419200         ; Expire
                              30 )       ; Negative Cache TTL
-@           NS          lab_domain.
+@           NS          %DOMAIN%.
 @           TXT         "DNS IS FUN" 
-ns1         A           100.100.X.130
-ns1         AAAA        fd89:59e0:X:128::130
-ns2         A           100.100.X.131
-ns2         AAAA        fd89:59e0:X:128::131
+ns1         A           100.100.%GRP%.130
+ns1         AAAA        fd89:59e0:%GRP:128.::130
+ns2         A           100.100.%GRP%.131
+ns2         AAAA        fd89:59e0:%GRP:128.::131
 ```
 
 You can add more records as you want.
@@ -70,15 +70,15 @@ sudo nano /etc/bind/named.conf.local
 ```
 
 ```
-zone "grpX.lab_domain." {
+zone "grp%GRP%.%DOMAIN%." {
 	type primary;
-	file "/var/lib/bind/zones/db.grpX";
+	file "/var/lib/bind/zones/db.grp%GRP%";
 	allow-transfer { any; };
 	also-notify {
-		100.100.X.130; 
-		100.100.X.131; 
-		fd89:59e0:X:128::130; 
-		fd89:59e0:X:128::131; 
+		100.100.%GRP%.130; 
+		100.100.%GRP%.131; 
+		fd89:59e0:%GRP:128.::130; 
+		fd89:59e0:%GRP:128.::131; 
 	};
 }; 
 ```
@@ -101,8 +101,8 @@ sudo nano /etc/bind/named.conf.options
 options {
     directory "/var/cache/bind";
     server-id "hidden primary";
-    version "grpX";
-    hostname "grpX-soa";
+    version "grp%GRP%";
+    hostname "grp%GRP%-soa";
     dnssec-validation no;
     listen-on port 53 { localhost; 100.100.0.0/16; };
     listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
@@ -125,12 +125,12 @@ sudo rndc reload
 server reload successful
 ```
 ```
-sudo rndc zonestatus grpX.lab_domain
+sudo rndc zonestatus grp%GRP%.%DOMAIN%
 ```
 ```
-name: grpX.lab_domain
+name: grp%GRP%.%DOMAIN%
 type: primary
-files: /var/lib/bind/zones/db.grpX
+files: /var/lib/bind/zones/db.grp%GRP%
 serial: 1
 nodes: 3
 last loaded: Fri, 28 Mar 2025 14:19:54 GMT
@@ -148,8 +148,8 @@ reconfigurable via modzone: no
 Query your zone on the local server:
 
 ```
-dig @localhost soa grpX.lab_domain +noall +answer
+dig @localhost soa grp%GRP%.%DOMAIN% +noall +answer
 ```
 ```
-grpX.lab_domain. 300 IN SOA grpX.lab_domain. dnsadmin.lab_domain. 1 604800 86400 2419200 300
+grp%GRP%.%DOMAIN%. 300 IN SOA grp%GRP%.%DOMAIN%. dnsadmin.%DOMAIN%. 1 604800 86400 2419200 300
 ```

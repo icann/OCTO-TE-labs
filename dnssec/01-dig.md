@@ -49,5 +49,5 @@ $ dig sdlkhghkj.icann.org +dnssec
 
 1. dig @9.9.9.9      www.dnssec-failed.org +dnssec
 1. dig @9.9.9.9      www.dnssec-failed.org +dnssec +cd 
-1. dig @100.100.X.68 www.dnssec-failed.org +dnssec
-1. dig @100.100.X.68 www.dnssec-failed.org +dnssec +cd
+1. dig @100.100.%GRP%.68 www.dnssec-failed.org +dnssec
+1. dig @100.100.%GRP%.68 www.dnssec-failed.org +dnssec +cd

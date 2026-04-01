@@ -40,8 +40,8 @@ nxdomain.internal          CNAME   .
 ```
 Let's check if what answers look like
 ```
-dig @100.100.X.68 nxdomain.internal TXT
-dig @100.100.X.67 nxdomain.internal TXT
+dig @100.100.%GRP%.68 nxdomain.internal TXT
+dig @100.100.%GRP%.67 nxdomain.internal TXT
 ```
 The one dig command should give you data like
 ```
@@ -57,8 +57,8 @@ nodata.internal            CNAME   rpz-nodata.
 ```
 Let's check if what answers look like
 ```
-dig @100.100.X.68 nodata.internal TXT
-dig @100.100.X.67 nodata.internal TXT
+dig @100.100.%GRP%.68 nodata.internal TXT
+dig @100.100.%GRP%.67 nodata.internal TXT
 ```
 The one dig command should give you data like
 ```
@@ -74,8 +74,8 @@ drop.internal CNAME   rpz-drop.
 ```
 Let's check if what answers look like
 ```
-dig @100.100.X.68 drop.internal TXT
-dig @100.100.X.67 drop.internal TXT
+dig @100.100.%GRP%.68 drop.internal TXT
+dig @100.100.%GRP%.67 drop.internal TXT
 ```
 The one dig command should give you data like
 ```
@@ -84,7 +84,7 @@ drop.internal.		30	IN	TXT	"Block me if you can"
 ```
 The second should something like
 ```
-;; communications error to 100.100.X.67#53: timed out
+;; communications error to 100.100.%GRP%.67#53: timed out
 ```
 
 ### TCP-ONLY
@@ -94,13 +94,13 @@ tcponly.internal CNAME   rpz-tcp-only.
 ```
 Let's check if what answers look like
 ```
-dig @100.100.X.68 tcponly.internal TXT
-dig @100.100.X.67 tcponly.internal TXT
+dig @100.100.%GRP%.68 tcponly.internal TXT
+dig @100.100.%GRP%.67 tcponly.internal TXT
 ```
 This you should look at the comments at the end of the `dig` output. 
 It indicates if the result was obtained through UDP or TCP.
 ```
-;; SERVER: 100.100.X.67#53(100.100.X.67) (TCP)
+;; SERVER: 100.100.%GRP%.67#53(100.100.%GRP%.67) (TCP)
 ```
 
 ### WILDCARD
@@ -110,10 +110,10 @@ In the RPZ zone file we find the following line
 ```
 Let's check if what answers look like
 ```
-dig @100.100.X.68 wildcard.internal TXT
-dig @100.100.X.67 wildcard.internal TXT
-dig @100.100.X.68 any-name-you-want.wildcard.internal TXT
-dig @100.100.X.67 any-name-you-want.wildcard.internal TXT
+dig @100.100.%GRP%.68 wildcard.internal TXT
+dig @100.100.%GRP%.67 wildcard.internal TXT
+dig @100.100.%GRP%.68 any-name-you-want.wildcard.internal TXT
+dig @100.100.%GRP%.67 any-name-you-want.wildcard.internal TXT
 ```
 Wildcard blocking will not block the exact label. That will have to be blocked with it's own blocking instructions.
 
@@ -124,8 +124,8 @@ override.wildcard.internal         CNAME   rpz-passthru.
 ```
 This “whitelist” example disables policy for this name.
 ```
-dig @100.100.X.68 override.wildcard.internal TXT
-dig @100.100.X.67 override.wildcard.internal TXT
+dig @100.100.%GRP%.68 override.wildcard.internal TXT
+dig @100.100.%GRP%.67 override.wildcard.internal TXT
 ```
 ### LOCAL-DATA
 In the RPZ zone file we find the following line
@@ -134,8 +134,8 @@ rewrite.internal            TXT "A MESSAGE FROM RPZ"
 ```
 Returns different data instead of the original answer.
 ```
-dig @100.100.X.68 rewrite.internal TXT
-dig @100.100.X.67 rewrite.internal TXT
+dig @100.100.%GRP%.68 rewrite.internal TXT
+dig @100.100.%GRP%.67 rewrite.internal TXT
 ```
 
 ### IP-ADDRESSES
@@ -149,14 +149,14 @@ Answers which result in these IP addresses will be answered with NXDOMAIN.
 Note the address notation. First is the prefix length followed by the ip address in reverse notation.
 
 ```
-dig @100.100.X.68 v4blocked.internal A
-dig @100.100.X.67 v4blocked.internal A
-dig @100.100.X.68 v4blocked.internal AAAA
-dig @100.100.X.67 v4blocked.internal AAAA
-dig @100.100.X.68 v6blocked.internal A
-dig @100.100.X.67 v6blocked.internal A
-dig @100.100.X.68 v6blocked.internal AAAA
-dig @100.100.X.67 v6blocked.internal AAAA
+dig @100.100.%GRP%.68 v4blocked.internal A
+dig @100.100.%GRP%.67 v4blocked.internal A
+dig @100.100.%GRP%.68 v4blocked.internal AAAA
+dig @100.100.%GRP%.67 v4blocked.internal AAAA
+dig @100.100.%GRP%.68 v6blocked.internal A
+dig @100.100.%GRP%.67 v6blocked.internal A
+dig @100.100.%GRP%.68 v6blocked.internal AAAA
+dig @100.100.%GRP%.67 v6blocked.internal AAAA
 ```
 
 ### NSDNAME
@@ -166,8 +166,8 @@ badns.internal.rpz-nsdname  CNAME   rpz-drop.
 ```
 The query will be droped if a name of a nameserver in the delegation matches.
 ```
-dig @100.100.X.68 badnsname.internal TXT
-dig @100.100.X.67 badnsname.internal TXT
+dig @100.100.%GRP%.68 badnsname.internal TXT
+dig @100.100.%GRP%.67 badnsname.internal TXT
 ```
 Use `dig` to investigate the configuration of `badnsname.internal`. Which nameserver 
 is configured?
@@ -179,8 +179,8 @@ In the RPZ zone file we find the following line
 ```
 The query will be droped if the ip of a nameserver in the delegation matches.
 ```
-dig @100.100.X.68 evilnsip.internal TXT
-dig @100.100.X.67 evilnsip.internal TXT
+dig @100.100.%GRP%.68 evilnsip.internal TXT
+dig @100.100.%GRP%.67 evilnsip.internal TXT
 ```
 Use `dig` to investigate the configuration of `evilnsip.internal`. Which nameserver 
 is configured? What is it's ip address?

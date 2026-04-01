@@ -14,8 +14,8 @@ be used by your own network.
 ## Current Situation
 
 Let's start with trying out our current security.
-Your own resolvers resolv1 and resolv2 have ip addresses 100.100.X.67
-and 100.100.X.68.
+Your own resolvers resolv1 and resolv2 have ip addresses 100.100.%GRP%.67
+and 100.100.%GRP%.68.
 
 Try to access the resolver of some of your peer groups the ip-addresses
 follow the same scheme as yours does.
@@ -30,9 +30,9 @@ dig @100.100.?.68 icann.org +noall +nocomments +answer
 
 Please change your `unbound.conf` and add the following section
 ```
-        access-control: 100.100.X.0/24 allow
+        access-control: 100.100.%GRP%.0/24 allow
         access-control: 127.0.0.0/8 allow
-        access-control: fd89:59e0:X::/48 allow
+        access-control: fd89:59e0:%GRP%::/48 allow
         access-control: ::1/128 allow
 ```
 Check your configuration and reload the server

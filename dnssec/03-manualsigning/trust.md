@@ -23,13 +23,13 @@ Now let's fix this!
 Execute the following command to get the DS record
 
 ```
-dig @localhost grpX.lab_domain DNSKEY | dnssec-dsfromkey -f - grpX.lab_domain
+dig @localhost grp%GRP%.%DOMAIN% DNSKEY | dnssec-dsfromkey -f - grp%GRP%.%DOMAIN%
 ```
 
 Your output should look something similar to the following line:
 
 ```
-grpX.lab_domain. IN DS 12345 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34DB5A7F3BC10A424D6E
+grp%GRP%.%DOMAIN%. IN DS 12345 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B34DB5A7F3BC10A424D6E
 ```
 
 ## Check DS record
@@ -49,19 +49,19 @@ It will take approx. 2 or 3 minutes to publish the DS record.
 Query your parent zone and confirm that they have published your DS.
 
 ```
-dig grpX.lab_domain DS +nocomments +noall +answer
+dig grp%GRP%.%DOMAIN% DS +nocomments +noall +answer
 ```
 
 Retry until the answer looks like
 
 ```
-grpX.lab_domain. 60    IN      DS      2404 8 2 8A4D8024E59D115331C8ECAF715E1168A429282646E6861420BEF8D1 7F9676E7
+grp%GRP%.%DOMAIN%. 60    IN      DS      2404 8 2 8A4D8024E59D115331C8ECAF715E1168A429282646E6861420BEF8D1 7F9676E7
 ```
 
 Now see if your resolver returns the ad flag.
 
 ```
-dig grpX.lab_domain SOA
+dig grp%GRP%.%DOMAIN% SOA
 ```
 
 And finally go back to [dnsviz.net](https://dnsviz.net) and retest your domain. This time a DS record should be shown.

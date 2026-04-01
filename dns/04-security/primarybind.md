@@ -46,7 +46,7 @@ machines, but not from the internet. (Out-of-scope for this lab)
 
 First test your server
 ```
-$ dig @100.100.X.66 icann.org
+$ dig @100.100.%GRP%.66 icann.org
 ```
 If the status in the response is not `REFUSED` or you even got an ip address, 
 your server allows recursion. The good new is, this is easy to fix.
@@ -79,19 +79,19 @@ transfer.
 
 Let's start by testing if our server allows zone transfers or if we are already secure
 ```
-dig @100.100.X.66 grpX.lab_domain AXFR
+dig @100.100.%GRP%.66 grp%GRP%.%DOMAIN% AXFR
 ```
 
 ## Generating TSIG keys
 
 Generate the tsig key on your primary server (SOA).
 ```
-sudo tsig-keygen -a hmac-sha256 grpX-key
+sudo tsig-keygen -a hmac-sha256 grp%GRP%-key
 ```
 Add the output to your named.conf.options file. Should look similar to this:
 
 ```
-key "grpX-key" {
+key "grp%GRP%-key" {
 	algorithm hmac-sha256;
 	secret "THIS_IS_MY_KEY";
 }; 
@@ -104,9 +104,9 @@ Add the tsig key at the bottom of **named.conf.options** config file.
 Then in your zone, change allow-transfer line
 
 ```
-zone "grpX.lab_domain" {                                                                               
+zone "grp%GRP%.%DOMAIN%" {                                                                               
         [...]
-        allow-transfer { key grpX-key; };
+        allow-transfer { key grp%GRP%-key; };
         [...]
 };
 ```
@@ -118,11 +118,11 @@ rndc reconfig
 ```
 Check if you can do a zone transfer
 ```
-dig @100.100.X.66 grpX.lab_domain AXFR
+dig @100.100.%GRP%.66 grp%GRP%.%DOMAIN% AXFR
 ```
 This should fail. Try again, but this time specify the TSIG-key
 ```
-dig @100.100.X.66 grpX.lab_domain AXFR -y hmac-sha256:grpX-key:THIS_IS_MY_KEY
+dig @100.100.%GRP%.66 grp%GRP%.%DOMAIN% AXFR -y hmac-sha256:grp%GRP%-key:THIS_IS_MY_KEY
 ```
 
 ## Secure Notify
@@ -131,17 +131,17 @@ The primary server sends notifies to the secondaries.
 
 Please include the following statements in `named.conf.options`
 ```
-server 100.100.X.130 {
-     keys { grpX-key; };
+server 100.100.%GRP%.130 {
+     keys { grp%GRP%-key; };
 };
-server 100.100.X.131 {
-     keys { grpX-key; };
+server 100.100.%GRP%.131 {
+     keys { grp%GRP%-key; };
 };
-server fd89:59e0:X:128::130 {
-     keys { grpX-key; };
+server fd89:59e0:%GRP:128.::130 {
+     keys { grp%GRP%-key; };
 };
-server fd89:59e0:X:128::131 {
-     keys { grpX-key; };
+server fd89:59e0:%GRP:128.::131 {
+     keys { grp%GRP%-key; };
 };
 ```
 
@@ -157,14 +157,14 @@ Look at your server configuration. What would you change?
 
 # Zone Update
 
-Please edit the zone file of your domain `grpx.lab_domain`. Increase the serial 
-number, save the file and reload the zone `sudo rndc reload grpX.lab_domain`.
+Please edit the zone file of your domain `grpx.%DOMAIN%`. Increase the serial 
+number, save the file and reload the zone `sudo rndc reload grp%GRP%.%DOMAIN%`.
 
 Check if your primary and your secondary serve the same zone version.
 ```
-dig @100.100.X.66  grpX.lab_domain SOA +noall +nocomments +answer
-dig @100.100.X.130 grpX.lab_domain SOA +noall +nocomments +answer
-dig @100.100.X.131 grpX.lab_domain SOA +noall +nocomments +answer
+dig @100.100.%GRP%.66  grp%GRP%.%DOMAIN% SOA +noall +nocomments +answer
+dig @100.100.%GRP%.130 grp%GRP%.%DOMAIN% SOA +noall +nocomments +answer
+dig @100.100.%GRP%.131 grp%GRP%.%DOMAIN% SOA +noall +nocomments +answer
 ```
 
 Why did you get these answer?

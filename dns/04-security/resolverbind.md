@@ -14,8 +14,8 @@ be used by your own network.
 ## Current Situation
 
 Let's start with trying out our current security.
-Your own resolvers resolv1 and resolv2 have ip addresses 100.100.X.67
-and 100.100.X.68.
+Your own resolvers resolv1 and resolv2 have ip addresses 100.100.%GRP%.67
+and 100.100.%GRP%.68.
 
 Try to access the resolver of some of your peer groups the ip-addresses
 follow the same scheme as yours does.
@@ -31,7 +31,7 @@ dig @100.100.?.68 icann.org +noall +nocomments +answer
 Please change your `named.conf.options` and add the following section
 ```
 acl "trusted" {
-    localhost; 100.100.X.0/24; fd89:59e0:X::/48; 
+    localhost; 100.100.%GRP%.0/24; fd89:59e0:%GRP%::/48; 
 };
 ```
 And edit the to following line to look like this

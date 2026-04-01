@@ -49,7 +49,7 @@ server:
     zonesdir: "/var/lib/nsd"
     hide-version: no
     hide-identity: no
-    nsid: "ascii_grpX zone validator"
+    nsid: "ascii_grp%GRP% zone validator"
     verbosity: 2
 
 verify:
@@ -63,18 +63,18 @@ pattern:
     request-xfr: AXFR ::1@5353 NOKEY
     verify-zone: yes
     verifier: /var/lib/nsd/test.sh
-    notify: 100.100.X.130 NOKEY
-    notify: 100.100.X.131 NOKEY
-    notify: fd89:59e0:X:128::130 NOKEY 
-    notify: fd89:59e0:X:128::131 NOKEY
-    provide-xfr: 100.100.X.130 NOKEY
-    provide-xfr: 100.100.X.131 NOKEY
-    provide-xfr: fd89:59e0:X:128::130 NOKEY 
-    provide-xfr: fd89:59e0:X:128::131 NOKEY
+    notify: 100.100.%GRP%.130 NOKEY
+    notify: 100.100.%GRP%.131 NOKEY
+    notify: fd89:59e0:%GRP:128.::130 NOKEY 
+    notify: fd89:59e0:%GRP:128.::131 NOKEY
+    provide-xfr: 100.100.%GRP%.130 NOKEY
+    provide-xfr: 100.100.%GRP%.131 NOKEY
+    provide-xfr: fd89:59e0:%GRP:128.::130 NOKEY 
+    provide-xfr: fd89:59e0:%GRP:128.::131 NOKEY
 
 zone:
-    name: "grpX.lab_domain."
-    zonefile: "db.grpX.secondary"
+    name: "grp%GRP%.%DOMAIN%."
+    zonefile: "db.grp%GRP%.secondary"
     include-pattern: "fromprimary"
 ```
 Now we need to make a small zone checking script. Please edit the file `/var/lib/nsd/test.sh` with
@@ -99,16 +99,16 @@ Ready to restart
 1. Back to the first shell window
 1. Restart Bind `sudo systemctl restart named`
 1. Restart NSD `sudo systemctl restart nsd`
-1. Edit the zone file `/var/lib/bind/zones/db.grpX`, increase the serial number
+1. Edit the zone file `/var/lib/bind/zones/db.grp%GRP%`, increase the serial number
 1. Run `rndc reload`
 1. Back to the new shell window and see if you can identify the validation in the logs
 
 Lets check what contents our servers carry.
 
-1. `dig @localhost -p 5353    grpX.lab_domain SOA +nsid`
-1. `dig @localhost -p 53      grpX.lab_domain SOA +nsid`
-1. `dig @100.100.X.130        grpX.lab_domain SOA +nsid`
-1. `dig @fd89:59e0:X:128::131 grpX.lab_domain SOA +nsid`
+1. `dig @localhost -p 5353    grp%GRP%.%DOMAIN% SOA +nsid`
+1. `dig @localhost -p 53      grp%GRP%.%DOMAIN% SOA +nsid`
+1. `dig @100.100.%GRP%.130        grp%GRP%.%DOMAIN% SOA +nsid`
+1. `dig @fd89:59e0:%GRP:128.::131 grp%GRP%.%DOMAIN% SOA +nsid`
 
 Did all servers show the correct serial number?
 Did you get different id strings for all servers?
@@ -116,7 +116,7 @@ Did you get different id strings for all servers?
 Currently our script fails all zones. Let's try if we approve all zones.
 
 1. Edit `/var/lib/nsd/test.sh` again and change `exit 5` to `exit 0`.
-1. Edit the zone file `/var/lib/bind/zones/db.grpX`, increase the serial number
+1. Edit the zone file `/var/lib/bind/zones/db.grp%GRP%`, increase the serial number
 1. Run `rndc reload`
 1. Back to the new shell window and see if you can identify the validation in the logs
 
@@ -124,10 +124,10 @@ What's different?
 
 Run the same dig commands again:
 
-1. `dig @localhost -p 5353    grpX.lab_domain SOA +nsid`
-1. `dig @localhost -p 53      grpX.lab_domain SOA +nsid`
-1. `dig @100.100.X.130        grpX.lab_domain SOA +nsid`
-1. `dig @fd89:59e0:X:128::131 grpX.lab_domain SOA +nsid`
+1. `dig @localhost -p 5353    grp%GRP%.%DOMAIN% SOA +nsid`
+1. `dig @localhost -p 53      grp%GRP%.%DOMAIN% SOA +nsid`
+1. `dig @100.100.%GRP%.130        grp%GRP%.%DOMAIN% SOA +nsid`
+1. `dig @fd89:59e0:%GRP:128.::131 grp%GRP%.%DOMAIN% SOA +nsid`
 
 Did all servers show the correct serial number?
 Did you get different id strings for all servers?

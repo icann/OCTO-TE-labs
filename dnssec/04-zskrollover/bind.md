@@ -13,12 +13,12 @@ nav_order: 1
 Before you continue, check that:
 
 ```
-$ dig grpX.lab_domain dnskey +dnssec +multiline
+$ dig grp%GRP%.%DOMAIN% dnskey +dnssec +multiline
 ```
 shows you one ZSK and one KSK. Remember that the KSK has flags 257.
 
 ```
-$ dig grpX.lab_domain SOA +dnssec +multiline
+$ dig grp%GRP%.%DOMAIN% SOA +dnssec +multiline
 ```
 gives you the SOA record for your domain, and that it is signed.
 
@@ -48,15 +48,15 @@ Find your current ZSK in the keys folder. The ZSK should have the value 256. Tha
 > Remember that your filename will be different! Do not simply cut and paste Kmytld.+008+26734 later in the lab!
 
 ```
-cat KgrpX.lab_domain.+???+?????.key 
+cat Kgrp%GRP%.%DOMAIN%.+???+?????.key 
 ```
 
 ```
-; This is a zone-signing key, keyid ?????, for grpX.lab_domain.
+; This is a zone-signing key, keyid ?????, for grp%GRP%.%DOMAIN%.
 ; Created: 20221103220010 (Thu Nov  3 22:00:10 2022)
 ; Publish: 20221103220010 (Thu Nov  3 22:00:10 2022)
 ; Activate: 20221103220010 (Thu Nov  3 22:00:10 2022)
-grpX.lab_domain.te-labs.training. IN DNSKEY 256 3 8 AwEAAadehqG2E23DsA4MnHcaeTH/bKTHlLftvUKR9i8lVbvWNTydacdQ MsZJPTTFZXHeXFdSmxAxImc/FEGNnk9VRr3FfzfJKbc+s6r17PLWn1bO sUxawKZogOvISPytMcWnhbj8Trs8KOoAekB1PRaiPGsCP/nj68ufvrzl x2AcfDJAWPynNDjgHxeFygifVlM6iYuzmPlpcMAY5LCIS/B1MrfashJh wtj0dldgqJSp6yZHaP8vcrMa6+s5McQcqRpyoR2rpNpl6PiOUBtjE0Ho nwg1XYzSaBAbhLdmQhC4MWL/aNiXp1ybwXSVb8uZqL5k26QlKRNH2eB8 
+grp%GRP%.%DOMAIN%. IN DNSKEY 256 3 8 AwEAAadehqG2E23DsA4MnHcaeTH/bKTHlLftvUKR9i8lVbvWNTydacdQ MsZJPTTFZXHeXFdSmxAxImc/FEGNnk9VRr3FfzfJKbc+s6r17PLWn1bO sUxawKZogOvISPytMcWnhbj8Trs8KOoAekB1PRaiPGsCP/nj68ufvrzl x2AcfDJAWPynNDjgHxeFygifVlM6iYuzmPlpcMAY5LCIS/B1MrfashJh wtj0dldgqJSp6yZHaP8vcrMa6+s5McQcqRpyoR2rpNpl6PiOUBtjE0Ho nwg1XYzSaBAbhLdmQhC4MWL/aNiXp1ybwXSVb8uZqL5k26QlKRNH2eB8 
 YRRtq+B9rIs=
 ```
 
@@ -65,12 +65,12 @@ YRRtq+B9rIs=
 We do not need to specify the full set of parameters (algorithm name, key size, etc.) when we generate a replacement ZSK  because we will tell the dnssec-signzone command that we are creating a successor to the old ZSK, and the software will make sure the new key it generates matches.
 
 ```
-sudo dnssec-keygen -f ZSK -a ECDSAP256SHA256 -K /var/lib/bind/keys grpX.lab_domain
+sudo dnssec-keygen -f ZSK -a ECDSAP256SHA256 -K /var/lib/bind/keys grp%GRP%.%DOMAIN%
 ```
 
 ```
 Generating key pair............+++++ ..............................+++++ 
-KgrpX.lab_domain.te-labs.training.+013+12969
+Kgrp%GRP%.%DOMAIN%.te-labs.training.+013+12969
 ```
 Change the ownership of the new file and reload bind.
 ```
@@ -82,19 +82,19 @@ sudo chown -R bind:bind /var/lib/bind/keys
 1. Edit the zone and increase the serial
 2. Resign the zone
 ```
-sudo dnssec-signzone -S -K /var/lib/bind/keys -o grpX.lab_domain /var/lib/bind/zones/db.grpX
+sudo dnssec-signzone -S -K /var/lib/bind/keys -o grp%GRP%.%DOMAIN% /var/lib/bind/zones/db.grp%GRP%
 ```  
 Output should be something like 
 ```
-Fetching grpX.lab_domain/ECDSAP256SHA256/14800 (ZSK) from key repository.
-Fetching grpX.lab_domain/ECDSAP256SHA256/65181 (ZSK) from key repository.
-Fetching  grpX.lab_domain/ECDSAP256SHA256/16579 (KSK) from key repository.
+Fetching grp%GRP%.%DOMAIN%/ECDSAP256SHA256/14800 (ZSK) from key repository.
+Fetching grp%GRP%.%DOMAIN%/ECDSAP256SHA256/65181 (ZSK) from key repository.
+Fetching  grp%GRP%.%DOMAIN%/ECDSAP256SHA256/16579 (KSK) from key repository.
 Verifying the zone using the following algorithms:
 - ECDSAP256SHA256
 Zone fully signed:
 Algorithm: ECDSAP256SHA256: KSKs: 1 active, 0 stand-by, 0 revoked
                             ZSKs: 2 active, 0 stand-by, 0 revoked
-/var/lib/bind/zones/db.grpX.signed
+/var/lib/bind/zones/db.grp%GRP%.signed
 ```
 ### Wait for TTL timeout
 
@@ -105,12 +105,12 @@ In this lab timeouts are very short, you can proceed immediately. But on the int
 Hopefully you remember which of the files is the new and which is the old ZSK.
 
 ```
-mv /var/lib/bind/keys/KgrpX.lab_domain.te-labs.training.+013+?????.key /var/lib/bind/keys/old_KgrpX.lab_domain.te-labs.training.+013+?????.key
-mv /var/lib/bind/keys/KgrpX.lab_domain.te-labs.training.+013+?????.private /var/lib/bind/keys/old_KgrpX.lab_domain.te-labs.training.+013+?????.private
+mv /var/lib/bind/keys/Kgrp%GRP%.%DOMAIN%.te-labs.training.+013+?????.key /var/lib/bind/keys/old_Kgrp%GRP%.%DOMAIN%.te-labs.training.+013+?????.key
+mv /var/lib/bind/keys/Kgrp%GRP%.%DOMAIN%.te-labs.training.+013+?????.private /var/lib/bind/keys/old_Kgrp%GRP%.%DOMAIN%.te-labs.training.+013+?????.private
 ```
 and now we sign again, but we will increase the serial before we do that
 ```
-sudo dnssec-signzone -S -K /var/lib/bind/keys -o grpX.lab_domain /var/lib/bind/zones/db.grpX
+sudo dnssec-signzone -S -K /var/lib/bind/keys -o grp%GRP%.%DOMAIN% /var/lib/bind/zones/db.grp%GRP%
 ```  
 
 > [!IMPORTANT]

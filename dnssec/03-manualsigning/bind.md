@@ -16,7 +16,7 @@ To sign the zone we first need two pairs of keys: a ZSK and a KSK.
 Position yourself in BIND configuration folder and then backup your zone file:
 
 ```
-sudo cp /var/lib/bind/zones/db.grpX /var/lib/bind/zones/db.grpX.backup
+sudo cp /var/lib/bind/zones/db.grp%GRP% /var/lib/bind/zones/db.grp%GRP%.backup
 ```
 
 Create a directory to hold your DNSSEC keys
@@ -28,13 +28,13 @@ sudo mkdir -p /var/lib/bind/keys
 Generate the **ZSK**
 
 ```
-sudo dnssec-keygen -f ZSK -a ECDSAP256SHA256 -K /var/lib/bind/keys grpX.lab_domain
+sudo dnssec-keygen -f ZSK -a ECDSAP256SHA256 -K /var/lib/bind/keys grp%GRP%.%DOMAIN%
 ```
 
 Generate **KSK**
 
 ```
-sudo dnssec-keygen -f KSK -a ECDSAP256SHA256 -K /var/lib/bind/keys grpX.lab_domain
+sudo dnssec-keygen -f KSK -a ECDSAP256SHA256 -K /var/lib/bind/keys grp%GRP%.%DOMAIN%
 ```
 
 Change ownership to the zones and keys folders
@@ -54,23 +54,23 @@ We start with manual zone signing.
 > Bind is very strict about SOA serial numbers. Before signing check which serial your server is currently using and then edit your zone file and increase the serial number to something bigger then the current number.
 
 ```
-sudo dnssec-signzone -S -K /var/lib/bind/keys -o grpX.lab_domain /var/lib/bind/zones/db.grpX
+sudo dnssec-signzone -S -K /var/lib/bind/keys -o grp%GRP%.%DOMAIN% /var/lib/bind/zones/db.grp%GRP%
 ```
 
 You should get an output similar to the follwing:
 
 ```
-Fetching grpX.lab_domain/ECDSAP256SHA256/61520 (KSK) from key repository.
-Fetching grpX.lab_domain/ECDSAP256SHA256/12593 (ZSK) from key repository.
+Fetching grp%GRP%.%DOMAIN%/ECDSAP256SHA256/61520 (KSK) from key repository.
+Fetching grp%GRP%.%DOMAIN%/ECDSAP256SHA256/12593 (ZSK) from key repository.
 Verifying the zone using the following algorithms:
 - ECDSAP256SHA256
 Zone fully signed:
 Algorithm: ECDSAP256SHA256: KSKs: 1 active, 0 stand-by, 0 revoked
                             ZSKs: 1 active, 0 stand-by, 0 revoked
-/var/lib/bind/zones/db.grpX.signed
+/var/lib/bind/zones/db.grp%GRP%.signed
 ```
 
-Now, replace the *db.grpX* file in `named.conf.local` with the `db.grpX.signed` and reload the server using 
+Now, replace the *db.grp%GRP%* file in `named.conf.local` with the `db.grp%GRP%.signed` and reload the server using 
 
 ```
 rndc reload
@@ -81,12 +81,12 @@ rndc reload
 We can now use *dig* utility to confirm that the zone is signed and play with the new DNSSEC RRs.
 
 ```
-dig @localhost soa grpX.lab_domain +dnssec 
+dig @localhost soa grp%GRP%.%DOMAIN% +dnssec 
 ```
 
 This should give you an output similiar to
 ```
-; <<>> DiG 9.16.1-Ubuntu <<>> @localhost soa grpX.lab_domain. +dnssec
+; <<>> DiG 9.16.1-Ubuntu <<>> @localhost soa grp%GRP%.%DOMAIN%. +dnssec
 ; (2 servers found)                                                               
 ;; global options: +cmd                                                           
 ;; Got answer:                                                                  
@@ -96,21 +96,21 @@ This should give you an output similiar to
 ; EDNS: version: 0, flags: do; udp: 4096
 ; COOKIE: 69a0c61239afd9a201000000609c5df711d4eb3a39f90d89 (good)
 ;; QUESTION SECTION:
-;grpX.lab_domain.        IN      SOA 
+;grp%GRP%.%DOMAIN%.        IN      SOA 
 
 ;; ANSWER SECTION:
-grpX.lab_domain. 30 IN   SOA     soa.grpX.lab_domain. dnsadmin.grpX.lab_domain. 1 604800 86400 2419200 300
-grpX.lab_domain. 30 IN   RRSIG   SOA 8 4 30 20210611215606 20210512215606 41110 grpX.lab_domain. RmUb[...]=
+grp%GRP%.%DOMAIN%. 30 IN   SOA     soa.grp%GRP%.%DOMAIN%. dnsadmin.grp%GRP%.%DOMAIN%. 1 604800 86400 2419200 300
+grp%GRP%.%DOMAIN%. 30 IN   RRSIG   SOA 8 4 30 20210611215606 20210512215606 41110 grp%GRP%.%DOMAIN%. RmUb[...]=
 ```
 
 **QUESTION**: Did you get the "ad" flag? Why?
 
 More tests: 
 
-1. dig @100.100.X.130 grpX.lab_domain SOA
-1. dig @100.100.X.130 grpX.lab_domain DNSKEY +dnssec +multi
-1. dig @100.100.X.67  grpX.lab_domain SOA
-1. dig @100.100.X.68  grpX.lab_domain DNSKEY +dnssec +multi
+1. dig @100.100.%GRP%.130 grp%GRP%.%DOMAIN% SOA
+1. dig @100.100.%GRP%.130 grp%GRP%.%DOMAIN% DNSKEY +dnssec +multi
+1. dig @100.100.%GRP%.67  grp%GRP%.%DOMAIN% SOA
+1. dig @100.100.%GRP%.68  grp%GRP%.%DOMAIN% DNSKEY +dnssec +multi
 
 Please discuss with your peers and the instructor: 
 

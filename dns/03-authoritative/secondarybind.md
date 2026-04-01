@@ -30,11 +30,11 @@ Create the directory and file that will contain our zone.
 
 ```
 sudo mkdir -p /var/lib/bind/zones
-sudo touch /var/lib/bind/zones/db.grpX.secondary
+sudo touch /var/lib/bind/zones/db.grp%GRP%.secondary
 sudo chown -R bind:bind /var/lib/bind
 ```
 
-Configure the server as secondary for our domain grpX.lab_domain.
+Configure the server as secondary for our domain grp%GRP%.%DOMAIN%.
 
 To do this we edit the bind configuration
 
@@ -45,12 +45,12 @@ sudo nano /etc/bind/named.conf.local
 Change the file contents to
 
 ```
-zone "grpX.lab_domain" {
+zone "grp%GRP%.%DOMAIN%" {
     type secondary;
-    file "/var/lib/bind/zones/db.grpX.secondary";
+    file "/var/lib/bind/zones/db.grp%GRP%.secondary";
     masters { 
-        100.100.X.66; 
-        fd89:59e0:X:64::66;
+        100.100.%GRP%.66; 
+        fd89:59e0:%GRP%:64::66;
     };
 };
 ```
@@ -67,7 +67,7 @@ sudo nano /etc/bind/named.conf.options
 options {
     directory "/var/cache/bind";
     server-id "server_id";
-    version "grpX";
+    version "grp%GRP%";
     hostname "host_name";
     dnssec-validation no;
     listen-on port 53 { localhost; 100.100.0.0/16; };
@@ -91,13 +91,13 @@ sudo rndc reload
 Verify that it restarted correctly:
 
 ```
-sudo rndc zonestatus grpX.lab_domain 
+sudo rndc zonestatus grp%GRP%.%DOMAIN% 
 ```
 
 # Check if the instance is working
 
 The following two dig commands should produce the same result
 ```
-dig @100.100.X.66 grpX.lab_domain SOA +noall +answer
-dig @localhost grpX.lab_domain SOA +noall +answer
+dig @100.100.%GRP%.66 grp%GRP%.%DOMAIN% SOA +noall +answer
+dig @localhost grp%GRP%.%DOMAIN% SOA +noall +answer
 ``` 

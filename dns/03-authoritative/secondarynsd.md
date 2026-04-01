@@ -28,7 +28,7 @@ Create the directory and file that will contain our zone file.
 
 ```
 sudo mkdir -p /var/lib/nsd
-sudo touch /var/lib/nsd/db.grpX.secondary
+sudo touch /var/lib/nsd/db.grp%GRP%.secondary
 sudo chown -R nsd:nsd /var/lib/nsd
 ```
 
@@ -41,7 +41,7 @@ sudo nano /etc/nsd/nsd.conf
 server:
     log-only-syslog: yes
     zonesdir: "/var/lib/nsd"
-    nsid: "ascii_grpX NSD nsid"
+    nsid: "ascii_grp%GRP% NSD nsid"
     hide-version: no
     hide-identity: no
     cookie-secret: "71ff147d946b942ed66e608b64dc54c9"
@@ -49,16 +49,16 @@ server:
 
 pattern:
     name: "fromprimary"
-    allow-notify: 100.100.X.66 NOKEY
-    allow-notify: fd89:59e0:X:64::66 NOKEY
-    allow-notify: fd89:59e0:X::2 NOKEY
-    request-xfr: AXFR 100.100.X.66 NOKEY
-    request-xfr: AXFR fd89:59e0:X:64::66 NOKEY
-    request-xfr: AXFR fd89:59e0:X::2 NOKEY
+    allow-notify: 100.100.%GRP%.66 NOKEY
+    allow-notify: fd89:59e0:%GRP%:64::66 NOKEY
+    allow-notify: fd89:59e0:%GRP%::2 NOKEY
+    request-xfr: AXFR 100.100.%GRP%.66 NOKEY
+    request-xfr: AXFR fd89:59e0:%GRP%:64::66 NOKEY
+    request-xfr: AXFR fd89:59e0:%GRP%::2 NOKEY
 
 zone:
-    name: "grpX.lab_domain."
-    zonefile: "db.grpX.secondary"
+    name: "grp%GRP%.%DOMAIN%."
+    zonefile: "db.grp%GRP%.secondary"
     include-pattern: "fromprimary"
 ```
 
@@ -76,5 +76,5 @@ Verify that it restarted correctly:
 
 ```
 sudo nsd-control status
-sudo nsd-control zonestatus grpX.lab_domain
+sudo nsd-control zonestatus grp%GRP%.%DOMAIN%
 ```

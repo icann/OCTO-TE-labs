@@ -23,9 +23,9 @@ dnssec-policy "insecure";
 ```
 Again watch the DNSSEC configuration with
 ```
-sudo rndc dnssec -status grpX.lab_domain
+sudo rndc dnssec -status grp%GRP%.%DOMAIN%
 ```
 and watch the parent remove the DS record with
 ```
-dig grpX.lab_domain DS +dnssec +noall +answer
+dig grp%GRP%.%DOMAIN% DS +dnssec +noall +answer
 ```

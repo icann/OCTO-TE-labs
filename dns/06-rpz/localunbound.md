@@ -49,7 +49,7 @@ $TTL    30
         30 )   ; minimum
 @   IN  NS  localhost.
 
-32.2.X.100.100.rpz-client-ip CNAME rpz-tcp-only.
+32.2.%GRP%.100.100.rpz-client-ip CNAME rpz-tcp-only.
 drop.internal CNAME rpz-passthru.
 ```
 Check if everything is configured correct
@@ -74,7 +74,7 @@ rpz.	serial 1
 ## Client IP trigger
 Our RPZ contains the following line
 ```
-32.2.X.100.100.rpz-client-ip CNAME rpz-tcp-only.
+32.2.%GRP%.100.100.rpz-client-ip CNAME rpz-tcp-only.
 ```
 The same IP address notation as before, prefix length and IP address in reverse order.
 This matches the IP of the client sending queries.

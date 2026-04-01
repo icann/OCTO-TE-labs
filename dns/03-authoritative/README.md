@@ -17,10 +17,10 @@ will server the zone externaly.
 
 ## From the parent zone
 
-Our "parent" (***lab_domain***) has already created the following in its own zone:
+Our "parent" (***%DOMAIN%***) has already created the following in its own zone:
 
 ```
-grpX             NS          lab_domain.
+grp%GRP%             NS          %DOMAIN%.
 ```
 
 The lab uses dnsdist (a DNS proxy) to forward queries to the 
@@ -29,14 +29,14 @@ following ip addresses:
 
 | Device Name   | IPv4 Address   | IPv6 Address         | 
 | ------------- | -------------- | -------------------- |
-| ns1           | 100.100.X.130  | fd89:59e0:X:128::130 |
-| ns2           | 100.100.X.131  | fd89:59e0:X:128::131 |
+| ns1           | 100.100.%GRP%.130  | fd89:59e0:%GRP:128.::130 |
+| ns2           | 100.100.%GRP%.131  | fd89:59e0:%GRP:128.::131 |
 
 Our zone configuration must be compatible with that.
 
 ## Setting up the primary
 
-Use the "SOA" server as primary authoritative server for the  grp***X***.***lab_domain*** zone.
+Use the "SOA" server as primary authoritative server for the  grp%GRP%.***%DOMAIN%*** zone.
 
 Your instructor will tell you which instructions to follow for installation of your primary server.
 
@@ -57,13 +57,13 @@ We will now use *dig* tool to verify the zone configuration and propagation, the
 
 On the **cli** instance
 
-1. `dig @100.100.X.66  grpX.lab_domain SOA`
-1. `dig @100.100.X.130 grpX.lab_domain SOA`
-1. `dig @100.100.X.131 grpX.lab_domain SOA`
+1. `dig @100.100.%GRP%.66  grp%GRP%.%DOMAIN% SOA`
+1. `dig @100.100.%GRP%.130 grp%GRP%.%DOMAIN% SOA`
+1. `dig @100.100.%GRP%.131 grp%GRP%.%DOMAIN% SOA`
 
 Please repeat the following queries several times
 
-```dig @lab_domain grpX.lab_domain SOA        +nsid```
+```dig @%DOMAIN% grp%GRP%.%DOMAIN% SOA        +nsid```
 
 
 
