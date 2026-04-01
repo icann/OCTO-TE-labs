@@ -47,7 +47,7 @@ Change the file contents to
 ```
 zone "grpX.lab_domain" {
     type secondary;
-    file "/etc/bind/zones/db.grpX.secondary";
+    file "/var/lib/bind/zones/db.grpX.secondary";
     masters { 
         100.100.X.66; 
         fd89:59e0:X:64::66;
