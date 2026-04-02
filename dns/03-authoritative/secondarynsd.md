@@ -50,11 +50,11 @@ server:
 pattern:
     name: "fromprimary"
     allow-notify: 100.100.%GRP%.66 NOKEY
-    allow-notify: fd89:59e0:%GRP%:64::66 NOKEY
-    allow-notify: fd89:59e0:%GRP%::2 NOKEY
+    allow-notify: %IPv6pfx%:%GRP%:64::66 NOKEY
+    allow-notify: %IPv6pfx%:%GRP%::2 NOKEY
     request-xfr: AXFR 100.100.%GRP%.66 NOKEY
-    request-xfr: AXFR fd89:59e0:%GRP%:64::66 NOKEY
-    request-xfr: AXFR fd89:59e0:%GRP%::2 NOKEY
+    request-xfr: AXFR %IPv6pfx%:%GRP%:64::66 NOKEY
+    request-xfr: AXFR %IPv6pfx%:%GRP%::2 NOKEY
 
 zone:
     name: "grp%GRP%.%DOMAIN%."

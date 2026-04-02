@@ -32,7 +32,7 @@ Please change your `unbound.conf` and add the following section
 ```
         access-control: 100.100.%GRP%.0/24 allow
         access-control: 127.0.0.0/8 allow
-        access-control: fd89:59e0:%GRP%::/48 allow
+        access-control: %IPv6pfx%:%GRP%::/48 allow
         access-control: ::1/128 allow
 ```
 Check your configuration and reload the server

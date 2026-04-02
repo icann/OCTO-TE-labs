@@ -21,8 +21,8 @@ cat /etc/resolv.conf
 search grp%GRP%.%DOMAIN%
 nameserver 100.100.%GRP%.67
 nameserver 100.100.%GRP%.68
-nameserver fd89:59e0:%GRP%:64::67
-nameserver fd89:59e0:%GRP%:64::68
+nameserver %IPv6pfx%:%GRP%:64::67
+nameserver %IPv6pfx%:%GRP%:64::68
 ```
 So again the resolv1 and resolv2 servers are used for resolving.
 Unfortunately we have not yet installed the resolvers.
@@ -83,7 +83,7 @@ options {
   directory "/var/cache/bind";
   dnssec-validation no;
   listen-on port 53 { localhost; 100.100.0.0/16; };
-  listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
+  listen-on-v6 port 53 { localhost; %IPv6pfx%::/32; };
   allow-query { any; };
   recursion yes;
 };

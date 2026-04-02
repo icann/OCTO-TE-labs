@@ -20,7 +20,7 @@ zone "rpz" {
     file "/var/lib/bind/zones/db.rpz.secondary";
     masters { 
         100.64.0.54; 
-        fd89:59e0::54;
+        %IPv6pfx%::54;
     };
     allow-transfer { none; };
     allow-query { localhost; };

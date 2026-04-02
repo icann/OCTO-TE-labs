@@ -31,7 +31,7 @@ dig @100.100.?.68 icann.org +noall +nocomments +answer
 Please change your `named.conf.options` and add the following section
 ```
 acl "trusted" {
-    localhost; 100.100.%GRP%.0/24; fd89:59e0:%GRP%::/48; 
+    localhost; 100.100.%GRP%.0/24; %IPv6pfx%:%GRP%::/48; 
 };
 ```
 And edit the to following line to look like this

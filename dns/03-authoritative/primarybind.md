@@ -56,9 +56,9 @@ $TTL    30
 @           NS          %DOMAIN%.
 @           TXT         "DNS IS FUN" 
 ns1         A           100.100.%GRP%.130
-ns1         AAAA        fd89:59e0:%GRP%:128.::130
+ns1         AAAA        %IPv6pfx%:%GRP%:128.::130
 ns2         A           100.100.%GRP%.131
-ns2         AAAA        fd89:59e0:%GRP%:128.::131
+ns2         AAAA        %IPv6pfx%:%GRP%:128.::131
 ```
 
 You can add more records as you want.
@@ -77,8 +77,8 @@ zone "grp%GRP%.%DOMAIN%." {
 	also-notify {
 		100.100.%GRP%.130; 
 		100.100.%GRP%.131; 
-		fd89:59e0:%GRP%:128.::130; 
-		fd89:59e0:%GRP%:128.::131; 
+		%IPv6pfx%:%GRP%:128.::130; 
+		%IPv6pfx%:%GRP%:128.::131; 
 	};
 }; 
 ```
@@ -105,7 +105,7 @@ options {
     hostname "grp%GRP%-soa";
     dnssec-validation no;
     listen-on port 53 { localhost; 100.100.0.0/16; };
-    listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
+    listen-on-v6 port 53 { localhost; %IPv6pfx%::/32; };
     allow-query { any; };
     allow-transfer { any; };
     also-notify { any; };

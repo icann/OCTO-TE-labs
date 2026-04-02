@@ -24,7 +24,7 @@ key "grp%GRP%-key" {
 server 100.100.%GRP%.66 {		
         keys { grp%GRP%-key; };
 };
-server fd89:59e0:%GRP%:64::66 {	
+server %IPv6pfx%:%GRP%:64::66 {	
         keys { grp%GRP%-key; };
 };
 ```
@@ -69,7 +69,7 @@ In `named.conf.local` we need to allow notify for our zone grp%GRP%.%DOMAIN% by 
 ```
     allow-notify { 
         100.100.%GRP%.66;
-        fd89:59e0:%GRP%:64::66;
+        %IPv6pfx%:%GRP%:64::66;
     }
 ```
 Currently our server accepts notify message from any source. Attackers could
@@ -78,7 +78,7 @@ our master servers with the correct keys.
 ```
     masters { 
         100.100.%GRP%.66 key grp%GRP%-key; 
-        fd89:59e0:%GRP%:64::66 key grp%GRP%-key;
+        %IPv6pfx%:%GRP%:64::66 key grp%GRP%-key;
     };
 ```
 Please check your configuration and reload the server

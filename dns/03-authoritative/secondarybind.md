@@ -50,7 +50,7 @@ zone "grp%GRP%.%DOMAIN%" {
     file "/var/lib/bind/zones/db.grp%GRP%.secondary";
     masters { 
         100.100.%GRP%.66; 
-        fd89:59e0:%GRP%:64::66;
+        %IPv6pfx%:%GRP%:64::66;
     };
 };
 ```
@@ -71,7 +71,7 @@ options {
     hostname "host_name";
     dnssec-validation no;
     listen-on port 53 { localhost; 100.100.0.0/16; };
-    listen-on-v6 port 53 { localhost; fd89:59e0::/32; };
+    listen-on-v6 port 53 { localhost; %IPv6pfx%::/32; };
     allow-query { any; };
     recursion yes;
     cookie-secret "71ff147d946b942ed66e608b64dc54c9";
