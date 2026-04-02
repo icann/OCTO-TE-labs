@@ -26,8 +26,10 @@ You can add the `+multi` option to make the results more "readable".
 * Retrieve the public keys for the zone: they are stored in a specific resource record type named "DNSKEY"
 
 ```
-$ dig icann.org DNSKEY +noall +answer
-$ dig icann.org DNSKEY +noall +answer +multi
+dig icann.org DNSKEY +noall +answer
+```
+```
+dig icann.org DNSKEY +noall +answer +multi
 ```
 
 You can mix the known options such as redirecting to a specific name server, adding multiline option, etc.
@@ -35,14 +37,14 @@ You can mix the known options such as redirecting to a specific name server, add
 * Retrieve the delegation signer info for the zone: they are stored in a specific resource record type named "DS"
 
 ```
-$ dig icann.org DS
+dig icann.org DS
 ```
 
 There are also some special DNSSEC records that you can not actually send queries for,
 but will be contained in negative answers. Look for NSEC or NSEC3 records.
 
 ```
-$ dig sdlkhghkj.icann.org +dnssec
+dig sdlkhghkj.icann.org +dnssec
 ```
 
 # Checking Disabled 

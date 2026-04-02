@@ -65,4 +65,4 @@ Please checkout the help page for rndc. You can even specifiy a lifetime for neg
 
 This blog post from Quad9 explains why NTA's are not a good idea, but still
 sometimes neccessary.
-(DNSSEC NTAs: No Good Compromises)[https://quad9.net/news/blog/dnssec-ntas-no-good-compromises/]
+[DNSSEC NTAs: No Good Compromises](https://quad9.net/news/blog/dnssec-ntas-no-good-compromises/)

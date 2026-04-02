@@ -79,7 +79,7 @@ Please discuss with your peers and/or your instructor
 1. Where did the trust-anchor come from?
 1. Check the trust-anchor! Is it correct?
 
-# Temporary desable DNSSEC validation for broken domains
+# Temporary disable DNSSEC validation for broken domains
 
 A zone can become broken due to issues with its DNSSEC configuration. In that case, validating resolvers may return DNS answers with status bogus, servfail, etc. Users behind such recursive resolver will get impacted for those domains. While it is generally the responsibility of the domain administrator to fix the issue, the recursive resolver administrator can take action to temporarily disable DNSSEC validation for such domain that is broken at validation level.
 
