@@ -56,8 +56,8 @@ zone "%GRP%.100.100.in-addr.arpa" {
   	also-notify {
 		100.100.%GRP%.130; 
 		100.100.%GRP%.131; 
-		%IPv6pfx%:%GRP:128.::130; 
-		%IPv6pfx%:%GRP:128.::131; 
+		%IPv6pfx%:%GRP%:128.::130; 
+		%IPv6pfx%:%GRP%:128.::131; 
 	};
 };
 ```

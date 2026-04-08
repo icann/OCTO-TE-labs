@@ -29,8 +29,8 @@ following ip addresses:
 
 | Device Name   | IPv4 Address   | IPv6 Address         | 
 | ------------- | -------------- | -------------------- |
-| ns1           | 100.100.%GRP%.130  | %IPv6pfx%:%GRP:128.::130 |
-| ns2           | 100.100.%GRP%.131  | %IPv6pfx%:%GRP:128.::131 |
+| ns1           | 100.100.%GRP%.130  | %IPv6pfx%:%GRP%:128.::130 |
+| ns2           | 100.100.%GRP%.131  | %IPv6pfx%:%GRP%:128.::131 |
 
 Our zone configuration must be compatible with that.
 
