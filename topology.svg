@@ -78,7 +78,7 @@
 
         <text style="fill: rgb(0, 100, 0); font-family: Arial, sans-serif; font-size: 8px; white-space: pre; text-anchor: middle;" x="250" y="205" >ns2</text>
         <use href="#server" x="240" y="205" width="24" height="24" fill="#006400"/>
-        <text style="fill: rgb(0, 100, 0); font-family: Arial, sans-serif; font-size: 8px; white-space: pre; text-anchor: middle;" x="250" y="225" >.130 | ::130</text>
+        <text style="fill: rgb(0, 100, 0); font-family: Arial, sans-serif; font-size: 8px; white-space: pre; text-anchor: middle;" x="250" y="225" >.131 | ::131</text>
 
         <text style="fill: rgb(0, 100, 0); font-family: Arial, sans-serif; font-size: 8px; white-space: pre; text-anchor: end;" x="470" y="217" >100.100.%GRP%.128/26</text>
         <text style="fill: rgb(0, 100, 0); font-family: Arial, sans-serif; font-size: 8px; white-space: pre; text-anchor: end;" x="470" y="225" >%IPv6pfx%:%GRP%:128::/64</text>
