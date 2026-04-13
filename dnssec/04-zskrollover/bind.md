@@ -13,12 +13,12 @@ nav_order: 1
 Before you continue, check that:
 
 ```
-$ dig grp%GRP%.%DOMAIN% dnskey +dnssec +multiline
+dig grp%GRP%.%DOMAIN% dnskey +dnssec +multiline
 ```
 shows you one ZSK and one KSK. Remember that the KSK has flags 257.
 
 ```
-$ dig grp%GRP%.%DOMAIN% SOA +dnssec +multiline
+dig grp%GRP%.%DOMAIN% SOA +dnssec +multiline
 ```
 gives you the SOA record for your domain, and that it is signed.
 
@@ -70,7 +70,7 @@ sudo dnssec-keygen -f ZSK -a ECDSAP256SHA256 -K /var/lib/bind/keys grp%GRP%.%DOM
 
 ```
 Generating key pair............+++++ ..............................+++++ 
-Kgrp%GRP%.%DOMAIN%.te-labs.training.+013+12969
+Kgrp%GRP%.%DOMAIN%.+013+12969
 ```
 Change the ownership of the new file and reload bind.
 ```
@@ -105,8 +105,8 @@ In this lab timeouts are very short, you can proceed immediately. But on the int
 Hopefully you remember which of the files is the new and which is the old ZSK.
 
 ```
-mv /var/lib/bind/keys/Kgrp%GRP%.%DOMAIN%.te-labs.training.+013+?????.key /var/lib/bind/keys/old_Kgrp%GRP%.%DOMAIN%.te-labs.training.+013+?????.key
-mv /var/lib/bind/keys/Kgrp%GRP%.%DOMAIN%.te-labs.training.+013+?????.private /var/lib/bind/keys/old_Kgrp%GRP%.%DOMAIN%.te-labs.training.+013+?????.private
+mv /var/lib/bind/keys/Kgrp%GRP%.%DOMAIN%.+013+?????.key /var/lib/bind/keys/old_Kgrp%GRP%.%DOMAIN%.+013+?????.key
+mv /var/lib/bind/keys/Kgrp%GRP%.%DOMAIN%.+013+?????.private /var/lib/bind/keys/old_Kgrp%GRP%.%DOMAIN%.+013+?????.private
 ```
 and now we sign again, but we will increase the serial before we do that
 ```
