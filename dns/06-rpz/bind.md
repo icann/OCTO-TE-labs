@@ -47,7 +47,7 @@ logging {
 And in the already existing options section add
 ```
     response-policy	{
-        zone "rpz" policy given;
+        zone "rpz" ede blocked policy given;
     };
 ```
 Almost done, we just need to prepare for the zone file transfer

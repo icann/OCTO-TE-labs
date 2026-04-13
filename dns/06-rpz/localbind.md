@@ -34,8 +34,8 @@ sudo nano /etc/bind/named.conf.options
 And the already existing options section `response-policy` should look like this
 ```
     response-policy	{
-        zone "rpz-local" policy given;
-        zone "rpz" policy given;
+        zone "rpz-local" ede filtered policy given;
+        zone "rpz" ede blocked policy given;
     };
 ```
 > [!NOTE] The local zone needs to be configured before the other zones. RPZ will be
