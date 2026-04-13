@@ -80,6 +80,11 @@ server:
         do-ip4: yes
         do-ip6: yes
 
+        serve-expired: yes
+
+        ede: yes
+        ede-serve-expired: yes
+
 remote-control:
     control-enable: yes
 
