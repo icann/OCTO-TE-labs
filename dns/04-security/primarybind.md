@@ -137,10 +137,10 @@ server 100.100.%GRP%.130 {
 server 100.100.%GRP%.131 {
      keys { grp%GRP%-key; };
 };
-server %IPv6pfx%:%GRP%:128.::130 {
+server %IPv6pfx%:%GRP%:128::130 {
      keys { grp%GRP%-key; };
 };
-server %IPv6pfx%:%GRP%:128.::131 {
+server %IPv6pfx%:%GRP%:128::131 {
      keys { grp%GRP%-key; };
 };
 ```

@@ -25,8 +25,8 @@ zone "grp%GRP%.%DOMAIN%." {
 	also-notify {
 		100.100.%GRP%.130; 
 		100.100.%GRP%.131; 
-		%IPv6pfx%:%GRP%:128.::130; 
-		%IPv6pfx%:%GRP%:128.::131; 
+		%IPv6pfx%:%GRP%:128::130; 
+		%IPv6pfx%:%GRP%:128::131; 
 	};
 	dnssec-policy NotForProduction;
     parental-agents { 100.100.%GRP%.67; %IPv6pfx%:%GRP%:64::68; };

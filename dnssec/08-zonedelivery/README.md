@@ -65,12 +65,12 @@ pattern:
     verifier: /var/lib/nsd/test.sh
     notify: 100.100.%GRP%.130 NOKEY
     notify: 100.100.%GRP%.131 NOKEY
-    notify: %IPv6pfx%:%GRP%:128.::130 NOKEY 
-    notify: %IPv6pfx%:%GRP%:128.::131 NOKEY
+    notify: %IPv6pfx%:%GRP%:128::130 NOKEY 
+    notify: %IPv6pfx%:%GRP%:128::131 NOKEY
     provide-xfr: 100.100.%GRP%.130 NOKEY
     provide-xfr: 100.100.%GRP%.131 NOKEY
-    provide-xfr: %IPv6pfx%:%GRP%:128.::130 NOKEY 
-    provide-xfr: %IPv6pfx%:%GRP%:128.::131 NOKEY
+    provide-xfr: %IPv6pfx%:%GRP%:128::130 NOKEY 
+    provide-xfr: %IPv6pfx%:%GRP%:128::131 NOKEY
 
 zone:
     name: "grp%GRP%.%DOMAIN%."
@@ -108,7 +108,7 @@ Lets check what contents our servers carry.
 1. `dig @localhost -p 5353    grp%GRP%.%DOMAIN% SOA +nsid`
 1. `dig @localhost -p 53      grp%GRP%.%DOMAIN% SOA +nsid`
 1. `dig @100.100.%GRP%.130        grp%GRP%.%DOMAIN% SOA +nsid`
-1. `dig @%IPv6pfx%:%GRP%:128.::131 grp%GRP%.%DOMAIN% SOA +nsid`
+1. `dig @%IPv6pfx%:%GRP%:128::131 grp%GRP%.%DOMAIN% SOA +nsid`
 
 Did all servers show the correct serial number?
 Did you get different id strings for all servers?
@@ -127,7 +127,7 @@ Run the same dig commands again:
 1. `dig @localhost -p 5353    grp%GRP%.%DOMAIN% SOA +nsid`
 1. `dig @localhost -p 53      grp%GRP%.%DOMAIN% SOA +nsid`
 1. `dig @100.100.%GRP%.130        grp%GRP%.%DOMAIN% SOA +nsid`
-1. `dig @%IPv6pfx%:%GRP%:128.::131 grp%GRP%.%DOMAIN% SOA +nsid`
+1. `dig @%IPv6pfx%:%GRP%:128::131 grp%GRP%.%DOMAIN% SOA +nsid`
 
 Did all servers show the correct serial number?
 Did you get different id strings for all servers?

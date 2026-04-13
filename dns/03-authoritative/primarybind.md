@@ -56,19 +56,19 @@ $TTL    30
 @           NS          %DOMAIN%.
 @           TXT         "DNS IS FUN"
 cli         A           100.100.%GRP%.2
-cli         AAAA        %IPv6pfx%:%GRP%:128.::2
+cli         AAAA        %IPv6pfx%:%GRP%:128::2
 soa         A           100.100.%GRP%.66
-soa         AAAA        %IPv6pfx%:%GRP%:128.::66
+soa         AAAA        %IPv6pfx%:%GRP%:128::66
 resolv1     A           100.100.%GRP%.67
-resolv1     AAAA        %IPv6pfx%:%GRP%:128.::67
+resolv1     AAAA        %IPv6pfx%:%GRP%:128::67
 resolv2     A           100.100.%GRP%.68
-resolv2     AAAA        %IPv6pfx%:%GRP%:128.::68
+resolv2     AAAA        %IPv6pfx%:%GRP%:128::68
 rpki        A           100.100.%GRP%.70
-rpki        AAAA        %IPv6pfx%:%GRP%:128.::70
+rpki        AAAA        %IPv6pfx%:%GRP%:128::70
 ns1         A           100.100.%GRP%.130
-ns1         AAAA        %IPv6pfx%:%GRP%:128.::130
+ns1         AAAA        %IPv6pfx%:%GRP%:128::130
 ns2         A           100.100.%GRP%.131
-ns2         AAAA        %IPv6pfx%:%GRP%:128.::131
+ns2         AAAA        %IPv6pfx%:%GRP%:128::131
 ```
 
 You can add more records as you want.
@@ -87,8 +87,8 @@ zone "grp%GRP%.%DOMAIN%." {
 	also-notify {
 		100.100.%GRP%.130; 
 		100.100.%GRP%.131; 
-		%IPv6pfx%:%GRP%:128.::130; 
-		%IPv6pfx%:%GRP%:128.::131; 
+		%IPv6pfx%:%GRP%:128::130; 
+		%IPv6pfx%:%GRP%:128::131; 
 	};
 }; 
 ```

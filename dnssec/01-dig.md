@@ -15,8 +15,8 @@ nav_order: 1
 * Getting the resource record signatures (RRSIG) for signed domains: 
 
 ```
-$ dig www.icann.org A +dnssec
-$ dig icann.org NS +dnssec
+dig www.icann.org A +dnssec
+dig icann.org NS +dnssec
 ```
 
 Compare the number of RRSIG you get in the first case to the number you received in the second case.
