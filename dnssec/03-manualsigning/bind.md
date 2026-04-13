@@ -53,6 +53,8 @@ We start with manual zone signing.
 > [!IMPORTANT]
 > Bind is very strict about SOA serial numbers. Before signing check which serial your server is currently using and then edit your zone file and increase the serial number to something bigger then the current number.
 
+This command signs the zone 
+
 ```
 sudo dnssec-signzone -S -K /var/lib/bind/keys -o grp%GRP%.%DOMAIN% /var/lib/bind/zones/db.grp%GRP%
 ```
