@@ -71,3 +71,10 @@ rate-limit {
 Now let's test the rate limit.
 
 dnsperf 
+
+```
+curl -s -O https://data.iana.org/TLD/tlds-alpha-by-domain.txt
+perl -n -e 'chomp; print"$_ DNSKEY\n" if !m/#/;' tlds-alpha-by-domain.txt > data.file
+dnsperf -s 100.100.%GRP%.68  -d data.file 
+dnsperf -s %IPv6pfx%:%GRP%:64::68  -d data.file 
+```

@@ -65,7 +65,7 @@ sudo unbound-control flush grp%GRP%.%DOMAIN%
 Now see if your resolver returns the ad flag.
 
 ```
-$ dig grp%GRP%.%DOMAIN% SOA
+dig grp%GRP%.%DOMAIN% SOA
 ```
 
 And finally go back to [dnsviz.net](https://dnsviz.net) and retest your domain. This time a DS record should be shown.

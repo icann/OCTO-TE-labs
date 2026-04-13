@@ -46,7 +46,7 @@ machines, but not from the internet. (Out-of-scope for this lab)
 
 First test your server
 ```
-$ dig @100.100.%GRP%.66 icann.org
+dig @100.100.%GRP%.66 icann.org
 ```
 If the status in the response is not `REFUSED` or you even got an ip address, 
 your server allows recursion. The good new is, this is easy to fix.

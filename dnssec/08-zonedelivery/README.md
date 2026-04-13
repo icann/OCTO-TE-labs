@@ -79,7 +79,7 @@ zone:
 ```
 Now we need to make a small zone checking script. Please edit the file `/var/lib/nsd/test.sh` with
 ```
-$ sudo nano /var/lib/nsd/test.sh
+sudo nano /var/lib/nsd/test.sh
 ```
 to the following content
 ```
@@ -88,8 +88,8 @@ exit 5;
 ```
 And make it executable with 
 ```
-$ sudo chmod +x /var/lib/nsd/test.sh
-$ sudo chown nsd:nsd /var/lib/nsd/test.sh
+sudo chmod +x /var/lib/nsd/test.sh
+sudo chown nsd:nsd /var/lib/nsd/test.sh
 ```
  
 Ready to restart
