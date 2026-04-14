@@ -42,4 +42,4 @@ There are now two new type of records in the zone CDS and CDNSKEY.
 dig grp%GRP%.%DOMAIN% CDS
 dig grp%GRP%.%DOMAIN% CDNSKEY
 ```
-Again  try to onitor the status of the keys in the zone. This time we do not have to tell bind when the DS record is update.
+Again  try to monitor the status of the keys in the zone. This time we do not have to tell bind when the DS record is update.

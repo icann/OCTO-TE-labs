@@ -79,7 +79,7 @@ If you repeatedly run
 ```
 sudo rndc dnssec -status grp%GRP%.%DOMAIN%
 ```
-You can see the status of the keys changing. Once hte new key is in status "omnipresent"  run
+You can see the status of the keys changing. Once the new key is in status "omnipresent"  run
 ```
 dig @100.100.%GRP%.66 grp%GRP%.%DOMAIN% DNSKEY +dnssec +noall +answer
 ```
