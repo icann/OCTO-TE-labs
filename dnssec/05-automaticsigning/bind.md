@@ -88,20 +88,28 @@ Check DNSSEC status of your zone:
 sudo rndc dnssec -status grp%GRP%.%DOMAIN%
 ```
 ```
-dnssec-policy: default
-current time:  Wed May 28 14:14:13 2025
+dnssec-policy: NotForProduction
+current time:  Tue Apr 14 17:17:02 2026
 
-key: 64655 (ECDSAP256SHA256), CSK
-  published:      yes - since Wed May 28 14:13:21 2025
-  key signing:    yes - since Wed May 28 14:13:21 2025
-  zone signing:   yes - since Wed May 28 14:13:21 2025
+key: 15345 (ECDSAP256SHA256), KSK
+  published:      yes - since Tue Apr 14 09:26:02 2026
+  key signing:    yes - since Tue Apr 14 09:26:02 2026
 
   No rollover scheduled
   - goal:           omnipresent
-  - dnskey:         rumoured
-  - ds:             hidden
-  - zone rrsig:     rumoured
-  - key rrsig:      rumoured
+  - dnskey:         omnipresent
+  - ds:             omnipresent
+  - key rrsig:      omnipresent
+
+key: 15717 (ECDSAP256SHA256), ZSK
+  published:      yes - since Tue Apr 14 07:33:10 2026
+  zone signing:   yes - since Tue Apr 14 07:33:10 2026
+
+  No rollover scheduled
+  - goal:           omnipresent
+  - dnskey:         omnipresent
+  - zone rrsig:     omnipresent
+
 ```
 
 Some new files should appear in the *zones* directory.
