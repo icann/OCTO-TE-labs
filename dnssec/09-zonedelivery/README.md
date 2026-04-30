@@ -143,6 +143,7 @@ validns -q -p dnskey -p ksk-exists "$TMP_ZONE" || fail "validns failed"
 
 ldns-verify-zone "$TMP_ZONE" >/dev/null || fail "ldns-verify-zone failed"
 
+fail "NO ERROR"
 pass
 ```
 And make it executable with 
@@ -174,7 +175,7 @@ Did you get different id strings for all servers?
 
 Currently our script fails all zones. Let's try if we approve all zones.
 
-1. Edit `/var/lib/nsd/test.sh` again and change `exit 5` to `exit 0`.
+1. Edit `/var/lib/nsd/test.sh` again and remove the line `fail "NO ERROR"`.
 1. Edit the zone file `/var/lib/bind/zones/db.grp%GRP%`, increase the serial number
 1. Run `rndc reload`
 1. Back to the new shell window and see if you can identify the validation in the logs
