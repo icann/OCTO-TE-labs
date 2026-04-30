@@ -39,7 +39,10 @@ And in file `/etc/bind/named.conf.local`
 
 # Install NSD checking server
 
-Please install NSD on the machine by running `sudo apt install -y nsd`.
+Please install NSD and some tools that we need for this lab on the machine by running
+```
+sudo apt install -y nsd validns ldnsutils
+```
 
 Now we need to configure NSD:
 ```
@@ -105,12 +108,6 @@ pass() {
 
 require_cmd() {
   command -v "$1" >/dev/null 2>&1 || fail "missing command: $1"
-}
-
-normalize_fqdn() {
-  tr '[:upper:]' '[:lower:]' \
-    | sed -e 's/[[:space:]]\+$//' -e '/^$/d' \
-    | awk '{print ($0 ~ /\.$/) ? $0 : $0 "."}'
 }
 
 ZONE="${VERIFY_ZONE:-}"
