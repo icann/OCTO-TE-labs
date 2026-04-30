@@ -38,6 +38,7 @@ Update your zone configuration statement in `/etc/bind/named.conf.local`, to loo
 > [!TIP] 
 > Bind has a pre-configured policy that you absolutely should consider using instead of defining your own just use `dnssec-policy default`.
 
+In `named.conf.local`
 ```
 dnssec-policy NotForProduction {
     inline-signing yes;
