@@ -35,6 +35,8 @@ zone "grp%GRP%.%DOMAIN%." {
 ```
 ```
 named-checkconf
+```
+```
 sudo rndc reload
 ```
 There are now two new type of records in the zone CDS and CDNSKEY.

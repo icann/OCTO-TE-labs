@@ -11,7 +11,8 @@ nav_order: 2
 Let's start with looking at the current state of your domain.
 Go to [dnsviz.net](https://dnsviz.net) and analyze your domain. 
 
-> [!TIP] If you have analyzed your domain with dnsviz before, make sure to run an new analysis.
+> [!TIP] 
+> If you have analyzed your domain with dnsviz before, make sure to run an new analysis.
 
 Try to follow the chain of trust in the resulting graph.
 Take notice of the missing DS in the last step. How can you know that a DS record is not there? How does DNSSEC proof if a DS record exists or not?

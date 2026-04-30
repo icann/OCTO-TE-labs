@@ -38,7 +38,8 @@ And the already existing options section `response-policy` should look like this
         zone "rpz" ede blocked policy given;
     };
 ```
-> [!NOTE] The local zone needs to be configured before the other zones. RPZ will be
+> [!NOTE] 
+> The local zone needs to be configured before the other zones. RPZ will be
 evaluated in the order given in this configuration.
 
 Almost done, we just need to create our zone file

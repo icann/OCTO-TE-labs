@@ -11,7 +11,8 @@ nav_order: 2
 Let's start with looking at the current state of your domain.
 Go to [dnsviz.net](https://dnsviz.net) and analyze your domain. 
 
-> [!TIP] If you have analyzed your domain with dnsviz before, make sure to run an new analysis.
+> [!TIP] 
+> If you have analyzed your domain with dnsviz before, make sure to run an new analysis.
 
 Try to follow the chain of trust in the resulting graph.
 Take notice of the missing DS in the last step. How can you know that a DS record is not there? How does DNSSEC proof if a DS record exists or not?
@@ -36,7 +37,8 @@ grp%GRP%.%DOMAIN%. IN DS 12345 8 2 018A86C0139BA5500AC87A5BAD8FB5D8D4F9672C319B3
 
 Before publishing your DS record use [zonemaster.net](https://zonemaster.net) to check if your DS record is correct. 
 
-> [!TIP] See Options below the zonemaster search box!
+> [!TIP] 
+> See Options below the zonemaster search box!
 
 ## Push the DS to your parent
 

@@ -32,7 +32,8 @@ To make internal names run in Island Operations an authoritative name server for
 
 In this lab installation we use .internal and we have configured .internal in resolv1/2. 
 
-> [!NOTE] .internal has been signified as a Top Level Domain that will never be deployed 
+> [!NOTE] 
+> .internal has been signified as a Top Level Domain that will never be deployed 
 > in the root zone and can savely be used by anyone for internal purposes.
 
 But DNSSEC introduces more dependencies. To be able to validate, a resolver needs the chain

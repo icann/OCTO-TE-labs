@@ -73,7 +73,8 @@ For each dig query sent, a response is expected with different sections. Here ar
 
 ## Sending DNS Queries using dig
 
-> [!NOTE] Execute this lab on the cli machine
+> [!NOTE] 
+> Execute this lab on the cli machine
 
 Try using dig to query the IPv4 address corresponding to www.icann.org. Here are various ways of doing that; what differences do you see in the output from each of them?
 

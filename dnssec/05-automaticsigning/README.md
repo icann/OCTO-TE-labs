@@ -5,7 +5,7 @@ parent: "DNSSEC"
 nav_order: 5
 ---
 
-# Signing
+# Automatic Signing
 
 Signing a zone used to be a difficult task, but for many years now name servers 
 can do this automatically for you. Depending on your security requirements you

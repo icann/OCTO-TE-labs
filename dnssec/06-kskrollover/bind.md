@@ -38,7 +38,7 @@ We need the key id of the key with the flag value of 257. (In this example 3963)
 
 Now on the soa machine we run
 ```
-sudo rndc dnssec -rollover -key ???? grp%GRP%.%DOMAIN%
+sudo rndc dnssec -rollover -key <key id> grp%GRP%.%DOMAIN%
 ```
 Please run
 ```
