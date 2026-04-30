@@ -154,7 +154,7 @@ sudo chown nsd:nsd /var/lib/nsd/test.sh
 Ready to restart
 
 1. Open another shell window on the soa machine
-1. Run `sudo tail -f /var/log/syslog`
+1. Run `sudo journalctl -x -u nsd -f`
 1. Back to the first shell window
 1. Restart Bind `sudo systemctl restart named`
 1. Restart NSD `sudo systemctl restart nsd`
