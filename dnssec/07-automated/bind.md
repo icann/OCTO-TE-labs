@@ -5,9 +5,20 @@ parent: "Automated DNSSEC"
 nav_order: 1
 ---
 
-> [!WARNING]
-> This is a configuration for this lab, it is absolutely unfit for use in any kind of real world deployment.
+# Automated DNSSEC with Bind
 
+> [!WARNING]
+> To change to automatic signing we will have to change keys. This can be done in two ways: 
+> 1. With a Key Rollover, your domain stays signed all the time
+> 2. With going insecure
+>
+> We will do the later in this step. 
+
+## Going Insecure
+
+Remove the DS record from the parent. Easiest done on the web page for your lab group. At the bottom you will find a button `Delete all DS records`.
+
+## Configuration
 ```
 sudo nano /etc/bind/named.conf.local
 ```
