@@ -41,7 +41,7 @@ sudo rndc reload grp%GRP%.%DOMAIN%
 In ns1, go to logs and validate that the transfer was successful.
 
 ```
-tail /var/log/syslog
+sudo journalctl -x -u named 
 ```
 Should look like
 ```
