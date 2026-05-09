@@ -53,8 +53,10 @@ $TTL    30
                           86400         ; Retry
                         2419200         ; Expire
                              30 )       ; Negative Cache TTL
+@           MX          0 .
 @           NS          %DOMAIN%.
 @           TXT         "DNS IS FUN"
+@           TXT         "v=spf1 -all"
 cli         A           100.100.%GRP%.2
 cli         AAAA        %IPv6pfx%:%GRP%:128::2
 soa         A           100.100.%GRP%.66
@@ -72,6 +74,12 @@ ns2         AAAA        %IPv6pfx%:%GRP%:128::131
 ```
 
 You can add more records as you want.
+
+> [!NOTE]
+> Please take note of the MX record and the SPF record above.
+> Every domain that is not used for email should have a null MX record 
+> and a SPF record that forbids everything.
+> We all need to join up in fight against SPAM.
 
 In the configuration file ***/etc/bind/named.conf.local*** , create a new "zone" statement as below:
 
