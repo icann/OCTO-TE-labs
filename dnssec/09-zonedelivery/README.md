@@ -80,6 +80,11 @@ zone:
     zonefile: "db.grp%GRP%.secondary"
     include-pattern: "fromprimary"
 ```
+> [!NOTE]
+> If you have done the Security lab earlier, this configuration 
+> will most likely not work.
+> Try to figure out what is missing. Maybe check back with the security lab. What was changed in the configuration in that lab?
+
 Now we need to make a small zone checking script. Please edit the file `/var/lib/nsd/test.sh` with
 ```
 sudo nano /var/lib/nsd/test.sh
@@ -149,6 +154,8 @@ pass
 And make it executable with 
 ```
 sudo chmod +x /var/lib/nsd/test.sh
+```
+```
 sudo chown nsd:nsd /var/lib/nsd/test.sh
 ```
  
