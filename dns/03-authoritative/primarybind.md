@@ -71,6 +71,8 @@ ns1         A           100.100.%GRP%.130
 ns1         AAAA        %IPv6pfx%:%GRP%:128::130
 ns2         A           100.100.%GRP%.131
 ns2         AAAA        %IPv6pfx%:%GRP%:128::131
+v6only      AAAA        %IPv4%
+v4only      A           %IPv6%
 ```
 
 You can add more records as you want.
