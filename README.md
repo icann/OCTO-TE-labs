@@ -61,11 +61,8 @@ Please don't skip any of the labs as they build on each other.
 > [!WARNING]
 > Any configuration in this lab is not ready for production systems.
 
-{:toc}
-
 # Roadmap
 - ZONEMD
-- RPZ
 - Catalog Zones
 - Pre Delegation Testing
 - PowerDNS / Recursor
