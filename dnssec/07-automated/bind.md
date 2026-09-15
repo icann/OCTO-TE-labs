@@ -24,6 +24,10 @@ sudo nano /etc/bind/named.conf.local
 ```
 Please change the following values in the dnssec-policy to
 ```
+    keys {
+        ksk key-directory lifetime 5m algorithm ecdsa256;
+        zsk key-directory lifetime 5m algorithm ecdsa256;
+    };
     cdnskey yes;
     cds-digest-types { SHA-256; };
 ```
@@ -40,7 +44,9 @@ zone "grp%GRP%.%DOMAIN%." {
 		%IPv6pfx%:%GRP%:128::131; 
 	};
 	dnssec-policy NotForProduction;
-    parental-agents { 100.100.%GRP%.67; %IPv6pfx%:%GRP%:64::68; };
+    parental-agents { 
+        100.100.%GRP%.67; %IPv6pfx%:%GRP%:64::68; 
+    };
     checkds explicit;
 }; 
 ```
