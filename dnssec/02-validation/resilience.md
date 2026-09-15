@@ -22,6 +22,19 @@ So we are caught in a catch22 situation. DNS depends on NTP and NTP depends on D
 
 This can be solved by using IP addresses for the NTP configuration.
 
+## Fragmentation
+
+On IPv4 Fragmentation can be a problem. Some firewalls just drop it and there is a
+number of attacks that have used fragmentation as point of entry. In IPv6 there is no fragmentation.
+That has lead to it's own set of problems. If a packet is to big, the router will send back an ICMP message. But DNS is UDP. When the ICMP message arrives at the server, the server has no idea 
+which query that was and can not resend the data with a lower MTU. Therefore it is adviseable
+to avoid fragmentation for IPv4 and IPv6.
+
+In IPv6 the minimum MTU is 1280. The IP header needs 48 bytes. That leaves 1232 bytes for the DNS data.
+
+[!NOTE]
+The current recommendation is to configure EDNS0 packet size to 1232.
+
 ## Island Operations
 
 There will be time for every datacenter when an unlucky building crew managed to cut all outside cable connections. Connection to the internet is lost, Island Operations start.
@@ -93,3 +106,26 @@ please add the following statement (again use the values you retrieved from inte
 ```
 
 Now unbound should show the AD flag too.
+
+## Serve-Stale
+
+Serve-stale is a resolver configuration that allows the resolver to answer queries using
+expired data. The resolver will try to refresh the expired data but until the refresh 
+succeeds or the serve-stale time is exceeded the resolver will continue using the old data.
+
+https://indico.dns-oarc.net/event/52/contributions/1151/attachments/1104/2292/Thinking%20About%20Serve%20Stale%20-%20OARC44.pdf
+
+
+## External Failure reasons
+
+Historically I have seen many different causes for resolver instability 
+beyond simple authoritative downtime:
+
+    - DNSSEC provisioning mistakes
+    - broken glue
+    - circular dependencies
+    - registrar disputes leaving domains in inconsistent states
+    - EDNS fragmentation and MTU-related issues
+    - inconsistent anycast behavior
+    - aggressive firewalling or rate limiting
+    - geo-routing side effects involving ECS and GSLB systems
