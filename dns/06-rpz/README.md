@@ -18,6 +18,7 @@ In many countries national certs provide a list of malicious domain names. Often
 internet service providers and other network operators receive these lists and
 block the contained names in their resolvers. Unfortunately this is often a manual
 process, which means it is often very slow.
+RPZ is one possibility to remove the manual steps and speed up the process significantly.
 
 Please do only one of the following labs. We need one resolver do the blocking and the other to not block.
 
