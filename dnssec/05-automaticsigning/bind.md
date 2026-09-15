@@ -43,18 +43,18 @@ In `named.conf.local`
 dnssec-policy NotForProduction {
     inline-signing yes;
     dnskey-ttl 5;
-    max-zone-ttl 300;
+    max-zone-ttl 30;
     offline-ksk false;
     parent-ds-ttl 60s;
     parent-propagation-delay 1s;
     zone-propagation-delay 1s;
     publish-safety 0s;
-    purge-keys 1h;
+    purge-keys 15m;
     retire-safety 1m;
-    signatures-jitter 31s;
-    signatures-refresh 1m;
-    signatures-validity 10m;
-    signatures-validity-dnskey 2m;
+    signatures-jitter 5s;
+    signatures-refresh 30s;
+    signatures-validity 1m;
+    signatures-validity-dnskey 1m;
     keys {
         ksk key-directory lifetime unlimited algorithm ecdsa256;
         zsk key-directory lifetime unlimited algorithm ecdsa256;
