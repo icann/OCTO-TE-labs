@@ -25,12 +25,17 @@ Hardening the OS is beyond this course, but it is the foundation of all further 
 
 ## Hardening Authoritative DNS Servers
 
-The DNS has many attack vectors, from spoofing to DDoS and beyond. But why spoof a response when you easily 
-can change data on the autoritative server? So hardening and protecting your DNS infrastructure is 
-important for the security of your IT infrastructure. DNS is used to secure email, all certificates and 
-even many firewalls use DNS based rules.
+The DNS has many attack vectors, from spoofing to DDoS and beyond. But why spoof a response 
+when you easily can change data on the autoritative server? So hardening and protecting your 
+DNS infrastructure is important for the security of your IT infrastructure. 
+DNS is used to secure email, all certificates and even many firewalls use DNS based rules.
 
-Please follow theses two labs to secure your lab infrastructure. Afterwards return to this document and go to the next section.
+## Hardening Resolvers
+
+Resolvers can be attacked themselfs or be used to attack others.
+It is a good idea to prevent both. 
+
+Please follow theses labs to secure your lab infrastructure. 
 
 > [!TIP] 
 > These lab instructions are a little bit more complex to follow.
