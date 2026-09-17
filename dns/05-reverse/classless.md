@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Classless reverse DNS delegation"
+title: "Classless"
 parent: "Reverse DNS"
 nav_order: 3
 ---
