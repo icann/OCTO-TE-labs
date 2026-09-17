@@ -1,7 +1,7 @@
 ---
 layout: page
-title: DNS64
-parent: DNS
+title: "DNS64"
+parent: "DNS"
 nav_order: 8
 ------------
 
