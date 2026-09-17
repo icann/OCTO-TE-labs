@@ -3,7 +3,7 @@ layout: page
 title: DNS64 with Bind
 parent: DNS64
 nav_order: 1
-------------
+---
 
 # DNS64 with Bind
 
