@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Primary Bind"
+title: "Classless reverse DNS delegation"
 parent: "Reverse DNS"
 nav_order: 3
 ---

@@ -26,7 +26,4 @@ or
 dig -x 2001:500:88:200::8
 ```
 
-Please continue to 
-- [Configure primary reverse zone](primarybind.md)
-- [Configure secondary servers](secondaries.md)
-- [Classless Reverse Delegation](classless.md)
+Please follow the labs.
