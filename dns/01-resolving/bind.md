@@ -100,6 +100,12 @@ zone "internal." {
     forwarders { 100.64.0.54; };
     forward only;  // only forward, no fallback to root hints
 };
+
+zone "%GRP%.100.100.in-add.arpa." {
+    type forward;
+    forwarders { 100.100.%GRP.130; 100.100.%GRP%.131; };
+    forward only;  // only forward, no fallback to root hints
+};
 ```
 Once finish editing the configuration file, verify the configuration syntax:
 

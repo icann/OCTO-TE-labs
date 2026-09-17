@@ -91,6 +91,11 @@ remote-control:
 stub-zone:
     name: "internal."
     stub-addr: 100.64.0.54
+
+stub-zone:
+    name: "1.100.100.in-addr.arpa."
+    stub-addr: 100.100.1.130
+    stub-addr: 100.100.1.131
 ```
 
 Let's create neccessary files for unbound-control
