@@ -101,6 +101,7 @@ Our setup will look like this:
 +-- 66  ---> 66.64-127.%GRP%.100.100.in-addr.arpa.
 +-- 67  ---> 67.64-127.%GRP%.100.100.in-addr.arpa.
 +-- 68  ---> 68.64-127.%GRP%.100.100.in-addr.arpa.
++-- 70  ---> 70.64-127.%GRP%.100.100.in-addr.arpa.
 |
 +-- 130 PTR ns1.grp%GRP%.%DOMAIN%.
 +-- 131 PTR ns2.grp%GRP%.%DOMAIN%.
@@ -119,6 +120,7 @@ The new delegated zone contains the actual PTR records:
 +-- 66 PTR soa.grp%GRP%.%DOMAIN%.
 +-- 67 PTR resolv1.grp%GRP%.%DOMAIN%.
 +-- 68 PTR resolv2.grp%GRP%.%DOMAIN%.
++-- 70 PTR rpki.grp%GRP%.%DOMAIN%.
 ```
 
 Let's configure it.
