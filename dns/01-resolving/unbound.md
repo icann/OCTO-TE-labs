@@ -85,6 +85,8 @@ server:
         ede: yes
         ede-serve-expired: yes
 
+        module-config: "validator iterator"
+
 remote-control:
     control-enable: yes
 
@@ -93,7 +95,7 @@ stub-zone:
     stub-addr: 100.64.0.54
 
 stub-zone:
-    name: "1.100.100.in-addr.arpa."
+    name: "%GRP%.100.100.in-addr.arpa."
     stub-addr: 100.100.1.130
     stub-addr: 100.100.1.131
 ```

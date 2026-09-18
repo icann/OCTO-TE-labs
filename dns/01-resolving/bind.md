@@ -101,9 +101,12 @@ zone "internal." {
     forward only;  // only forward, no fallback to root hints
 };
 
-zone "%GRP%.100.100.in-add.arpa." {
+zone "%GRP%.100.100.in-addr.arpa." {
     type forward;
-    forwarders { 100.100.%GRP.130; 100.100.%GRP%.131; };
+    forwarders {
+        100.100.%GRP%.130;
+        100.100.%GRP%.131;
+    };
     forward only;  // only forward, no fallback to root hints
 };
 ```
