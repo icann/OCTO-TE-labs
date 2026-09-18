@@ -13,13 +13,10 @@ Edit the Unbound configuration:
 nano /etc/unbound/unbound.conf.d/dns64.conf
 ```
 
-Modify the module-config statement and add the dns64-prefix statement:
+In the server section modify the module-config statement. "dns64" must be added 
+after respip but before any other module.
 
-```text
-server:
-    module-config: "dns64 validator iterator"
-    dns64-prefix: 64:ff9b::/96
-```
+Configure the DNS64 prefix with the statement `dns64-prefix: 64:ff9b::/96`.
 
 Check the configuration:
 
