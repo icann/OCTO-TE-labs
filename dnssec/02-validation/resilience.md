@@ -30,7 +30,7 @@ That has lead to it's own set of problems. If a packet is to big, the router wil
 which query that was and can not resend the data with a lower MTU. Therefore it is adviseable
 to avoid fragmentation for IPv4 and IPv6.
 
-In IPv6 the minimum MTU is 1280. The IP header needs 48 bytes. That leaves 1232 bytes for the DNS data.
+In IPv6 the minimum MTU is 1280. The IP header needs 40 bytes. And the UDP header 8 bytes. That leaves 1232 bytes for the DNS data.
 
 [!NOTE]
 The current recommendation is to configure EDNS0 packet size to 1232.
