@@ -102,7 +102,7 @@ This should give you an output similiar to
 
 ;; ANSWER SECTION:
 grp%GRP%.%DOMAIN%. 30 IN   SOA     soa.grp%GRP%.%DOMAIN%. dnsadmin.grp%GRP%.%DOMAIN%. 1 604800 86400 2419200 300
-grp%GRP%.%DOMAIN%. 30 IN   RRSIG   SOA 8 4 30 20210611215606 20210512215606 41110 grp%GRP%.%DOMAIN%. RmUb[...]=
+grp%GRP%.%DOMAIN%. 30 IN   RRSIG   SOA 13 4 30 20210611215606 20210512215606 41110 grp%GRP%.%DOMAIN%. RmUb[...]=
 ```
 
 **QUESTION**: Did you get the "ad" flag? Why?
