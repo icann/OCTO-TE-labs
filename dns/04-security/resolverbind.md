@@ -41,7 +41,7 @@ And edit the to following line to look like this
 ```
 Check your configuration and reload the server
 ```
-named-confcheck
+named-checkconf
 sudo rndc reload
 ```
 

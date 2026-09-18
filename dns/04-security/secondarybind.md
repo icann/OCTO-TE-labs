@@ -70,7 +70,7 @@ In `named.conf.local` we need to allow notify for our zone grp%GRP%.%DOMAIN% by 
     allow-notify { 
         100.100.%GRP%.66;
         %IPv6pfx%:%GRP%:64::66;
-    }
+    };
 ```
 Currently our server accepts notify message from any source. Attackers could
 use this for a resource exhaustion attack. Let's only accept notifies from 

@@ -17,7 +17,7 @@ they go online.
 First step in any security for applications is a secure operating system. Security is build in layers and 
 if the foundations aren't safe, it is very hard (or impossible) to mitigate that.
 
-Hardening the OS, starts with making sure that no unneccessary ports are open, ssh only accepts certificates,
+Hardening the OS, starts with making sure that no unneccessary ports are open, ssh only accepts public key authentication,
 only users can login (no remote root access) and many other security best practices. Hopefully you or your
 company already have routines in place for hardening your machines.
 
@@ -29,6 +29,25 @@ The DNS has many attack vectors, from spoofing to DDoS and beyond. But why spoof
 when you easily can change data on the autoritative server? So hardening and protecting your 
 DNS infrastructure is important for the security of your IT infrastructure. 
 DNS is used to secure email, all certificates and even many firewalls use DNS based rules.
+
+Please find answers to these questions:
+- Can another group query us?
+- Can another group recurse through us?
+- Can a ns1 and ns2 transfer the zone?
+- Can anyone else request AXFR?
+- Can anyone else send NOTIFY?
+
+Please folow the labs:
+  - [Primary Security with Bind](primarybind.md)
+  - [Secondary Security with Bind](secondarybind.md)
+  - [Secondary Security with NSD](secondarynsd.md)
+
+Have the answers changed?
+- Can another group query us?
+- Can another group recurse through us?
+- Can a ns1 and ns2 transfer the zone?
+- Can anyone else request AXFR?
+- Can anyone else send NOTIFY?
 
 ## Hardening Resolvers
 

@@ -5,7 +5,7 @@ parent: "Security"
 nav_order: 2
 ---
 
-# Primary Security
+# Primary Security with Bind
 
 Hopefully your servers are configured in a hidden primary configuration.
 That has the great benefit, that your primary server doesn't have to be available on the internet, at least not for most of the internet.
