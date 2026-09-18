@@ -46,7 +46,7 @@ A client therefore communicates with the DNS resolver using HTTPS.
 
 DoQ carries DNS messages over QUIC.
 
-The standard service port is: TPC/853
+The standard service port is: TCP/853
 
 QUIC provides encrypted transport using TLS 1.3.
 
