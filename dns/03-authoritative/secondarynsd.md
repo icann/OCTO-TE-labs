@@ -22,7 +22,7 @@ nav_order: 4
 sudo apt -y install nsd
 ```
 
-This installs bind and allows our current user to use rndc to control bind.
+This installs NSD and allows our current user to use nsd-control to control NSD.
 
 Create the directory and file that will contain our zone file.
 
