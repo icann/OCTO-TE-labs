@@ -61,9 +61,8 @@ On the **cli** instance
 1. `dig @100.100.%GRP%.130 grp%GRP%.%DOMAIN% SOA`
 1. `dig @100.100.%GRP%.131 grp%GRP%.%DOMAIN% SOA`
 
-Please repeat the following queries several times
+Make sure all three servers serve the same serial.
+
+Check if your domain is reachable from the internet:
 
 ```dig @%DOMAIN% grp%GRP%.%DOMAIN% SOA        +nsid```
-
-
-
