@@ -96,8 +96,8 @@ stub-zone:
 
 stub-zone:
     name: "%GRP%.100.100.in-addr.arpa."
-    stub-addr: 100.100.1.130
-    stub-addr: 100.100.1.131
+    stub-addr: 100.100.%GRP%.130
+    stub-addr: 100.100.%GRP%.131
 ```
 
 Let's create neccessary files for unbound-control
